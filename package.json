@@ -1,0 +1,23 @@
+{
+  "name": "humcomdeb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^5.14.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dji501/humcomdeb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dji501/humcomdeb/issues"
+  },
+  "homepage": "https://github.com/dji501/humcomdeb#readme"
+}

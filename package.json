@@ -7,10 +7,17 @@
     "eslint": "^5.14.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.3.1",
+    "babel-jest": "^24.1.0",
     "jest": "^24.1.0"
   },
   "scripts": {
     "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "repository": {
     "type": "git",

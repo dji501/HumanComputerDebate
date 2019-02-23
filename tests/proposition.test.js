@@ -115,3 +115,9 @@ test("getContentAsString should return appropriate value", () => {
     const proposition3 = new Proposition("Unspecified", false);
     expect(proposition3.getContentAsString()).toBe("denial of this is not specified");
 });
+
+test("check getClassName returns correct name", () => {
+    const proposition1 = new Proposition("CP is acceptable", true);
+
+    expect(proposition1.getClassName()).toBe("Proposition");
+});

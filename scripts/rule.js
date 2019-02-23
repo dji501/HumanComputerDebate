@@ -6,6 +6,10 @@ import { RuleProp } from "./RuleProp";
 
 export class Rule extends RuleProp {
 
+    static getClassName() {
+        return "Rule";
+    }
+
     /**
      * constructor - creat rule with passed in parameters only LHS and RHS of rule
      * are requied.
@@ -79,6 +83,10 @@ export class Rule extends RuleProp {
 
     fire() {
         this._fired = true;
+    }
+
+    getClassName() {
+        return Rule.getClassName();
     }
 
     equals(rule) {

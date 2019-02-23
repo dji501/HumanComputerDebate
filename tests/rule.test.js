@@ -93,3 +93,11 @@ test("getContentAsString should return appropriate value", () => {
     const rule2 = rule1.denial();
     expect(rule2.getContentAsString()).toBe("It is not the case that 'LHS' implies 'RHS'");
 });
+
+test("check getClassName returns correct name", () => {
+    let lhsProp1 = new Proposition("LHS", true);
+    let rhsProp2 = new Proposition("RHS", true);
+    const rule1 = new Rule(lhsProp1, rhsProp2);
+
+    expect(rule1.getClassName()).toBe("Rule");
+});

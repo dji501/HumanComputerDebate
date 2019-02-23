@@ -2,6 +2,9 @@ import { RuleProp } from "./RuleProp";
 
 export class Proposition extends RuleProp {
 
+    static getClassName() {
+        return "Proposition";
+    }
     /**
      * constructor - instantiate proposition
      *
@@ -70,6 +73,10 @@ export class Proposition extends RuleProp {
         } else {
             throw SyntaxError("Position must have value 'ANTECEDENT', 'CONSEQUENT' or 'WARRENT'");
         }
+    }
+
+    getClassName() {
+        return Proposition.getClassName();
     }
 
     /**

@@ -1,5 +1,5 @@
 import { Proposition } from "../scripts/proposition";
-
+//TODO: Add booleanRuleBase
 test("Instantiating gives correct values", () => {
     const proposition = new Proposition("Name", true, "Qualification");
 
@@ -9,7 +9,7 @@ test("Instantiating gives correct values", () => {
     expect(proposition.ruleReferences).toEqual([]);
 });
 
-test("Instantiating without BooleanRuleBase gives correct values", () => {
+test("Instantiating without Qualification and BooleanRuleBase gives correct values", () => {
     const proposition = new Proposition("Name", true);
 
     expect(proposition.name).toBe("Name");
@@ -20,10 +20,10 @@ test("Instantiating without BooleanRuleBase gives correct values", () => {
 
 test("Setting position works for valid values", () => {
     const proposition = new Proposition("Name", true);
-    proposition.position = "PREMISE";
-    expect(proposition.position).toBe("PREMISE");
-    proposition.position = "CONCLUSION";
-    expect(proposition.position).toBe("CONCLUSION");
+    proposition.position = "ANTECEDENT";
+    expect(proposition.position).toBe("ANTECEDENT");
+    proposition.position = "CONSEQUENT";
+    expect(proposition.position).toBe("CONSEQUENT");
     proposition.position = "WARRENT";
     expect(proposition.position).toBe("WARRENT");
 });
@@ -44,7 +44,7 @@ test("Adding rule reference works successfully", () => {
     expect(proposition.ruleReferences).toEqual(["X", "Y"]);
 });
 
-test("Is evidence method identifies evidence", () => {
+test("IsEvidence method identifies evidence", () => {
     const proposition1 = new Proposition("Name", true, "evidence");
     expect(proposition1.isEvidence()).toBe(true);
 
@@ -53,7 +53,7 @@ test("Is evidence method identifies evidence", () => {
 });
 
 
-test("Is evidence method identifies fact", () => {
+test("IsFact method identifies fact", () => {
     const proposition1 = new Proposition("Name", true, "fact");
     expect(proposition1.isFact()).toBe(true);
 
@@ -106,12 +106,12 @@ test("Denial method should return denial or current proposition", () => {
 });
 
 test("getContentAsString should return appropriate value", () => {
-        const proposition1 = new Proposition("CP is acceptable", true);
-        expect(proposition1.getContentAsString()).toBe("CP is acceptable");
+    const proposition1 = new Proposition("CP is acceptable", true);
+    expect(proposition1.getContentAsString()).toBe("CP is acceptable");
 
-        const proposition2 = new Proposition("CP is acceptable", false);
-        expect(proposition2.getContentAsString()).toBe("CP is not acceptable");
+    const proposition2 = new Proposition("CP is acceptable", false);
+    expect(proposition2.getContentAsString()).toBe("CP is not acceptable");
 
-        const proposition3 = new Proposition("Unspecified", false);
-        expect(proposition3.getContentAsString()).toBe("denial of this is not specified");
+    const proposition3 = new Proposition("Unspecified", false);
+    expect(proposition3.getContentAsString()).toBe("denial of this is not specified");
 });

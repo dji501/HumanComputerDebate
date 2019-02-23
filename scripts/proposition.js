@@ -8,14 +8,14 @@ export class Proposition extends RuleProp {
     /**
      * constructor - instantiate proposition
      *
-     * @param  {string} name                 description
+     * @param  {string} message                 description
      * @param  {boolean} truth                description
      * @param  {String} qualification = null description
      * @param  {BooleanRuleBase} booleanRuleBase      description
      */
-    constructor(name, truth, qualification = null, booleanRuleBase = null) {
+    constructor(message, truth, qualification = null, booleanRuleBase = null) {
         super();
-        this._name = name;
+        this._message = message;
         this._truth = truth;
         this._booleanRuleBase = booleanRuleBase;
         this._qualification = qualification;
@@ -32,8 +32,8 @@ export class Proposition extends RuleProp {
         return this._qualification;
     }
 
-    get name() {
-        return this._name;
+    get message() {
+        return this._message;
     }
 
     get ruleReferences() {
@@ -112,7 +112,7 @@ export class Proposition extends RuleProp {
      * @return {boolean} true if equal false if not
      */
     equals(proposition) {
-        if (this._name === proposition.name && this._truth === proposition.truth){
+        if (this._message === proposition.message && this._truth === proposition.truth){
             return true;
         } else {
             return false;
@@ -126,7 +126,7 @@ export class Proposition extends RuleProp {
      * @return {boolean} true if they are the negatives of each other, false otherwise
      */
     checkNegation(proposition) {
-        if (this._name == proposition.name) {
+        if (this._message == proposition.message) {
             if (this._truth === true && proposition.truth === false) {
                 return true;
             } else if (this._truth === false && proposition.truth === true) {
@@ -142,7 +142,7 @@ export class Proposition extends RuleProp {
      * @return {Proposition}  A copy of the proposition that called clone
      */
     clone() {
-        return new Proposition(this._name, this._truth, this._qualification);
+        return new Proposition(this._message, this._truth, this._qualification);
     }
 
     /**
@@ -156,16 +156,16 @@ export class Proposition extends RuleProp {
     /**
      * denial - Create a Proposition which denies the calling proposition
      *
-     * @return {Proposition}  Proposition with same name but opposite truth value as calling proposition
+     * @return {Proposition}  Proposition with same message but opposite truth value as calling proposition
      */
     denial() {
-        return new Proposition(this._name, !this._truth);
+        return new Proposition(this._message, !this._truth);
     }
 
     getContentAsString() {
         let contentString = null;
         if (this._truth === false) {
-            switch (this._name) {
+            switch (this._message) {
                 case "a state has the right to deliberately execute the wrong people":
                  contentString = "a state does not have the right to deliberately execute the wrong people";
                  break;
@@ -260,7 +260,7 @@ export class Proposition extends RuleProp {
 
             }
         } else {
-            contentString = this._name;
+            contentString = this._message;
         }
         return contentString;
     }

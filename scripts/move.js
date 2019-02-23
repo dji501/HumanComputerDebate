@@ -1,9 +1,18 @@
 export class Move {
+
+    /**
+     * constructor - instantiates a move
+     *
+     * @param  {String} turn     String representing current player either "S" or "C for student/computer"
+     * @param  {String} moveType    String representing the type of move
+     * @param  {RuleProp} moveContent Content of the mode either a Rule or a Proposition
+     * @param  {ConflictSet} conflictSet TODO: (Optional)
+     */
     constructor(turn, moveType, moveContent, conflictSet) {
-        this._turn = turn; //Char
-        this._moveType = moveType; //String
-        this._moveContent = moveContent; //RuleProposition
-        this._conflictSet = conflictSet; //ConflictSet
+        this._turn = turn;
+        this._moveType = moveType;
+        this._moveContent = moveContent;
+        this._conflictSet = conflictSet;
     }
 
     set turn(turn) {
@@ -30,35 +39,35 @@ export class Move {
         return this._conflictSet;
     }
 
-    // TODO:
+    // Original: getMoveProp
     get moveContentProposition() {
-        /*TODO:
-        if(rpmc.getClass().getName()=="Proposition")
-            return (Proposition)rpmc;
-        else return null;
-        */
-        return null;
+        if ( this._moveContent.getClassName()==="Proposition" )
+            return this._moveContent;
+        else {
+            return null;
+        }
     }
 
-    get movecontentRule() {
-        /*TODO:
-        if(rpmc.getClass().getName()=="Rule")
-            return (Rule)rpmc;
-        else return null;
-        */
-        return null;
+    // Original: getMoveRule
+    get moveContentRule() {
+        if ( this._moveContent.getClassName()==="Rule" )
+            return this._moveContent;
+        else {
+            return null;
+        }
     }
 
+    // Original: getName()
     getMoveContentName() {
-        //TODO:
-        return this._moveContent; // rpmc.getClass().getName();
+        //TODO: THIS MAY NOT BEHAVE IN SAME WAY!!!
+        return this._moveContent.getClassName();
     }
 
+    // Original: getContent()
     getMoveContentAsString() {
         //TODO:
-        return this._moveContent; // romv.getContent();
+        return this._moveContent.getContentAsString(); // romv.getContent();
     }
-    // -------------------------------------------------------
 
     // Return a copy of the move
     clone() {
@@ -66,71 +75,84 @@ export class Move {
     }
 
     equals(move) {
-        if (this._turn == move.turn() && this._moveType == move.moveType() && this._moveContent == move.moveContent()){
+        if (this._turn === move.turn && this._moveType === move.moveType && this._moveContent.equals(move.moveContent)) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     negate() {
-        /*TODO:
-        if(getMoveRule()==null){getMoveProp().negate();}
-        else{getMoveRule().negate();}
-        */
+        /*TODO: THIS CHANGE MAY HAVE CAUSED BUGS!!*/
+        if (this._moveContent)
+        {
+            this._moveContent.negate();
+        }
     }
 
+    // Original: getWholeMove()
     getMoveAsString(prevMoveType, prevMoveContent) {
         let moveString = null;
 
         //Move type is Concession
-        if (this._moveType === "Concession") {
+        if ( this._moveType === "Concession" ) {
 
             //If previous move was yes/no/Idk question
-            if (prevMoveType === "Question") {
-                if (/* getMoveContentAsString.equals(prevMoveContent)*/prevMoveContent === null) {
-                    moveString = "Yes, I think " + /* getMoveContentAsString */ + ".";
+            if ( prevMoveType === "Question" ) {
+                if (this.getMoveContentAsString() === prevMoveContent) {
+                    moveString = "Yes, I think that " + this.getMoveContentAsString() + ".";
                 } else {
-                    moveString = "No, I think " + /* getMoveContentAsString */ + ".";
+                    moveString = "No, I think that " + this.getMoveContentAsString() + ".";
                 }
             }
 
         } else if (this._moveType === "Assertion") {
-            /*
-            if(getName()=="Proposition" && getMoveProp().isEvidence())
-			{
-				wholeMove="But "+getContent()+".";
-			}
-			else wholeMove="I think "+getContent()+".";
-            */
-        } else if (this.moveType === "Ground") {
-            moveString = "Because " + /* getMoveContentAsString */ + ".";
-        } else if (this.moveType === "Challenge") {
-            moveString = "Why is it the case that " + /* getMoveContentAsString */ + "?";
-        } else if (this.moveType === "Question") {
-            moveString = "Is it the case that " + /* getMoveContentAsString */ + "?";
-        } else if (this.moveType === "Resolve") {
-            if (this._conflictSet.size === 2 && this._conflict.isPNP() == false && this._turn === "C") {
-                moveString = "You already know this, please resolve " + /* getMoveContentAsString */ + " in your positions.";
-            } else {
-                moveString = "Please resolve " + /* getMoveContentAsString */ + " in your positions.";
+
+            if ( this.getMoveContentName() === "Proposition" && this._moveContent.isEvidence() ) {
+				moveString = "But " + this.getMoveContentAsString() + ".";
+			} else {
+                moveString= "I think that " + this.getMoveContentAsString() + ".";
             }
-        } else if (this.moveType === "Withdraw") {
+
+        } else if ( this._moveType === "Ground" ) {
+
+            moveString = "Because " + this.getMoveContentAsString() + ".";
+
+        } else if (this._moveType === "Challenge") {
+
+            moveString = "Why is it the case that " + this.getMoveContentAsString() + "?";
+
+        } else if (this._moveType === "Question") {
+
+            moveString = "Is it the case that " + this.getMoveContentAsString() + "?";
+
+        } else if (this._moveType === "Resolve") {
+
+            if (this._conflictSet.size === 2 && this._conflict.isPNP() == false && this._turn === "C") {
+                moveString = "You already know this, please resolve " + this.getMoveContentAsString() + " in your positions.";
+            } else {
+                moveString = "Please resolve " + this.getMoveContentAsString() + " in your positions.";
+            }
+        } else if (this._moveType === "Withdraw") {
+
             if (prevMoveType === "Question") {
                 moveString = "I am not sure about it.";
             } else if (prevMoveType === "Challenge") {
-                moveString = "I don't know why " + /* getMoveContentAsString */ + ".";
+                moveString = "I don't know why " + this.getMoveContentAsString() + ".";
             } else {
-                moveString = "I don't think " + /* getMoveContentAsString */ + ".";
+                moveString = "I don't think " + this.getMoveContentAsString() + ".";
             }
+
         } else {
-            moveString = /* getMoveContentAsString */"";
+            moveString = this.getMoveContentAsString();
         }
 
         return moveString;
     }
 
+    // TODO:
     display(line, textArea, prevMoveType, prevMoveContent) {
-        let content = this.getWholeMove(prevMoveType, prevMoveContent);
+        let content = this.getMoveAsString(prevMoveType, prevMoveContent);
 
         if (line < 10) {
             //textArea.append("0"+line+": "+this_turn+">"+content+"\n");

@@ -61,13 +61,14 @@ export class Proposition extends RuleProp {
     /**
      * set position - set the proposition position
      *
-     * @param  {string} position Accepted values: "PREMISE", "CONCLUSION" and "WARRENT"
+     * @param  {string} position Accepted values: "ANTECEDENT", "CONSEQUENT" and "WARRENT"
      */
     set position(position) {
-        if (position === "PREMISE" || position === "CONCLUSION" || position === "WARRENT") {
+        // Original: if (position === "PREMISE" || position === "CONCLUSION" || position === "WARRENT") {
+        if (position === "ANTECEDENT" || position === "CONSEQUENT" || position === "WARRENT") {
             this._position = position;
         } else {
-            throw SyntaxError("Position must have value 'PREMISE', 'CONCLUSION' or 'WARRENT'");
+            throw SyntaxError("Position must have value 'ANTECEDENT', 'CONSEQUENT' or 'WARRENT'");
         }
     }
 

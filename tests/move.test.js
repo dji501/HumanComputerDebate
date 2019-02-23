@@ -1,16 +1,17 @@
 import { Move } from "../scripts/move";
 import { Proposition } from "../scripts/proposition";
 import { Rule } from "../scripts/rule";
-
+import { ConflictSet } from "../scripts/conflictSet";
 //TODO: Add conflictSet
 test("Instantiating gives correct values", () => {
     const prop = new Proposition("CP is acceptable", true);
-    const move = new Move("Turn", "Type", prop, "Conflict");
+    const cs = new ConflictSet();
+    const move = new Move("S", "Question", prop, cs);
 
-    expect(move.turn).toBe("Turn");
-    expect(move.moveType).toBe("Type");
+    expect(move.turn).toBe("S");
+    expect(move.moveType).toBe("Question");
     expect(move.moveContent).toBe(prop);
-    expect(move.conflictSet).toBe("Conflict");
+    expect(move.conflictSet.set).toEqual([]);
 });
 
 test("Instantiating without Conflict gives correct values", () => {
@@ -159,8 +160,34 @@ test("getMoveAsString method returns correct string when question type", () => {
     expect(moveString1).toBe("Is it the case that CP is a good deterrent?");
 });
 
-test("getMoveAsString method returns correct string when resolve type", () => {
-    //TODO: THIS NEEDS COFLICT SETS IMPLEMENTED
+test("getMoveAsString method returns correct string when resolve type and not PNP", () => {
+    const cs = new ConflictSet();
+    const prop1 = new Proposition("Human life is not scarce", true);
+    const prop2 = new Proposition("Human life is not scarce", true);
+
+    cs.add(prop1);
+    cs.add(prop2);
+
+    const prop3 = new Proposition("Human life is not scarce", true);
+    const move1 = new Move("C", "Resolve", prop3, cs);
+
+    let moveString1 = move1.getMoveAsString("Assertion", "Human life is not scarce");
+    expect(moveString1).toBe("You already know this, please resolve Human life is not scarce in your positions.");
+});
+
+test("getMoveAsString method returns correct string when resolve type and not PNP", () => {
+    const cs = new ConflictSet();
+    const prop1 = new Proposition("Human life is not scarce", true);
+    const prop2 = new Proposition("Human life is not scarce", false);
+
+    cs.add(prop1);
+    cs.add(prop2);
+
+    const prop3 = new Proposition("Human life is not scarce", true);
+    const move1 = new Move("C", "Resolve", prop3, cs);
+
+    let moveString1 = move1.getMoveAsString("Assertion", "Human life is not scarce");
+    expect(moveString1).toBe("Please resolve Human life is not scarce in your positions.");
 });
 
 test("getMoveAsString method returns correct string when withdraw type", () => {

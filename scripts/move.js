@@ -128,11 +128,12 @@ export class Move {
 
         } else if (this._moveType === "Resolve") {
 
-            if (this._conflictSet.size === 2 && this._conflict.isPNP() == false && this._turn === "C") {
+            if (this._conflictSet.set.length === 2 && this._conflictSet.isPNP() == false && this._turn === "C") {
                 moveString = "You already know this, please resolve " + this.getMoveContentAsString() + " in your positions.";
             } else {
                 moveString = "Please resolve " + this.getMoveContentAsString() + " in your positions.";
             }
+
         } else if (this._moveType === "Withdraw") {
 
             if (prevMoveType === "Question") {

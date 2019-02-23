@@ -106,7 +106,8 @@ export class Proposition extends RuleProp {
     }
 
     /**
-     * equals - Compare two propositions
+     * equals - Compares the message and truth of the calling proposition and passed in proposition
+     * to test equality.
      *
      * @param  {Proposition} proposition The proposition to be compared against
      * @return {boolean} true if equal false if not

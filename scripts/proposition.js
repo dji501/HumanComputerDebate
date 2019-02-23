@@ -199,7 +199,6 @@ export class Proposition extends RuleProp {
                  contentString = "it is not always wrong to take a human life";
                  break;
 
-
                 case "most people want CP back":
                  contentString = "most people don't want CP back";
                  break;

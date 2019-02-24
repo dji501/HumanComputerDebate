@@ -107,13 +107,15 @@ export class BooleanRuleBase {
     findGroundPropositions(prop) {
         const matchedProp = this.matchProposition(prop);
         let groundedSet = [];
-        let matchedPropRuleReferences = matchedProp.ruleReferences;
+        if (matchedProp !== null && matchedProp !== undefined) {
+            let matchedPropRuleReferences = matchedProp.ruleReferences;
 
-        if (matchedPropRuleReferences.length > 0) {
-            for (let i = 0; i < matchedPropRuleReferences.length; i++) {
-                let rule = matchedPropRuleReferences[i];
-                if (rule.truth === true && matchedProp.equals(rule.consequent) && this.checkProp(rule.antecedent)) {
-                    groundedSet.push(rule.antecedent);
+            if (matchedPropRuleReferences.length > 0) {
+                for (let i = 0; i < matchedPropRuleReferences.length; i++) {
+                    let rule = matchedPropRuleReferences[i];
+                    if (rule.truth === true && matchedProp.equals(rule.consequent) && this.checkProp(rule.antecedent)) {
+                        groundedSet.push(rule.antecedent);
+                    }
                 }
             }
         }

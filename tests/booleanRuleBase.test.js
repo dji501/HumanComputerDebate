@@ -136,17 +136,19 @@ test("findGroundPropositions method finds no propositions when not in propositio
     expect(brb.findGroundPropositions(prop2)).toEqual([]);
 });
 
-//TODO: NEED CONFLICT SET.
+//TODO: IMPROVE COVERAGE
 test("findAcceptableGroundPropositions method finds correct propositions", () => {
     let brb = new BooleanRuleBase("Player");
+    let cs = new CommitmentStore("Partner");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2);
-
+    const prop1Clone = prop1.clone();
     brb.addRule(rule);
     brb.addProposition(prop1);
     brb.addProposition(prop2);
 
+    expect(brb.findAcceptableGroundPropositions(prop2, cs)).toEqual([prop1Clone]);
 });
 
 test("propIsSupported identifies support proposition", () => {
@@ -216,7 +218,6 @@ test("againstSupport method returns correct value when first value doesn't suppo
 
 });
 
-//TODO: NEED CommitmentStore
 test("challengeable method returns correct value when challengeable", () => {
     let brb = new BooleanRuleBase("Player");
     let cs1 = new CommitmentStore("Partner");

@@ -18,6 +18,17 @@ test("addProposition to the BRB correctly", () => {
     expect(BRB._propositionList).toEqual([prop1]);
 });
 
+test("remove Proposition from the BRB correctly", () => {
+    let BRB = new BooleanRuleBase("Player");
+    const prop1 = new Proposition("CP is a good deterrent", true);
+
+    BRB.addProposition(prop1);
+    expect(BRB._propositionList).toEqual([prop1]);
+
+    BRB.removeProposition(prop1);
+    expect(BRB._propositionList).toEqual([]);
+});
+
 test("Add rule to the BRB correctly", () => {
     let BRB = new BooleanRuleBase("Player"); // es-lint
     const prop1 = new Proposition("CP is a good deterrent", true);

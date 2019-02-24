@@ -1,3 +1,7 @@
+
+/**
+ *  The reasoning part of the application
+ */
 export class BooleanRuleBase {
 
     constructor(name) {
@@ -15,6 +19,13 @@ export class BooleanRuleBase {
             this._propositionList = [];
         }
         this._propositionList.push(prop);
+    }
+
+    removeProposition(prop) {
+        let index = this._propositionList.indexOf(prop);
+        if (index > -1) {
+            this._propositionList.splice(index, 1);
+        }
     }
 
     addRule(rule) {
@@ -42,7 +53,6 @@ export class BooleanRuleBase {
                 this._rulePropList.splice(this._rulePropList.indexOf(rule.warrent),1);
             }
         }
-        return;
     }
 
     matchRuleProposition(ruleProp) {

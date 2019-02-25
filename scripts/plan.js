@@ -79,7 +79,7 @@ export class Plan {
             /*
              3. The user gives an unwanted statement,
                 and If there is a direct conflct, then pose a resolution demand
-                Or challenge the unwanted propostion
+                Or challenge the unwanted proposition
             */
             let conflictSet = partnerCS.getRealConflictSet();
 

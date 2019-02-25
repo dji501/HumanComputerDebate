@@ -1,17 +1,18 @@
 import { BooleanRuleBase } from "../scripts/booleanRuleBase";
 import { Proposition } from "../scripts/proposition";
 import { Rule } from "../scripts/rule";
-import { CommitmentStore } from "../scripts/commitmentStore"
-
+import { CommitmentStore } from "../scripts/commitmentStore";
+import { Plan } from "../scripts/plan";
+import { PlanSet } from "../scripts/planSet";
 
 test("instantiate the brb correctly", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
 
     expect(brb._name).toBe("Player");
 });
 
 test("addProposition to the brb correctly", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
 
     brb.addProposition(prop1);
@@ -19,7 +20,7 @@ test("addProposition to the brb correctly", () => {
 });
 
 test("remove Proposition from the brb correctly", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
 
     brb.addProposition(prop1);
@@ -30,7 +31,7 @@ test("remove Proposition from the brb correctly", () => {
 });
 
 test("Add rule to the brb correctly", () => {
-    let brb = new BooleanRuleBase("Player"); // es-lint
+    const brb = new BooleanRuleBase("Player"); // es-lint
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const prop3 = new Proposition("Warrent", true);
@@ -42,7 +43,7 @@ test("Add rule to the brb correctly", () => {
 });
 
 test("remove rule from the brb correctly", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const prop3 = new Proposition("Warrent", true);
@@ -56,7 +57,7 @@ test("remove rule from the brb correctly", () => {
 });
 
 test("matchRuleProposition method gets correct ruleProp", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const prop3 = new Proposition("Warrent", true);
@@ -70,7 +71,7 @@ test("matchRuleProposition method gets correct ruleProp", () => {
 });
 
 test("matchPropositionmethod gets correct Prop", () => {
-    let brb = new BooleanRuleBase("Player"); // es-lint
+    const brb = new BooleanRuleBase("Player"); // es-lint
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is not a good deterrent", true);
 
@@ -83,7 +84,7 @@ test("matchPropositionmethod gets correct Prop", () => {
 });
 
 test("matchRule method gets correct rule", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const prop3 = new Proposition("Warrent", true);
@@ -97,7 +98,7 @@ test("matchRule method gets correct rule", () => {
 });
 
 test("checkProp method identies proposition correctly", () => {
-    let brb = new BooleanRuleBase("Player"); // es-lint
+    const brb = new BooleanRuleBase("Player"); // es-lint
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is not a good deterrent", true);
 
@@ -110,7 +111,7 @@ test("checkProp method identies proposition correctly", () => {
 });
 
 test("findGroundPropositions method finds correct propositions", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2);
@@ -124,7 +125,7 @@ test("findGroundPropositions method finds correct propositions", () => {
 });
 
 test("findGroundPropositions method finds no propositions when not in proposition list", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2);
@@ -138,8 +139,8 @@ test("findGroundPropositions method finds no propositions when not in propositio
 
 //TODO: IMPROVE COVERAGE
 test("findAcceptableGroundPropositions method finds correct propositions", () => {
-    let brb = new BooleanRuleBase("Player");
-    let cs = new CommitmentStore("Partner");
+    const brb = new BooleanRuleBase("Player");
+    const cs = new CommitmentStore("Partner");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2);
@@ -152,7 +153,7 @@ test("findAcceptableGroundPropositions method finds correct propositions", () =>
 });
 
 test("propIsSupported identifies support proposition", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2);
@@ -166,7 +167,7 @@ test("propIsSupported identifies support proposition", () => {
 });
 
 test("propSupportsOthers identifies supporting proposition", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2);
@@ -180,7 +181,7 @@ test("propSupportsOthers identifies supporting proposition", () => {
 });
 
 test("propSupportsOthers identifies supporting proposition", () => {
-    let brb = new BooleanRuleBase("Player");
+    const brb = new BooleanRuleBase("Player");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2);
@@ -193,35 +194,106 @@ test("propSupportsOthers identifies supporting proposition", () => {
     expect(brb.getDirectSupportedProp(prop1)).toEqual(prop2);
 });
 
-//TODO: NEED PLAN + PLANSET
 test("getPlanFromProposition method returns correct plan", () => {
+    const brb = new BooleanRuleBase("Player");
+    const prop1 = new Proposition("CP is a good deterrent", true);
+    const prop2 = new Proposition("CP is acceptable", true);
+    const rule = new Rule(prop1, prop2);
+    const plan = new Plan();
 
+    brb.addRule(rule);
+    brb.addProposition(prop1);
+    brb.addProposition(prop2);
+    plan.add(prop2);
+
+    expect(brb.getPlanFromProposition(prop1)).toEqual(plan);
 });
 
 test("supports method returns correct value when first value supports second", () => {
+    const brb = new BooleanRuleBase("Player");
+    const prop1 = new Proposition("CP is a good deterrent", true);
+    const prop2 = new Proposition("CP is acceptable", true);
+    const prop3 = new Proposition("CP is poo poo", true);
+    const rule = new Rule(prop1, prop2);
 
+    brb.addRule(rule);
+    brb.addProposition(prop1);
+    brb.addProposition(prop2);
+
+    expect(brb.supports(rule, prop2)).toEqual(true);
+    expect(brb.supports(prop1, prop2)).toEqual(true);
+    expect(brb.supports(prop2, prop1)).toEqual(false);
+    expect(brb.supports(prop3, prop2)).toEqual(false);
 });
 
-test("supports method returns correct value when first value doesn't supports second", () => {
+test("supports method returns correct value when first value supports a negative second", () => {
+    const brb = new BooleanRuleBase("Player");
+    const prop1 = new Proposition("CP is a good deterrent", true);
+    const prop2 = new Proposition("CP is acceptable", true);
 
+    const prop3 = new Proposition("CP having countries have a higher murder rate than others", true);
+    const prop4 = new Proposition("CP is a good deterrent", false);
+    const rule = new Rule(prop1, prop2);
+    const rule2 = new Rule(prop3, prop4);
+
+    brb.addRule(rule);
+    brb.addRule(rule2);
+    brb.addProposition(prop1);
+    brb.addProposition(prop2);
+    brb.addProposition(prop3);
+    brb.addProposition(prop4);
+
+    expect(brb.supports(prop3, prop4)).toEqual(true);
+    expect(brb.supports(prop3, prop1.denial())).toEqual(true);
 });
 
 test("getPlanSet method returns correct planSet", () => {
+    const brb = new BooleanRuleBase("Player");
+    const prop1 = new Proposition("CP is a good deterrent", true);
+    const prop2 = new Proposition("CP is acceptable", true);
 
+    const rule = new Rule(prop1, prop2);
+    const expectedPlanSet = new PlanSet();
+    const plan = new Plan();
+    plan.add(prop1);
+    plan.add(prop2);
+    expectedPlanSet.add(plan);
+
+    brb.addRule(rule);
+    brb.addProposition(prop1);
+    brb.addProposition(prop2);
+
+    expect(brb.getPlanSet(prop2)).toEqual(expectedPlanSet);
 });
 
-test("againstSupport method returns correct value when first value supports second", () => {
+test("againstSupport method returns correct value when first param is against second", () => {
+    const brb = new BooleanRuleBase("Player");
+    const prop1 = new Proposition("CP is a good deterrent", true);
+    const prop2 = new Proposition("CP is acceptable", true);
 
-});
+    const prop3 = new Proposition("CP having countries have a higher murder rate than others", true);
+    const prop4 = new Proposition("CP is a good deterrent", false);
+    const rule = new Rule(prop1, prop2);
+    const rule2 = new Rule(prop3, prop4);
 
-test("againstSupport method returns correct value when first value doesn't supports second", () => {
+    brb.addRule(rule);
+    brb.addRule(rule2);
+    brb.addProposition(prop1);
+    brb.addProposition(prop2);
+    brb.addProposition(prop3);
+    brb.addProposition(prop4);
 
+    expect(brb.againstSupport(rule2, prop2)).toEqual(true);
+    expect(brb.againstSupport(prop3, prop2)).toEqual(true);
+    expect(brb.againstSupport(prop2, prop1)).toEqual(false);
+    expect(brb.againstSupport(prop3, prop4)).toEqual(false);
+    expect(brb.againstSupport(prop3, prop3)).toEqual(false);
 });
 
 test("challengeable method returns correct value when challengeable", () => {
-    let brb = new BooleanRuleBase("Player");
-    let cs1 = new CommitmentStore("Partner");
-    let cs2 = new CommitmentStore("Self");
+    const brb = new BooleanRuleBase("Player");
+    const cs1 = new CommitmentStore("Partner");
+    const cs2 = new CommitmentStore("Self");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2); // eslint-disable-line no-unused-vars
@@ -234,9 +306,9 @@ test("challengeable method returns correct value when challengeable", () => {
 });
 
 test("challengeable method returns false when not challengeable", () => {
-    let brb = new BooleanRuleBase("Player");
-    let cs1 = new CommitmentStore("Partner");
-    let cs2 = new CommitmentStore("Self");
+    const brb = new BooleanRuleBase("Player");
+    const cs1 = new CommitmentStore("Partner");
+    const cs2 = new CommitmentStore("Self");
     const prop1 = new Proposition("CP is a good deterrent", true);
     const prop2 = new Proposition("CP is acceptable", true);
     const rule = new Rule(prop1, prop2);

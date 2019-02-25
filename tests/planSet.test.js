@@ -2,8 +2,7 @@ import { Move } from "../scripts/move";
 import { PlanSet } from "../scripts/planSet";
 import { Plan } from "../scripts/plan";
 import { Proposition } from "../scripts/proposition";
-import { Rule } from "../scripts/rule";
-import { CommitmentStore } from "../scripts/commitmentStore"
+import { CommitmentStore } from "../scripts/commitmentStore";
 import { DialogueHistory } from "../scripts/dialogueHistory";
 import { Planner } from "../scripts/planner";
 

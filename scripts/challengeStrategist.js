@@ -13,7 +13,7 @@ export class ChallengeStrategist {
             let prop = partnerConflictSet.mergeIntoProposition();
             relevantMove.push(new Move(currentTurn, "Resolve", prop, partnerConflictSet));
         } else if (acceptableGrounds.length > 0) {
-            let i = (Math.random() * (acceptableGrounds.length - 1));
+            let i = Math.round((Math.random() * (acceptableGrounds.length - 1)));
             relevantMove.push(new Move(currentTurn, "Resolve", acceptableGrounds[i]));
         }
 

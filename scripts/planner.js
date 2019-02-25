@@ -20,6 +20,10 @@ export class Planner {
         this._currentPlan = value;
     }
 
+    set computerThesis(value) {
+        this._computerThesis = value;
+    }
+
     produceRelevantMove(dialogueHistory, selfCS, partnerCS, selfKBS) {
         let relevantMove = [];
         let previousMove = dialogueHistory[dialogueHistory.length-1];

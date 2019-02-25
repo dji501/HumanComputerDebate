@@ -69,6 +69,10 @@ test("Negate method should negate truth value correctly", () => {
     rule1.negate();
 
     expect(rule1.truth).toBe(false);
+
+    rule1.negate();
+
+    expect(rule1.truth).toBe(true);
 });
 
 test("Denial method should return denial or current Rule", () => {
@@ -82,6 +86,14 @@ test("Denial method should return denial or current Rule", () => {
     const rule3 = rule1.denial();
 
     expect(rule3).toEqual(rule2);
+    expect(rule3.truth).toEqual(false);
+
+    let lhsProp3 = new Proposition("LHS", true);
+    let rhsProp4 = new Proposition("RHS", true);
+    const rule4 = new Rule(lhsProp3, rhsProp4);
+    rule4.negate();
+    expect(rule4.truth).toEqual(false);
+    expect(rule4.denial().truth).toEqual(true);
 });
 
 test("getContentAsString should return appropriate value", () => {

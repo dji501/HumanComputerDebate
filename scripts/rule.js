@@ -116,7 +116,7 @@ export class Rule extends RuleProp {
      */
     denial() {
         let denial = new Rule(this._antecedent, this._consequent);
-        denial.negate();
+        denial.truth = !this.truth;
         return denial;
     }
 

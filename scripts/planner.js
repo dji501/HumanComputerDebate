@@ -1,6 +1,9 @@
 //import { AssertionStrategist } from "./assertionStrategist";
 import { Move } from "./move";
 
+/**
+ * Main decision obtainer for the computer
+ */
 export class Planner {
     constructor(turn) {
         this._turn = turn;
@@ -20,13 +23,17 @@ export class Planner {
         this._currentPlan = value;
     }
 
+    get computerThesis() {
+        return this._computerThesis;
+    }
+
     set computerThesis(value) {
         this._computerThesis = value;
     }
 
     produceRelevantMove(dialogueHistory, selfCS, partnerCS, selfKBS) {
         let relevantMove = [];
-        let previousMove = dialogueHistory[dialogueHistory.length-1];
+        let previousMove = dialogueHistory.set[dialogueHistory.length-1];
         let prevMoveType = previousMove.moveType;
         if (prevMoveType === "Assertion" || prevMoveType === "Ground" || prevMoveType === "Concession") {
             /*

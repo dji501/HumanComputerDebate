@@ -1,4 +1,5 @@
-import { Move } from "../scripts/move";
+import { Move } from "./move";
+import { FocusShiftManager } from "./focusShiftManager";
 
 export class WithdrawStrategist {
 
@@ -22,8 +23,8 @@ export class WithdrawStrategist {
                 // 2.1 Try execute the plan
                 relevantMove.push(nextMove);
             } else {
-                // 2.2 Else plan is abandonded, switch focus
-                //nextMove = FocusShiftManager.execute(dialogueHistory, planner, partnerCS,selfCS,selfKBS);
+                // 2.2 Else plan is abandoned, switch focus
+                nextMove = FocusShiftManager.execute(dialogueHistory, planner, partnerCS,selfCS,selfKBS);
                 if (nextMove !== null && nextMove !== undefined) {
                     relevantMove.push(nextMove);
                 }
@@ -37,7 +38,7 @@ export class WithdrawStrategist {
             } else if (previousProposition !== null && previousProposition !== undefined && planner.computerThesis.denial().equals(previousProposition)) {
                 relevantMove.push(new Move("C","Question",planner.computerThesis));
             } else {
-                let nextMove = null;//FocusShiftManager.execute(dialogueHistory, planner, partnerCS,selfCS,selfKBS);
+                let nextMove = FocusShiftManager.execute(dialogueHistory, planner, partnerCS,selfCS,selfKBS);
                 if (nextMove !== null && nextMove !== undefined) {
                     relevantMove.push(nextMove);
                 }

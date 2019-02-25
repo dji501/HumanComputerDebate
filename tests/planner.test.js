@@ -5,6 +5,7 @@ import { CommitmentStore } from "../scripts/commitmentStore";
 import { BooleanRuleBase } from "../scripts/booleanRuleBase";
 import { Move } from "../scripts/move";
 import { ConflictSet } from "../scripts/conflictSet";
+import { DialogueHistory } from "../scripts/dialogueHistory";
 
 test("initialises as expected", ()=> {
     let planner = new Planner("C");
@@ -13,29 +14,167 @@ test("initialises as expected", ()=> {
     expect(planner.currentPlan).toEqual(null);
 });
 
-// TODO: requires all the strategists
-test("produceRelevantMove should produce relevant moves when", () => {
+// TODO: improve theses tests at the moment they only check if a move is returned
+test("produceRelevantMove should produce a move when prev move type was concession", () => {
+    const selfCS = new CommitmentStore("self");
+    const partnerCS = new CommitmentStore("partner");
+    const brb = new BooleanRuleBase("selfKBS");
 
+    const prop1 = new Proposition("CP is acceptable", true);
+    const prop2 = new Proposition("CP is acceptable", false);
+
+    const move1 = new Move("C", "Question", prop1);
+    const move2 = new Move("S", "Concession", prop2);
+
+    const dh = new DialogueHistory();
+    dh.add(move1);
+    dh.add(move2);
+
+    const planner = new Planner();
+    planner.computerThesis = prop1;
+
+    let move = planner.produceRelevantMove(dh,selfCS,partnerCS,brb)[0];
+    expect(move instanceof Move).toBe(true);
 });
 
-test("produceRelevantMove should produce relevant moves when", () => {
+test("produceRelevantMove should produce a move when prev move type was assertion", () => {
+    const selfCS = new CommitmentStore("self");
+    const partnerCS = new CommitmentStore("partner");
+    const brb = new BooleanRuleBase("selfKBS");
 
+    const prop1 = new Proposition("CP is acceptable", true);
+    const prop2 = new Proposition("CP is acceptable", false);
+
+    const move1 = new Move("C", "Question", prop1);
+    const move2 = new Move("S", "Assertion", prop2);
+
+    const dh = new DialogueHistory();
+    dh.add(move1);
+    dh.add(move2);
+
+    const planner = new Planner();
+    planner.computerThesis = prop1;
+
+    let move = planner.produceRelevantMove(dh,selfCS,partnerCS,brb)[0];
+    expect(move instanceof Move).toBe(true);
 });
 
-test("produceRelevantMove should produce relevant moves when", () => {
+test("produceRelevantMove should produce a move when prev move type was ground", () => {
+    const selfCS = new CommitmentStore("self");
+    const partnerCS = new CommitmentStore("partner");
+    const brb = new BooleanRuleBase("selfKBS");
 
+    const prop1 = new Proposition("CP is acceptable", true);
+    const prop2 = new Proposition("CP is acceptable", false);
+
+    const move1 = new Move("C", "Question", prop1);
+    const move2 = new Move("S", "Ground", prop2);
+
+    const dh = new DialogueHistory();
+    dh.add(move1);
+    dh.add(move2);
+
+    const planner = new Planner();
+    planner.computerThesis = prop1;
+
+    let move = planner.produceRelevantMove(dh,selfCS,partnerCS,brb)[0];
+    expect(move instanceof Move).toBe(true);
 });
 
-test("produceRelevantMove should produce relevant moves when", () => {
+test("produceRelevantMove should produce a move when prev move type was withdraw", () => {
+    const selfCS = new CommitmentStore("self");
+    const partnerCS = new CommitmentStore("partner");
+    const brb = new BooleanRuleBase("selfKBS");
 
+    const prop1 = new Proposition("CP is acceptable", true);
+    const prop2 = new Proposition("CP is acceptable", false);
+
+    const move1 = new Move("C", "Question", prop1);
+    const move2 = new Move("S", "Withdraw", prop2);
+
+    const dh = new DialogueHistory();
+    dh.add(move1);
+    dh.add(move2);
+
+    const planner = new Planner();
+    planner.computerThesis = prop1;
+
+    let move = planner.produceRelevantMove(dh,selfCS,partnerCS,brb)[0];
+    expect(move instanceof Move).toBe(true);
 });
 
-test("produceRelevantMove should produce relevant moves when", () => {
+test("produceRelevantMove should produce a move moves when prev move type was challenge", () => {
+    const selfCS = new CommitmentStore("self");
+    const partnerCS = new CommitmentStore("partner");
+    const brb = new BooleanRuleBase("selfKBS");
 
+    const prop1 = new Proposition("CP is acceptable", true);
+    const prop2 = new Proposition("CP is acceptable", false);
+
+    const move1 = new Move("C", "Question", prop1);
+    const move2 = new Move("S", "Challenge", prop2);
+
+    const dh = new DialogueHistory();
+    dh.add(move1);
+    dh.add(move2);
+
+    const planner = new Planner();
+    planner.computerThesis = prop1;
+
+    let move = planner.produceRelevantMove(dh,selfCS,partnerCS,brb)[0];
+    expect(move instanceof Move).toBe(true);
 });
 
-test("produceRelevantMove should produce relevant moves when", () => {
+test("produceRelevantMove should produce a move moves when prev move type was question", () => {
+    const selfCS = new CommitmentStore("self");
+    const partnerCS = new CommitmentStore("partner");
+    const brb = new BooleanRuleBase("selfKBS");
 
+    const prop1 = new Proposition("CP is acceptable", true);
+    const prop2 = new Proposition("CP is acceptable", false);
+
+    const move1 = new Move("C", "Question", prop1);
+    const move2 = new Move("S", "Question", prop2);
+
+    const dh = new DialogueHistory();
+    dh.add(move1);
+    dh.add(move2);
+
+    const planner = new Planner();
+    planner.computerThesis = prop1;
+
+    let move = planner.produceRelevantMove(dh,selfCS,partnerCS,brb)[0];
+    expect(move instanceof Move).toBe(true);
+});
+
+test("produceRelevantMove should produce a move moves when prev move type was resolve", () => {
+    const selfCS = new CommitmentStore("self");
+    const partnerCS = new CommitmentStore("partner");
+    const brb = new BooleanRuleBase("selfKBS");
+
+    const prop1 = new Proposition("CP is a good deterrent", true);
+    const prop2 = new Proposition("CP is acceptable", true);
+    const rule = new Rule(prop1, prop2);
+
+    partnerCS.addAssertion(prop1);
+    partnerCS.addAssertion(rule);
+
+    const conflictSet = new ConflictSet();
+    conflictSet.add(prop1);
+    conflictSet.add(rule);
+
+    const move1 = new Move("C", "Question", prop1);
+    const move2 = new Move("S", "Resolve", prop1, conflictSet);
+
+    const dh = new DialogueHistory();
+    dh.add(move1);
+    dh.add(move2);
+
+    const planner = new Planner();
+    planner.computerThesis = prop1;
+
+    let move = planner.produceRelevantMove(dh,selfCS,partnerCS,brb)[0];
+    expect(move instanceof Move).toBe(true);
 });
 
 test("planResolution should return appropriate set of moves when P, R, R -> -P", () => {

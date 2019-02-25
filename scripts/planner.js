@@ -1,5 +1,9 @@
 //import { AssertionStrategist } from "./assertionStrategist";
 import { Move } from "./move";
+import { AssertionStrategist } from "./assertionStrategist";
+import { WithdrawStrategist } from "./withdrawStrategist";
+import { QuestionStrategist } from "./questionStrategist";
+import { ChallengeStrategist } from "./challengeStrategist";
 
 /**
  * Main decision obtainer for the computer
@@ -39,20 +43,20 @@ export class Planner {
             /*
             I	When facing the situation of ASSERTION, CONCESSION or GROUND
             */
-            //relevantMove = AssertionStrategist.planAssertion(dialogueHistory, selfCS, partnerCS, selfKBS, this);
+            relevantMove = AssertionStrategist.planAssertion(dialogueHistory, selfCS, partnerCS, selfKBS, this);
         } else if (prevMoveType === "Withdraw") {
             /*
             II When facing WITHDRAW a proposition or rule
             */
-            //relevantMove = WithdrawStrategist.planWithdraw(dialogueHistory, selfCS, partnerCS, selfKBS, this);
+            relevantMove = WithdrawStrategist.planWithdraw(dialogueHistory, selfCS, partnerCS, selfKBS, this);
         } else if (prevMoveType === "Challenge") {
             /*
             III	When facing the CHALLENGE, challenge a rule is not currently available
             */
             if (previousMove.getMoveContentName() === "Proposition") {
-                //let previousProposition = previousMove.getmoveContentProposition().clone();
+                let previousProposition = previousMove.moveContentProposition.clone();
 
-                //relevantMove = ChallengeStrategist.planChallProp(previousProposition, this._turn, selfCS, partnerCS, selfKBS;)
+                relevantMove = ChallengeStrategist.planChallProp(previousProposition, this._turn, selfCS, partnerCS, selfKBS);
             } else {
                 //Feature not available
             }
@@ -60,7 +64,7 @@ export class Planner {
             /*
             IV	Facing the QUESTION
             */
-            //relevantMove = QuestionStrategist.planQuestion(dialogueHistory, selfCS, partnerCS, selfKBS, this);
+            relevantMove = QuestionStrategist.planQuestion(dialogueHistory, selfCS, partnerCS, selfKBS, this);
         } else if (prevMoveType === "Resolve") {
             /*
             V	Facing a legal RESOLUTION demand

@@ -6,7 +6,6 @@ import { CommitmentStore } from "../scripts/commitmentStore";
 import { BooleanRuleBase } from "../scripts/BooleanRuleBase";
 import { ConflictSet } from "../scripts/conflictSet";
 
-//TODO: Create tests case
 test("planChallProp returns correct move when conflict set is greater than 0", () => {
     const partnerCS = new CommitmentStore("partner");
     const prop1 = new Proposition("CP is a good deterrent", true);

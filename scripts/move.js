@@ -31,6 +31,7 @@ export class Move {
         return this._moveType;
     }
 
+    // Original: getObject
     get moveContent() {
         return this._moveContent;
     }

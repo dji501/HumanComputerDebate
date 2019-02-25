@@ -115,7 +115,7 @@ test("execute focus shift manager should return what startBuildPlan would return
     planner.computerThesis = proposition6;
 
     const mockMath2 = Object.create(global.Math);
-    mockMath2.random = () => 1;
+    mockMath2.random = () => 0.5;
     global.Math = mockMath2;
 
     expect(FocusShiftManager.execute(dh, selfCS, partnerCS, brb, planner)).toEqual(planSet.startBuildPlan(dh,planner));

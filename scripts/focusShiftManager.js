@@ -7,7 +7,8 @@ export class FocusShiftManager {
         let response = null;
         let planSet = selfKBS.getPlanSet(planner.computerThesis);
 
-        let i = Math.round((Math.random() * 1));
+        // MAKE SURE THIS IS MEANT TO BE 2.
+        let i = Math.round((Math.random() * 2));
 
         switch(i) {
             case 0:

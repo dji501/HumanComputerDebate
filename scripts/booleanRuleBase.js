@@ -223,7 +223,7 @@ export class BooleanRuleBase {
         return plan;
     }
 
-    /**
+    /** Original: support
      * supports - Check wether the first parameter supports the second
      *
      * @param  {RuleProp} ruleProp Could be a rule or a proposition to check if supports prop

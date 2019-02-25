@@ -8,7 +8,7 @@ import { Planner } from "../scripts/planner";
 import { CommitmentStore } from "../scripts/commitmentStore";
 import { BooleanRuleBase } from "../scripts/BooleanRuleBase";
 
-
+//TODO: improve coverage
 test("plan question start of game question should return correct move", () => {
     const selfCS = new CommitmentStore("self");
     const partnerCS = new CommitmentStore("partner");

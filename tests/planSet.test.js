@@ -4,6 +4,8 @@ import { Plan } from "../scripts/plan";
 import { Proposition } from "../scripts/proposition";
 import { Rule } from "../scripts/rule";
 import { CommitmentStore } from "../scripts/commitmentStore"
+import { DialogueHistory } from "../scripts/dialogueHistory";
+import { Planner } from "../scripts/planner";
 
 test("initialisation works correctly", () => {
     const planSet = new PlanSet();
@@ -71,11 +73,12 @@ test("getHardEvidentialMove does not return a hard evidential move when one does
     expect(planSet.getHardEvidentialMove(selfCS)).toEqual(expectedMove);
 });
 
-//TODO REQUIRES DialogueHistory & Planner
 test("get Question move returns a question move when it exists", () => {
     const plan1 = new Plan();
     const plan2 = new Plan();
     const planSet = new PlanSet();
+    const planner = new Planner();
+    const dh = new DialogueHistory();
     const proposition1 = new Proposition("political and racial bias often cause prejudices", true);
     const proposition2 = new Proposition("there are mistakes during the judicial process", true);
     const proposition3 = new Proposition("records show an increase of murders in CP countries", true, "evidence");
@@ -85,22 +88,30 @@ test("get Question move returns a question move when it exists", () => {
     plan2.add(proposition2);
     planSet.add(plan1);
     planSet.add(plan2);
+
+    expect(planSet.getQuestionMove(dh,planner)).toEqual(new Move("C", "Question", proposition3));
 });
 
-//TODO REQUIRES DialogueHistory & Planner
 test("get Question move returns no question move when it doesnt exist", () => {
     const plan1 = new Plan();
     const plan2 = new Plan();
     const planSet = new PlanSet();
+    const planner = new Planner();
+    const dh = new DialogueHistory();
     const proposition1 = new Proposition("political and racial bias often cause prejudices", true);
     const proposition2 = new Proposition("there are mistakes during the judicial process", true);
     const proposition3 = new Proposition("records show an increase of murders in CP countries", true, "evidence");
-
+    const move1 = new Move("C","Question",proposition3);
+    const move2 = new Move("C","Question",proposition2);
     plan1.add(proposition1);
     plan2.add(proposition3);
     plan2.add(proposition2);
     planSet.add(plan1);
     planSet.add(plan2);
+    dh.add(move1);
+    dh.add(move2);
+
+    expect(planSet.getQuestionMove(dh,planner)).toEqual(null);
 });
 
 test("get rebuttal move returns a rebuttal move when it exists", () => {
@@ -223,29 +234,60 @@ test("startSubtopic return null when a succesful subtopic does not exist", () =>
     expect(planSet.startSubtopic(selfCS,partnerCS)).toEqual(expectedMove1);
 });
 
-//TODO: needs DialogueHistory and Planner
 test("startBuildPlan builds a plan succesfully and gives the first move back", () => {
-    const plan = new Plan();
+    const dh = new DialogueHistory();
+    const planner = new Planner();
+    const plan1 = new Plan();
+    const plan2 = new Plan();
+    const planSet = new PlanSet();
     const proposition1 = new Proposition("political and racial bias often cause prejudices", true);
     const proposition2 = new Proposition("there are mistakes during the judicial process", true);
     const proposition3 = new Proposition("innocent people may get killed", true);
-    const proposition4 = new Proposition("CP is acceptable", false);
 
-    plan.add(proposition1);
-    plan.add(proposition2);
-    plan.add(proposition3);
-    plan.add(proposition4);
+    const proposition4 = new Proposition("suicide bombers want to die", true);
+    const proposition5 = new Proposition("some people want to die", true);
+    const proposition6 = new Proposition("CP is not a good deterrant", true);
+
+    plan1.add(proposition1);
+    plan1.add(proposition2);
+    plan1.add(proposition3);
+    planSet.add(plan1);
+
+    plan2.add(proposition4);
+    plan2.add(proposition5);
+    plan2.add(proposition6);
+    planSet.add(plan2);
+
+    const mockMath1 = Object.create(global.Math);
+    mockMath1.random = () => 0;
+    global.Math = mockMath1;
+
+    expect(planSet.startBuildPlan(dh,planner)).toEqual(new Move("C","Question",proposition1));
+
+    const mockMath2 = Object.create(global.Math);
+    mockMath2.random = () => 1;
+    global.Math = mockMath2;
+
+    expect(planSet.startBuildPlan(dh,planner)).toEqual(new Move("C","Question",proposition4));
 });
 
 test("startBuildPlan does not build a plan succesfully and gives null back", () => {
-    const plan = new Plan();
+    const dh = new DialogueHistory();
+    const planner = new Planner();
+    const plan1 = new Plan();
+    const planSet = new PlanSet();
     const proposition1 = new Proposition("political and racial bias often cause prejudices", true);
     const proposition2 = new Proposition("there are mistakes during the judicial process", true);
     const proposition3 = new Proposition("innocent people may get killed", true);
-    const proposition4 = new Proposition("CP is acceptable", false);
 
-    plan.add(proposition1);
-    plan.add(proposition2);
-    plan.add(proposition3);
-    plan.add(proposition4);
+    const move1 = new Move("C","Question",proposition1);
+
+    plan1.add(proposition1);
+    plan1.add(proposition2);
+    plan1.add(proposition3);
+    planSet.add(plan1);
+
+    dh.add(move1);
+
+    expect(planSet.startBuildPlan(dh,planner)).toEqual(null);
 });

@@ -133,7 +133,7 @@ export class PlanSet {
             Randomly choose a plan
         */
         if (questionPlan.length > 0) {
-            let i = Math.round(Math.random() * questionPlan.length);
+            let i = Math.round(Math.random() * (questionPlan.length - 1));
             planner.currentPlan = questionPlan[i];
             return planner.currentPlan.start();
         } else {

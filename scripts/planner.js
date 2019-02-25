@@ -16,6 +16,10 @@ export class Planner {
         return this._currentPlan;
     }
 
+    set currentPlan(value) {
+        this._currentPlan = value;
+    }
+
     produceRelevantMove(dialogueHistory, selfCS, partnerCS, selfKBS) {
         let relevantMove = [];
         let previousMove = dialogueHistory[dialogueHistory.length-1];

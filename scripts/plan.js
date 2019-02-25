@@ -45,13 +45,11 @@ export class Plan {
     }
 
     execute(dialogueHistory, planner, partnerCS, selfCS, selfKBS) {
-        let previousMove = dialogueHistory[dialogueHistory.length-1];
-        let secondToLastMove = dialogueHistory[dialogueHistory.length-2];
+        let previousMove = dialogueHistory.set[dialogueHistory.length-1];
+        let secondToLastMove = dialogueHistory.set[dialogueHistory.length-2];
         let previousRuleProp = previousMove.moveContent;
 
-        //planner.currentPlan.show(); TODO
-
-        if (previousMove.moveType === "Concession" && previousMove.getContentAsString() === secondToLastMove.getContentAsString()) {
+        if (previousMove.moveType === "Concession" && previousMove.getMoveContentAsString() === secondToLastMove.getMoveContentAsString()) {
             /*
              * 1. If the user said yes, proceed to execute plan, the plan executed ok.
         		  If there is only one item remaining, then state the item and set the plan to null
@@ -62,7 +60,7 @@ export class Plan {
             if (this._set.length > 1){
                 return new Move("C", "Question", this._set[0]);
             } else if (this._set.length === 1) {
-                //planner.currentPlan = null;
+                planner.currentPlan = null;
                 return new Move("C", "Question", this._set[0]);
             }
         } else if (previousMove.moveType === "Withdraw" && secondToLastMove.moveType === "Question") {
@@ -74,8 +72,8 @@ export class Plan {
             /*
 			 C may needs to challenge it if the current focus is not current being built
 			*/
-			//planner.currentPlan=null;
-        } else if (previousMove.moveType === "Concession" && previousMove.getContentAsString() !== secondToLastMove.getContentAsString()) {
+			planner.currentPlan=null;
+        } else if (previousMove.moveType === "Concession" && previousMove.getMoveContentAsString() !== secondToLastMove.getMoveContentAsString()) {
             /*
              3. The user gives an unwanted statement,
                 and If there is a direct conflct, then pose a resolution demand
@@ -84,12 +82,13 @@ export class Plan {
             let conflictSet = partnerCS.getRealConflictSet();
 
             if (conflictSet.set.length > 0 && conflictSet.includes(previousRuleProp)) {
+
                 /*
                  3.1 If there is a direct conflict, then pose the resolution demand
                 */
                 let proposition = conflictSet.mergeIntoProposition();
                 return new Move("C", "Resolve", proposition, conflictSet);
-            } else if (selfKBS.challengable(previousRuleProp, partnerCS, selfCS)) {
+            } else if (selfKBS.challengeable(previousRuleProp, partnerCS, selfCS)) {
                 /*
                  3.2 If there is no direct conflict, then check whether the unwanted statement is challengable
                      If it is, then challenge it
@@ -100,7 +99,7 @@ export class Plan {
                  3.3 If there was no direct conflict, and the statement isn't challengable
                      then abandon the current line of question.
                 */
-                //planner.currentPlan = null;
+                planner.currentPlan = null;
             }
         } else if (previousMove.moveType === "Withdraw" && secondToLastMove.moveType === "Resolve") {
             /*
@@ -109,12 +108,12 @@ export class Plan {
             */
             let ruleProp = this._set[0];
 
-            if (ruleProp.getClassName() === "Proposition" && previousRuleProp.getClassName() === "Proposition" && ruleProp.negate(previousRuleProp)) {
+            if (ruleProp.getClassName() === "Proposition" && previousRuleProp.getClassName() === "Proposition" && ruleProp.checkNegation(previousRuleProp)) {
                 return new Move("C", "Question", ruleProp);
             } else if (ruleProp.getClassName() === "Rule" && previousRuleProp.getClassName() === "Rule" && ruleProp.denial().equals(previousRuleProp)) {
                 return new Move("C", "Question", ruleProp);
             } else {
-                //planner.currentPlan = null;
+                planner.currentPlan = null;
             }
         } else if (previousMove.moveType === "Withdraw" && secondToLastMove.moveType === "Challenge") {
             /*
@@ -125,7 +124,7 @@ export class Plan {
             /*
              5. The user says a Ground after a challenge then give up that line of questioning
             */
-            //planner.currentPlan=null;
+            planner.currentPlan=null;
         }
         return null;
     }
@@ -147,7 +146,7 @@ export class Plan {
             antecedentProp = planClone.set[i];
             consequentProp = planClone.set[i+1];
 
-            if (antecedentProp !== null && consequentProp !== null) {
+            if (antecedentProp !== null && antecedentProp !== undefined && consequentProp !== null && consequentProp !== undefined) {
                 let newRule = new Rule(antecedentProp, consequentProp);
                 this.add(newRule);
             }

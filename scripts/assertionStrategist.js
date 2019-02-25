@@ -1,7 +1,7 @@
 import { Proposition } from "./proposition";
 import { Move } from "./move";
-//import { FocusShiftManager } from "./focusShiftManager";
-//import { TacticManager } from "./tacticManager";
+import { FocusShiftManager } from "./focusShiftManager";
+import { TacticManager } from "./tacticManager";
 
 export class AssertionStrategist {
 
@@ -59,7 +59,7 @@ export class AssertionStrategist {
                      dialogue state. If there are level 3 available, then retain the current focus
                      Otherwise, call the focus shift manager
                 */
-                //nextMove = FocusShiftManager.execute(dialogueHistory, selfCS, partnerCS,selfKBS, planner);
+                nextMove = FocusShiftManager.execute(dialogueHistory, selfCS, partnerCS,selfKBS, planner);
                 if (nextMove !== null && nextMove !== undefined) {
                     relevantMove.push(nextMove);
                 }
@@ -76,13 +76,13 @@ export class AssertionStrategist {
             if (prevMoveProp.equals(planner.computerThesis.denial()) || selfKBS.support(prevMoveProp, planner.computerThesis.denial()) || selfKBS.againstSupport(prevMoveProp, planner.computerThesis)) {
                 let nextMove;
                 if (selfCS.onAssertion(prevMoveProp) === false) {
-                    //nextMove = TacticManager.getAction(prevMoveProp, dialogueHistory, selfCS, partnerCS, selfKBS, planner);
+                    nextMove = TacticManager.getAction(prevMoveProp, dialogueHistory, selfCS, partnerCS, selfKBS, planner);
                 }
                 if (nextMove !== null && nextMove !== undefined) {
                     relevantMove.push(nextMove);
                 }
                 if (relevantMove.length === 0) {
-                    //nextMove = FocusShiftManager.execute(dialogueHistory, selfCS, partnerCS,selfKBS, planner);
+                    nextMove = FocusShiftManager.execute(dialogueHistory, selfCS, partnerCS,selfKBS, planner);
                 }
             } else if (selfKBS.supports(prevMoveProp, planner.computerThesis)) {
                 // If statement supports Computers thesis
@@ -101,7 +101,7 @@ export class AssertionStrategist {
             }
         } else {
             // No plan under execution and Student gives a conditional
-            let nextMove = null;//FocusShiftManager.execute(dialogueHistory, selfCS, partnerCS,selfKBS, planner);
+            let nextMove = FocusShiftManager.execute(dialogueHistory, selfCS, partnerCS,selfKBS, planner);
             if (nextMove !== null && nextMove !== undefined) {
                 relevantMove.push(nextMove);
             }

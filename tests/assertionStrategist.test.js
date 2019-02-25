@@ -53,7 +53,7 @@ test("start of game stategy should perform correct actions if user rejects", () 
     expect(planner.computerThesis).toEqual(prop2);
 });
 
-// TODO after focusShiftManager and TacticManager
+// TODO Finish this set of tests:
 test("", () => {
     const dh = new DialogueHistory();
     const planner = new Planner();

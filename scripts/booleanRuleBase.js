@@ -1,4 +1,5 @@
-
+import { PlanSet } from "./planSet";
+import { Plan } from "./plan";
 /**
  *  The reasoning part of the application
  */
@@ -130,7 +131,7 @@ export class BooleanRuleBase {
      * @param  {Proposition} prop  Proposition to find the acceptable grounded propositions of.
      * @param  {CommitmentStore} partnerCS commitmentStore of the opponent
      * @return {array}    containing accepted grounded proposition
-     */    //TODO:
+     */
     findAcceptableGroundPropositions(prop, partnerCS) {
         let groundedPropositions = this.findGroundPropositions(prop);
         let acceptableGPs = [];
@@ -205,20 +206,21 @@ export class BooleanRuleBase {
         return null;
     }
 
-    /**
-     * getPlanFromProposition - TODO
+    /** Origina: getPlan
+     * getPlanFromProposition - Given a proposition create a plan from the propositions that it supports
      *
      * @param  {Proposition} prop given proposition
-     * @return {Plan}  TODO
+     * @return {Plan}  the plan to be returned
      */
     getPlanFromProposition(prop) {
-        //let plan = new Plan();
-        while(this.propSupportsOthers(prop)) {
-            let supportedProp = this.getDirectSupportedProp(prop);
-            //plan.add(supportedProp);
-            prop = supportedProp;
+        let plan = new Plan();
+        let searchingProp = prop;
+        while(this.propSupportsOthers(searchingProp)) {
+            let supportedProp = this.getDirectSupportedProp(searchingProp);
+            plan.add(supportedProp);
+            searchingProp = supportedProp;
         }
-        //return plan;
+        return plan;
     }
 
     /**
@@ -238,11 +240,12 @@ export class BooleanRuleBase {
         }
 
         let planSet = this.getPlanSet(prop);
-        for (let i = 0; i < planSet.length; i++) {
 
-            let plan = planSet[i];
-            for (let j = 0; j < plan.length; j++) {
-                let planProposition = plan[j];
+        for (let i = 0; i < planSet.set.length; i++) {
+
+            let plan = planSet.set[i];
+            for (let j = 0; j < plan.set.length; j++) {
+                let planProposition = plan.set[j];
                 if (planProposition.equals(proposition)) {
                     return true;
                 }
@@ -252,38 +255,38 @@ export class BooleanRuleBase {
     }
 
     /**
-     * getPlanSet - TODO
+     * getPlanSet - If propositions are unsupported then get a plan from the negation of that view ??? TODO
      *
-     * @param  {Proposition} prop TODO
-     * @return {PlanSet}      TODO
+     * @param  {Proposition} prop The proposition to check if it is contained in the plan of an unsupported propositon
+     * @return {PlanSet}      The new planSet
      */
     getPlanSet(prop) {
-        // let planset = new PlanSet();
-        for (let i = 0; i < this._propositionList; i++) {
+        let planSet = new PlanSet();
+
+        for (let i = 0; i < this._propositionList.length; i++) {
             let p = this._propositionList[i];
 
             if (this.propIsSupported(p) === false) {
-                let tempPlan = this.getPlanFromProposition(prop);
+                let tempPlan = this.getPlanFromProposition(p);
 
-                if (tempPlan.length === false && tempPlan.includes(prop)) {
-                    //let plan = New Plan();
-                    let j = tempPlan.indexOf(prop);
+                if (tempPlan.set.length > 0 && tempPlan.containsProposition(prop)) {
+                    let plan = new Plan();
+                    let j = tempPlan.set.indexOf(prop);
 
-                    //plan.push(p);
+                    plan.add(p);
 
                     for (let k = 0; k <= j; k++) {
-                        //plan.push(tempPlan.elementAt(k));
+                        plan.add(tempPlan.set[k]);
                     }
-                    //planSet.push(plan);
+                    planSet.add(plan);
                 }
             }
         }
-        //return planSet;
+        return planSet;
     }
 
     /**
      * againstSupport - Check whether a proposition is against proponent's support
-     *      TODO
      * @param  {RuleProp} ruleProp proposition to check
      * @param  {Proposition} prop   proposition to check against
      * @return {boolean}   true if ruleProp against prop false otherwise
@@ -298,11 +301,10 @@ export class BooleanRuleBase {
         }
 
         let planSet = this.getPlanSet(prop);
-        for (let i = 0; i < planSet.length; i++) {
-
-            let plan = planSet[i];
-            for (let j = 0; j < plan.length; j++) {
-                let planProposition = plan[j];
+        for (let i = 0; i < planSet.set.length; i++) {
+            let plan = planSet.set[i];
+            for (let j = 0; j < plan.set.length; j++) {
+                let planProposition = plan.set[j];
                 if (proposition.equals(planProposition.denial()) || this.supports(proposition, planProposition.denial())) {
                     return true;
                 }

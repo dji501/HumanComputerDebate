@@ -152,15 +152,14 @@ export class Move {
         return moveString;
     }
 
-    // TODO:
-    display(line, textArea, prevMoveType, prevMoveContent) {
+    // Original: display
+    getMoveStringForDisplay(line, prevMoveType, prevMoveContent) {
         let content = this.getMoveAsString(prevMoveType, prevMoveContent);
 
         if (line < 10) {
-            //textArea.append("0"+line+": "+this_turn+">"+content+"\n");
+            return "0" + line + ": " + this._turn + ">" + content;
         } else {
-            //textArea.append(line+": "+this._turn+">"+content+"\n");
+            return line + ": " + this._turn + ">" + content;
         }
-        console.warn(content);
     }
 }

@@ -13,53 +13,53 @@
     width: 100vw;
 }
 
-.commitmentstore__box {
-    width: inherit;
-    margin-top: 10px;
-}
+    .commitmentstore__box {
+        width: inherit;
+        margin-top: 10px;
+    }
 
-.commitmentstore__boundary {
-    background-color: #ffffff;
-    margin: 0 auto;
-    width: 85%;
-    height: 85%;
-    overflow: scroll;
-    overflow-x: hidden;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #000000;
-}
+        .commitmentstore__boundary {
+            background-color: #ffffff;
+            margin: 0 auto;
+            width: 85%;
+            height: 85%;
+            overflow: scroll;
+            overflow-x: hidden;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #000000;
+        }
 
-.commitmentstore__title {
-    margin: 0 auto;
-    width: 85%;
-}
+            .commitmentstore__title {
+                margin: 0 auto;
+                width: 85%;
+            }
 
-.commitmentstore__studentstore {
-    height: inherit;
-    order: 0;
-    flex: 1 50%;
-}
+            .commitmentstore__studentstore {
+                height: inherit;
+                order: 0;
+                flex: 1 50%;
+            }
 
-.commitmentstore__computerstore {
-    height: inherit;
-    order: 1;
-    flex: 1 50%;
-}
+            .commitmentstore__computerstore {
+                height: inherit;
+                order: 1;
+                flex: 1 50%;
+            }
 
-.commitmentstore__list {
-    height: inherit;
-    width: inherit;
-    display: flex;
-    flex-direction: column;
-}
+                .commitmentstore__list {
+                    height: inherit;
+                    width: inherit;
+                    display: flex;
+                    flex-direction: column;
+                }
 
-.commitmentStore_listElement {
-    list-style-type: none;
-    display: block;
-    padding-bottom: 6px;
-    padding-left: 3px;
-}
+                    .commitmentStore__listElement {
+                        list-style-type: none;
+                        display: block;
+                        padding-bottom: 6px;
+                        padding-left: 3px;
+                    }
 
 .debatehistory {
     height: 50vh;
@@ -70,7 +70,30 @@
     background-color: #a2a2a2;
     height: 25vh;
     width: 100vw;
+    display: inline-flex;
 }
+
+    .userinput__inset {
+        width: 95%;
+        height: 85%;
+        background-color: #fffff8;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        margin: auto auto;
+    }
+
+        .userinput__movetype {
+            flex: 3 30%;
+        }
+
+        .userinput__movecontent {
+            flex: 5 50%;
+        }
+
+        .userinput__inputbutton {
+            flex: 2 20%;
+        }
 
 ::-webkit-scrollbar
 {

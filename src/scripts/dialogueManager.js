@@ -29,6 +29,10 @@ export class DialogueManager {
         return this._studentCS;
     }
 
+    get dialogueHistory() {
+        return this._dialogueHistory;
+    }
+
     actionPerformed() {
         //Deal with this
     }

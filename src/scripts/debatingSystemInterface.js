@@ -9,6 +9,7 @@ export class DebatingSystemInterface extends React.Component{
         super(props);
 
         this._dialogueManager = new DialogueManager(this);
+        this._dialogueManager.start();
         //this._interfaceManager = new InterfaceManager(this);
     }
 
@@ -34,10 +35,22 @@ export class DebatingSystemInterface extends React.Component{
                         </div>
                     </div>
                 </div>
-                <div className="debatehistory"></div>
+                <div className="debatehistory">
+                    <div className="debatehistory__boundary">
+                        <DialogueHistory dialogueHistory={this._dialogueManager.dialogueHistory.moveStrings}/>
+                    </div>
+                </div>
                 <div className="userinput">
-                    <div>
+                    <div className="userinput__inset">
+                        <div className="userinput__movetype">
 
+                        </div>
+                        <div className="userinput__movecontent">
+
+                        </div>
+                        <div className="userinput__inputbutton">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,7 +61,10 @@ export class DebatingSystemInterface extends React.Component{
         <li>{commitment.getContentAsString()}</li>;
     });*/
 function CommitmentStore(props) {
-    const commitments = props.commitmentStore.map((commitment) => <li className="commitmentStore_listElement">{commitment.getContentAsString()}</li>);
+    let commitments;
+    if (props.commitmentStore !== null && props.commitmentStore !== undefined) {
+        commitments = props.commitmentStore.map((commitment) => <li className="commitmentStore__listElement">{commitment.getContentAsString()}</li>);
+    }
     return (
         <div id={props.owner}>
             <ul className="commitmentstore__list">{commitments}</ul>
@@ -56,11 +72,42 @@ function CommitmentStore(props) {
     );
 }
 
-function GoButton(props) {
+function MoveChoiceDropdown(props) {
     return (
-        <button className="userinput__button"
-                onClick={props.onClick}>
-                Go!
-        </button>
+        <div id="movechoice-dropdown">
+            <select className="userinput_movetypeselect"></select>
+        </div>
+    );
+}
+
+
+function MoveContentDropdown(props) {
+    return (
+        <div id="moveccontent-dropdown">
+            <select className="userinput_movecontentselect"></select>
+        </div>
+    );
+}
+
+function InputButton(props) {
+    return (
+        <div id="moveinput-button">
+            <button className="userinput__button"
+                    onClick={props.onClick}>
+                    Enter
+            </button>
+        </div>
+    );
+}
+
+function DialogueHistory(props) {
+    let dialogue;
+    if (props.dialogueHistory !== null && props.dialogueHistory !== undefined) {
+        dialogue = props.dialogueHistory.map((move) => <li className="debatehistory__listitem">{move}</li>);
+    }
+    return (
+        <div id="debate-history">
+            <ul className="debatehistory__list">{dialogue}</ul>
+        </div>
     );
 }

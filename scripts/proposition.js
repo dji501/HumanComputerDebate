@@ -120,7 +120,7 @@ export class Proposition extends RuleProp {
         }
     }
 
-    /**
+    /** Original: negate(prop)
      * checkNegation - check if proposition is the negative of the other
      *
      * @param  {Proposition} proposition the proposition to be compared against

@@ -26,8 +26,18 @@ export class DebatingSystemInterface extends React.Component{
 
     render() {
         return (
-            <div>
-                {this.goButton(this._sLeft)}
+            <div id="debate-system">
+                <div id="commitment-store" class="commitmentstore">
+                    <div id="student-store" class="commitmentstore__studentstore"></div>
+                    <hr></hr>
+                    <div id="computer-store" class="commitmentstore__computerstore"></div>
+                </div>
+                <div class="debatehistory"></div>
+                <div class="userinput">
+                    <div>
+                        {this.goButton(this._sLeft)}
+                    </div>
+                </div>
             </div>
         );
     }

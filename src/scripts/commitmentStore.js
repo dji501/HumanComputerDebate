@@ -15,6 +15,10 @@ export class CommitmentStore extends BooleanRuleBase {
         return this._assertionList;
     }
 
+    get totalList(){
+        return this._totalList;
+    }
+
     /**
      * removeRulePropFromArray - Remove the passed in RuleProp from the passed in array if it exists within it.
      *
@@ -36,6 +40,7 @@ export class CommitmentStore extends BooleanRuleBase {
 
     repaint(commitmentStoreElement) {
         // TODO: Original: This is where the drawing of text into area occured.
+        // Think I can just get total list.
     }
 
     /**

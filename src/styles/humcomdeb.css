@@ -6,27 +6,59 @@
 .commitmentstore {
     background-color: #f1f1f1;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-evenly;
     align-items: stretch;
     height: 25vh;
     width: 100vw;
 }
 
+.commitmentstore__box {
+    width: inherit;
+    margin-top: 10px;
+}
+
+.commitmentstore__boundary {
+    background-color: #ffffff;
+    margin: 0 auto;
+    width: 85%;
+    height: 85%;
+    overflow: scroll;
+    overflow-x: hidden;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000000;
+}
+
+.commitmentstore__title {
+    margin: 0 auto;
+    width: 85%;
+}
+
 .commitmentstore__studentstore {
+    height: inherit;
     order: 0;
-    flex: 1 49%;
-    border-right: solid;
-    border-width: thin;
-    border-color: #b9b9b9;
+    flex: 1 50%;
 }
 
 .commitmentstore__computerstore {
+    height: inherit;
     order: 1;
-    flex: 1 49%;
-    border-left: solid;
-    border-width: thin;
-    border-color: #b9b9b9;
+    flex: 1 50%;
+}
+
+.commitmentstore__list {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.commitmentStore_listElement {
+    list-style-type: none;
+    display: block;
+    padding-bottom: 6px;
+    padding-left: 3px;
 }
 
 .debatehistory {
@@ -38,4 +70,20 @@
     background-color: #a2a2a2;
     height: 25vh;
     width: 100vw;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
 }

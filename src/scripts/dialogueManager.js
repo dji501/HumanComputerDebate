@@ -16,9 +16,17 @@ export class DialogueManager {
         this._computerCS;
         this._studentCS;
         this._comuterRelevantMove = [];
-        this._dialogueHistory = new DialogueHistory();
+        this._dialogueHistory;
         this._gameEnd = false;
         this._line = 2;
+    }
+
+    get computerCS() {
+        return this._computerCS;
+    }
+
+    get studentCS() {
+        return this._studentCS;
     }
 
     actionPerformed() {
@@ -37,7 +45,7 @@ export class DialogueManager {
         //TODO: Add first line "01: C>Is it the case that CP is acceptable?\n"
 
         this._computerPlanner = new Planner("C");
-        this._dialogueHistory.set = [];
+        this._dialogueHistory = new DialogueHistory();
         //TODO: In original this activated a menu action
 
         this._studentCS = new CommitmentStore("Student");
@@ -73,7 +81,7 @@ export class DialogueManager {
                 //TODO: this is where the original would remove the green border hints
                 this._dialogueHistory.add(studentMove);
             } else {
-                let refereeMove = new Move("R","Message", new Proposition(warningMessage, true));
+                //let refereeMove = new Move("R","Message", new Proposition(warningMessage, true));
                 //TODO: Original would create new thread here to add line and update display
             }
         }
@@ -152,7 +160,7 @@ export class DialogueManager {
         //TODO: original would start a thread here
         if (this._end === false) {
             this._end = true;
-            let refereeMove = new Move("R","Message",new Proposition(message,true));
+            //let refereeMove = new Move("R","Message",new Proposition(message,true));
 
             this._line += 1;
             //TODO: Update display with move here.

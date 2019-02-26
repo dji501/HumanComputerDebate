@@ -54,7 +54,7 @@
                     flex-direction: column;
                 }
 
-                    .commitmentStore__listElement {
+                    .commitmentstore__listelement {
                         list-style-type: none;
                         display: block;
                         padding-bottom: 6px;

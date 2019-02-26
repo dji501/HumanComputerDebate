@@ -26,7 +26,7 @@ export class DialogueHistory {
     addToMoveStrings(value) {
         let previousMove = this.length > 1 ? this._set[this._set.length -2] : null;
         if (previousMove !== null && previousMove !== undefined) {
-            this._moveStrings.push(value.getMoveStringForDisplay(this.length, previousMove.moveType,previousMove.moveContent));
+            this._moveStrings.push(value.getMoveStringForDisplay(this.length, previousMove.moveType,previousMove.getMoveContentAsString()));
         } else {
             this._moveStrings.push(value.getMoveStringForDisplay(this.length, null,null));
         }

@@ -34,7 +34,7 @@ export class CommitmentStore extends BooleanRuleBase {
         }
     }
 
-    repaint() {
+    repaint(commitmentStoreElement) {
         // TODO: Original: This is where the drawing of text into area occured.
     }
 

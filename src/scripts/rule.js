@@ -37,8 +37,6 @@ export class Rule extends RuleProp {
         this._consequent.addRuleRef(this);
 
         if (booleanRuleBase !== null && booleanRuleBase !== undefined) {
-            booleanRuleBase.rulePropList.push(this._antecedent);
-            booleanRuleBase.rulePropList.push(this._consequent);
             booleanRuleBase.addRule(this);
         }
 

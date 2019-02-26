@@ -14,16 +14,20 @@ export class DebatingSystemInterface extends React.Component{
         this._middlePanel;
         this._southPanel;
         this._sRight;
-        this._sLeft;
+        this._sLeft = {
+            onClick: () => {
+                alert("A");
+            }
+        };
 
         this._dialogueManager = new DialogueManager(this);
-        this._interfaceManager = new InterfaceManager(this);
+        //this._interfaceManager = new InterfaceManager(this);
     }
 
     render() {
         return (
             <div>
-                {this.goButton()}
+                {this.goButton(this._sLeft)}
             </div>
         );
     }

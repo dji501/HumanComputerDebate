@@ -70,30 +70,30 @@ export class KBSManager {
         let p30=new Proposition("chances should be given to murderers for rehabilitation",true,"opinion",booleanRuleBase);
 
         // Define Consequence links
-        let r1 = new Rule(p3,  p1, booleanRuleBase,"R1");
-        let r2 = new Rule(p5,  p4, booleanRuleBase,"R2");
-        let r3 = new Rule(p6,  p3, booleanRuleBase,"R3");
-        let r4 = new Rule(p7,  p3, booleanRuleBase,"R4");
-        let r5 = new Rule(p8,  p7, booleanRuleBase,"R5");
-        let r6 = new Rule(p10, p9, booleanRuleBase,"R6");
-        let r7 = new Rule(p11, p2, booleanRuleBase,"R7");
-        let r8 = new Rule(p26, p1, booleanRuleBase,"R8");
-        let r9 = new Rule(p15, p2, booleanRuleBase,"R9");
+        let r1 = new Rule(p3,  p1, null, booleanRuleBase,"R1");
+        let r2 = new Rule(p5,  p4, null, booleanRuleBase,"R2");
+        let r3 = new Rule(p6,  p3, null, booleanRuleBase,"R3");
+        let r4 = new Rule(p7,  p3, null, booleanRuleBase,"R4");
+        let r5 = new Rule(p8,  p7, null, booleanRuleBase,"R5");
+        let r6 = new Rule(p10, p9, null, booleanRuleBase,"R6");
+        let r7 = new Rule(p11, p2, null, booleanRuleBase,"R7");
+        let r8 = new Rule(p26, p1, null, booleanRuleBase,"R8");
+        let r9 = new Rule(p15, p2, null, booleanRuleBase,"R9");
 
-        let r10 = new Rule(p13, p11, booleanRuleBase, "R10");
-        let r11 = new Rule(p14, p13, booleanRuleBase, "R11");
-        let r12 = new Rule(p16, p1,  booleanRuleBase, "R12");
-        let r13 = new Rule(p17, p16, booleanRuleBase, "R13");
-        let r14 = new Rule(p18, p2,  booleanRuleBase, "R14");
-        let r15 = new Rule(p21, p18, booleanRuleBase, "R15");
-        let r16 = new Rule(p20, p19, booleanRuleBase, "R16");
-        let r17 = new Rule(p22, p1,  booleanRuleBase, "R17");
-        let r18 = new Rule(p23, p22, booleanRuleBase, "R18");
-        let r19 = new Rule(p24, p2,  booleanRuleBase, "R19");
+        let r10 = new Rule(p13, p11, null, booleanRuleBase, "R10");
+        let r11 = new Rule(p14, p13, null, booleanRuleBase, "R11");
+        let r12 = new Rule(p16, p1,  null, booleanRuleBase, "R12");
+        let r13 = new Rule(p17, p16, null, booleanRuleBase, "R13");
+        let r14 = new Rule(p18, p2,  null, booleanRuleBase, "R14");
+        let r15 = new Rule(p21, p18, null, booleanRuleBase, "R15");
+        let r16 = new Rule(p20, p19, null, booleanRuleBase, "R16");
+        let r17 = new Rule(p22, p1,  null, booleanRuleBase, "R17");
+        let r18 = new Rule(p23, p22, null, booleanRuleBase, "R18");
+        let r19 = new Rule(p24, p2,  null, booleanRuleBase, "R19");
 
-        let r20 = new Rule(p27, p1,  booleanRuleBase, "R20");
+        let r20 = new Rule(p27, p1,  null, booleanRuleBase, "R20");
 
-        let r22 = new Rule(p30, p29, booleanRuleBase, "R22");
-        let r23 = new Rule(p25, p30, booleanRuleBase, "R23");
+        let r22 = new Rule(p30, p29, null, booleanRuleBase, "R22");
+        let r23 = new Rule(p25, p30, null, booleanRuleBase, "R23");
         }
 }

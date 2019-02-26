@@ -4,15 +4,31 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "eslint": "^5.14.1"
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
+    "eslint": "^5.14.1",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-hot-loader": "^4.7.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.3.1",
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-jest": "^24.1.0",
-    "jest": "^24.1.0"
+    "babel-loader": "^8.0.5",
+    "css-loader": "^1.0.0",
+    "jest": "^24.1.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode development"
   },
   "jest": {
     "transform": {
@@ -28,5 +44,9 @@
   "bugs": {
     "url": "https://github.com/dji501/humcomdeb/issues"
   },
-  "homepage": "https://github.com/dji501/humcomdeb#readme"
+  "homepage": "https://github.com/dji501/humcomdeb#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": []
 }

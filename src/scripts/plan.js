@@ -1,5 +1,5 @@
 import { Move } from "./move";
-import { Rule } from "./Rule";
+import { Rule } from "./rule";
 
 export class Plan {
     constructor() {

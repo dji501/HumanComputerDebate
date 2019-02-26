@@ -1,4 +1,4 @@
-import { RuleProp } from "./RuleProp";
+import { RuleProp } from "./ruleProp";
 /**
  *  The Rule class implements the antecedent (lHS), warrent and consequent (RHS) parts
  *  of a rule.
@@ -39,7 +39,7 @@ export class Rule extends RuleProp {
         if (booleanRuleBase !== null && booleanRuleBase !== undefined) {
             booleanRuleBase.rulePropList.push(this._antecedent);
             booleanRuleBase.rulePropList.push(this._consequent);
-            booleanRuleBase.ruleList.push(this);
+            booleanRuleBase.addRule(this);
         }
 
         if (warrent !== null && warrent !== undefined) {
@@ -48,7 +48,7 @@ export class Rule extends RuleProp {
             this._warrent.addRuleRef(this);
 
             if (booleanRuleBase !== null && booleanRuleBase !== undefined) {
-                booleanRuleBase.rulePropList.push(this._warrent);
+                booleanRuleBase.addRule(this._warrent);
             }
         }
     }

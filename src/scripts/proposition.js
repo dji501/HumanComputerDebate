@@ -1,4 +1,4 @@
-import { RuleProp } from "./RuleProp";
+import { RuleProp } from "./ruleProp";
 
 export class Proposition extends RuleProp {
 
@@ -24,7 +24,7 @@ export class Proposition extends RuleProp {
 
         // TODO: MAKE SURE THIS WORKS AS EXPECTED. LIKELY WILL NOT
         if (booleanRuleBase !== null && booleanRuleBase !== undefined) {
-            booleanRuleBase.propositionList.push(this);
+            booleanRuleBase.addProposition(this);
         }
     }
 

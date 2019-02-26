@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars*/
 import { BooleanRuleBase } from "./booleanRuleBase";
 import { Proposition } from "./proposition";
-import { Rule } from "./rule;";
+import { Rule } from "./rule";
 
 export class KBSManager {
 

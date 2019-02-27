@@ -1,4 +1,5 @@
 import { DialogueManager } from "./dialogueManager";
+import { InputManager } from "./inputManager";
 import { Proposition } from "./proposition";
 import { Move } from "./move";
 //import { InterfaceManager } from "./interfaceManager";
@@ -13,10 +14,14 @@ export class DebatingSystemInterface extends React.Component{
             studentCS: null,
             computerCS: null,
             moveTypes: null,
-            moveContents: null
+            moveContents: null,
+            implies: false,
         };
 
         //this._interfaceManager = new InterfaceManager(this);
+    }
+
+    componentDidMount() {
         this._dialogueManager.start();
     }
 
@@ -26,7 +31,7 @@ export class DebatingSystemInterface extends React.Component{
             studentCS: this.getCommitments(this._dialogueManager.studentCS.totalList),
             computerCS: this.getCommitments(this._dialogueManager.computerCS.totalList),
             moveTypes: null,
-            moveContents: null
+            moveContents: null,
         });
     }
 
@@ -66,14 +71,30 @@ export class DebatingSystemInterface extends React.Component{
                 </div>
                 <div className="userinput">
                     <div className="userinput__inset">
-                        <div className="userinput__movetype">
-                            <MoveChoiceDropdown/>
+                        <div className="userinput__typesection">
+                            <div className="userinput__label">Move Type:</div>
+                            <div className="userinput__movetype">
+                                <MoveChoiceDropdown/>
+                            </div>
+                            <div className="userinput__label">Implies</div>
+                            <div className="userinput__implycheckbox">
+                                <ImplyCheckbox onClick={() => this.setState( {implies: !this.state.implies,})} />
+                            </div>
                         </div>
-                        <div className="userinput__movecontent">
-                            <MoveContentDropdown/>
+                        <div className="userinput__contentsection">
+                            <div className="userinput__label">Antecedent:</div>
+                            <div className="userinput__movecontent">
+                                <MoveContentDropdown propositionType="antecedent"/>
+                            </div>
+                            <div className="userinput__label">Consequent:</div>
+                            <div className="userinput__movecontent">
+                                <MoveContentDropdown propositionType="consequent"/>
+                            </div>
                         </div>
-                        <div className="userinput__inputbutton">
-                            <InputButton onClick={() => {this.update();}}/>
+                        <div className="userinput__buttonsection">
+                            <div className="userinput__inputbutton">
+                                <InputButton onClick={() => { this.update();}}/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,9 +103,7 @@ export class DebatingSystemInterface extends React.Component{
     }
 }
 //_dialogueManager.dialogueHistory.add(new Move("S","Concession", new Proposition("CP is acceptable", true)));}}/>
-/*    const commitments = props.commitmentStore.map((commitment) => {
-        <li>{commitment.getContentAsString()}</li>;
-    });*/
+
 function CommitmentStore(props) {
     let commitments;
     if (props.commitmentStore !== null && props.commitmentStore !== undefined) {
@@ -108,7 +127,7 @@ function MoveChoiceDropdown(props) {
 
 function MoveContentDropdown(props) {
     return (
-        <div id="moveccontent-dropdown">
+        <div id={props.propositionType}>
             <select className="userinput_movecontentselect"></select>
         </div>
     );
@@ -134,5 +153,13 @@ function DialogueHistory(props) {
         <div id="debate-history">
             <ul className="debatehistory__list">{dialogue}</ul>
         </div>
+    );
+}
+
+function ImplyCheckbox(props) {
+    return (
+            <div id="imply-checkbox">
+                <input type="checkbox" name="implies" onClick={props.onClick}/>
+            </div>
     );
 }

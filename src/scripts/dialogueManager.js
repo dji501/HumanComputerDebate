@@ -62,7 +62,7 @@ export class DialogueManager {
         //TODO: This is where input listener was set up
 
         //TODO: This is where input choice was initialised
-        //this._debateSystemInterface.update();
+        this._debateSystemInterface.update();
     }
 
     studentMove() {

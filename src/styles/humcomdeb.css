@@ -83,17 +83,58 @@
         margin: auto auto;
     }
 
-        .userinput__movetype {
-            flex: 3 30%;
-        }
-
-        .userinput__movecontent {
-            flex: 5 50%;
-        }
-
-        .userinput__inputbutton {
+        .userinput__typesection {
+            margin: inherit;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
             flex: 2 20%;
         }
+
+            .userinput__label {
+                margin: inherit;
+            }
+
+            .userinput__movetype {
+                margin: inherit;
+                flex: 1 50%;
+            }
+
+            .userinput__implycheckbox {
+                margin: inherit;
+                flex: 1 50%;
+            }
+
+        .userinput__contentsection {
+            margin: inherit;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex: 7 50%;
+        }
+
+            .userinput__movecontent {
+                margin: inherit;
+                flex: 1 40%;
+            }
+
+        .userinput__buttonsection {
+            margin: inherit;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex: 1 10%;
+        }
+
+            .userinput__inputbutton {
+                margin: inherit;
+            }
 
 ::-webkit-scrollbar
 {

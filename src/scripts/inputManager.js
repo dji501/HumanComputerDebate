@@ -1,24 +1,10 @@
 import { Move } from "./move";
+import { Rule } from "./rule";
 
 export class InputManager {
 
-    constructor() {
-        this._moveTypes = [];
-        this._moveTypesText = [];
-        this._moveContent = [];
-        this._tempMove;
-    }
-
-    get moveTypesText() {
-        return this._moveTypesText;
-    }
-
-    prefixInputChoice(debatingSystemInterface, dialogueHistory, computerCS) {
-        this._moveTypes = [];
-        this.setMoveType(debatingSystemInterface, dialogueHistory, computerCS);
-    }
-
-    setMoveType(debatingSystemInterface, dialogueHistory, computerCS) {
+    static getMoveTypes(dialogueHistory, computerCS) {
+        let moveTypes = [];
         let previousMove = dialogueHistory.set[dialogueHistory.length - 1];
         let previousMoveType = previousMove.moveType;
         let previousRuleProp = previousMove.moveContent;
@@ -27,107 +13,121 @@ export class InputManager {
         Previous move was question, then options are: Yes, No, No comment
         */
         if (previousMoveType === "Question") {
-            this._moveTypes.push("Yes");
-            this._moveTypes.push("No");
-            this._moveTypes.push("I am not sure about it");
+            moveTypes.push("Yes");
+            moveTypes.push("No");
+            moveTypes.push("I am not sure about it");
 
             //TODO: Original would remove the content dropdown in this case:
-            this.showDynamicMoveType(debatingSystemInterface, dialogueHistory);
+            return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         } else if (previousMoveType === "Challenge") {
-            this._moveTypes.push("Assertion");
-            this._moveTypes.push("I don't know why " + previousMove.getMoveContentAsString() + ".");
+            moveTypes.push("Assertion");
+            moveTypes.push("I don't know why " + previousMove.getMoveContentAsString() + ".");
 
             if (computerCS.getRealPremises(previousRuleProp) > 0) {
-                this._moveTypes.push("Resolve");
+                moveTypes.push("Resolve");
             }
 
             // Original would add "" here to "make interface nice"
 
             //TODO: Original would re-add content dropdown in this case
-            this.showDynamicMoveType(debatingSystemInterface, dialogueHistory);
+            return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         } else if (previousMoveType === "Resolve") {
             let conflictSet = previousMove.conflictSet;
             for (let i = 0; i < conflictSet.set.length; i++) {
-                this._moveTypes.push("I don't think " + conflictSet.set[i].getContentAsString() + ".");
+                moveTypes.push("I don't think " + conflictSet.set[i].getContentAsString() + ".");
             }
 
             if (conflictSet.set.length === 2 && conflictSet.isPNP() === false) {
-                this._moveTypes.push("I think " + conflictSet.getConsequent().getContentAsString() + ".");
+                moveTypes.push("I think " + conflictSet.getConsequent().getContentAsString() + ".");
             }
 
             // Original would add "" here to "make interface nice"
 
             //TODO: Original would re-add content dropdown in this case
-            this.showDynamicMoveType(debatingSystemInterface, dialogueHistory);
+            return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         } else if (previousMoveType === "Assertion" || previousMoveType === "Question" || previousMoveType === "Ground") {
-            this._moveTypes.push("Assertion");
-            this._moveTypes.push("Question");
-            this._moveTypes.push("Challenge");
-            this._moveTypes.push("Withdraw");
+            moveTypes.push("Assertion");
+            moveTypes.push("Question");
+            moveTypes.push("Challenge");
+            moveTypes.push("Withdraw");
 
             // When there is a conflict
             if (computerCS.getRealConflictSet().set.length > 0) {
-                this._moveTypes.push("Resolve");
+                moveTypes.push("Resolve");
             }
 
             //TODO: Original would re-add content dropdown in this case
-            this.showDynamicMoveType(debatingSystemInterface, dialogueHistory);
+            return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         } else {
-            this._moveTypes.push("Assertion");
-            this._moveTypes.push("Question");
-            this._moveTypes.push("Challenge");
-            this._moveTypes.push("Withdraw");
+            moveTypes.push("Assertion");
+            moveTypes.push("Question");
+            moveTypes.push("Challenge");
+            moveTypes.push("Withdraw");
 
             if (previousRuleProp.getClassName() === "Proposition") {
                 if (computerCS.getRealPremises(previousRuleProp).set.length > 0 && computerCS.getRealConflictSet().set.length > 0) {
-                    this._moveTypes.push("Resolve");
+                    moveTypes.push("Resolve");
                 }
             }
 
             //TODO: Original would re-add content dropdown in this case
-            this.showDynamicMoveType(debatingSystemInterface, dialogueHistory);
+             return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         }
 
         //TODO: Set focus to move type select element
     }
 
-    showDynamicMoveType(debatingSystemInterface, dialogueHistory) {
-        this._moveTypesText = [];
-        for (let i = 0; i < this._moveTypes.length; i++) {
-            let moveType = this._moveTypes[i];
+    static getDynamicMoveType(dialogueHistory, moveTypes) {
+        let moveTypesText = [];
+        for (let i = 0; i < moveTypes.length; i++) {
+            let moveType = moveTypes[i];
             if (moveType === "Assertion") {
                 if (dialogueHistory.set[dialogueHistory.length -1].moveType === "Challenge") {
-                    this._moveTypesText.push("Because...");
+                    moveTypesText.push("Because...");
                 } else {
-                    this._moveTypesText.push("I think...");
+                    moveTypesText.push("I think...");
                 }
             } else if (moveType === "Challenge") {
-                this._moveTypesText.push("Why is it the case that..?");
+                moveTypesText.push("Why is it the case that..?");
             } else if (moveType === "Question") {
-                this._moveTypesText.push("Is it the case that..?");
+                moveTypesText.push("Is it the case that..?");
             } else if (moveType === "Withdraw") {
-                this._moveTypesText.push("I don't think...");
+                moveTypesText.push("I don't think...");
             } else if (moveType === "Resolve") {
-                this._moveTypesText.push("Please resolve...");
+                moveTypesText.push("Please resolve...");
             } else {
-                this._moveTypesText.push(moveType);
+                moveTypesText.push(moveType);
             }
         }
-
-        debatingSystemInterface.update();
+        return moveTypesText;
     }
 
-    getInput(debatingSystemInterface, dialogueHistory, computerCS, studentCS) {
-        //I WANNA CRY WAAAH
+    static getGeneralMoveType(moveType) {
+        if (moveType === "Because..." || moveType === "I think...") {
+            return "Assertion";
+        } else if (moveType === "Why is it the case that..?") {
+            return "Challenge";
+        } else if (moveType === "Is it the case that..?") {
+            return "Question";
+        } else if (moveType === "I don't think...") {
+            return "Withdraw";
+        } else if (moveType === "Please resolve...") {
+            return "Resolve";
+        } else {
+            return moveType;
+        }
+    }
+
+    static getInput(debatingSystemInterface, dialogueHistory, computerCS, studentCS) {
         let fullMove;
         let previousMove = dialogueHistory.set[dialogueHistory.length -1];
         let previousMoveType = previousMove.moveType;
         let previousRuleProp = previousMove.moveContent;
+        let moveType = InputManager.getGeneralMoveType(debatingSystemInterface.state.selectedType);
 
-        if (this._tempMove === null) {
-            let moveType = debatingSystemInterface.getMoveType(); // TODO
+        if (debatingSystemInterface.state.implies === false) {
 
-            if (moveType === "Yes", moveType === "No", moveType === "I am not sure about it") {
+            if (moveType === "Yes" || moveType === "No" || moveType === "I am not sure about it") {
                 if (moveType === "Yes") {
                     fullMove = new Move("S","Concession",previousRuleProp);
                 } else if (moveType === "No") {
@@ -195,7 +195,7 @@ export class InputManager {
                     fullMove = new Move("S", moveType, withdrawnElements[0]);
                 }
             } else if (moveType === "Assertion") {
-                let chosenContent = null; // TODO
+                let chosenContent = debatingSystemInterface.state.selectedAntecedent;
 
                 if (previousMoveType === "Challenge") {
                     if (debatingSystemInterface.state.implies === true) {
@@ -209,35 +209,41 @@ export class InputManager {
                     fullMove = new Move("S", moveType, chosenContent);
                 }
             } else if (moveType === "Question") {
-                let chosenContent = null; //TODO
+                let chosenContent = debatingSystemInterface.state.selectedAntecedent;
                 fullMove = new Move("S", "Question", chosenContent);
             } else {
-                if (previousMoveType === "Challenge") {//TODO && i == 2
+                if (previousMoveType === "Challenge" && moveType === ("I don't know why " + previousRuleProp.getContentAsString())) {//TODO TEST THIS
                     fullMove = new Move("S", "Withdraw", previousRuleProp);
                 }
 
                 if (previousMoveType === "Resolve") {
                     let conflictSet = previousMove.conflictSet;
 
-                    if (conflictSet.set.length === 2 && conflictSet.isPNP()) { //TODO i === 2 )|| i === 3) {
+                    // Try get rid of this i rubbish
+                    let i = debatingSystemInterface.moveTypes.indexOf(moveType);
+
+                    if ((conflictSet.set.length === 2 && conflictSet.isPNP() && i === 2 ) || i === 3) {
                         let message = "You need to select a move choice.\n";
                         alert(message); //TODO Make this something else;
                     }
 
-                    if (conflictSet.set.length === 2 && conflictSet.isPNP() === false) {//TODO && i === 2) {
+                    if (conflictSet.set.length === 2 && conflictSet.isPNP() === false && i === 2) {
                         fullMove = new Move("S", "Assertion", conflictSet.getConsequent());
                     } else {
-                        //TODO: fullMove = new Move("S", "Assertion", conflictSet.set[i]);
+                        fullMove = new Move("S", "Assertion", conflictSet.set[i]);
                     }
                 }
             }
 
         } else {
-            //TODO Handle implies here as that makes a rule.
-            //Think I will have two dropdowns in a column
+            //TODO TEST THIS BECAUSE
+            if (moveType === "Because...") {
+                fullMove = new Move("S","Ground", new Rule(debatingSystemInterface.selectedAntecedent,debatingSystemInterface.selectedConsequent));
+            } else {
+                fullMove = new Move("S","Ground", new Rule(debatingSystemInterface.selectedAntecedent,debatingSystemInterface.selectedConsequent));
+            }
         }
 
-        tempMove = null;
         // Untick implies checkbox
 
         return fullMove;

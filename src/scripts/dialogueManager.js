@@ -46,7 +46,19 @@ export class DialogueManager {
     }
 
     actionPerformed() {
-        //Deal with this
+        if (this._gameEnd === false) {
+            this.studentMove();
+            let message = this.getEndingMessage();
+            if (message !== null && message !== undefined) {
+                this.endDebate();
+            }
+        }
+        this._debateSystemInterface.update();
+
+        if (this._gameEnd === false) {
+            this.computerMove();
+        }
+        this._debateSystemInterface.update();
     }
 
     /**
@@ -58,11 +70,9 @@ export class DialogueManager {
         //TODO: Clear everything
         this._end = false;
         this._line = 1;
-        //TODO: Add first line "01: C>Is it the case that CP is acceptable?\n"
 
         this._computerPlanner = new Planner("C");
         this._dialogueHistory = new DialogueHistory();
-        //TODO: In original this activated a menu action
 
         this._studentCS = new CommitmentStore("Student");
         this._computerCS = new CommitmentStore("Computer");
@@ -71,9 +81,9 @@ export class DialogueManager {
 
         //TODO: This is where message would come up saying it was users go.
 
-        //TODO: This is where input listener was set up
-
-        MoveChoiceInitialiser.initChoice(this._debateSystemInterface);
+        this._moveTypes = MoveChoiceInitialiser.initialMoveType();
+        this._moveContents = MoveChoiceInitialiser.initialMoveContent();
+        this._moveTypes = InputManager.getMoveTypes(this._dialogueHistory, this._computerCS);
         this._debateSystemInterface.update();
     }
 
@@ -85,11 +95,9 @@ export class DialogueManager {
             let studentMove = InputManager.getInput(this._debateSystemInterface, this._dialogueHistory, this._computerCS, this._studentCS);
 
             this._line += 1;
-            //TODO: display current Move
 
             // Check if the move is legal
             let warningMessage = Filler.getMessage(studentMove, this._dialogueHistory, this._computerCS, this._studentCS);
-
             if (warningMessage === null || warningMessage === undefined) {
                 // Move is legal
                 CommitmentManager.commit(studentMove, previousMove, this._studentCS, this._computerCS, this._debateSystemInterface.studentCommitmentStore, this._debateSystemInterface.computerCommitmentStore, this._dialogueHistory);
@@ -99,6 +107,7 @@ export class DialogueManager {
             } else {
                 //let refereeMove = new Move("R","Message", new Proposition(warningMessage, true));
                 //TODO: Original would create new thread here to add line and update display
+                alert(warningMessage);
             }
         }
     }
@@ -125,8 +134,8 @@ export class DialogueManager {
                 this._dialogueHistory.add(chosenMove);
 
                 //TODO: This is where original would notify users it was their turn
-                //TODO: This method limits user inputs so they cant break the rules:
-                InputManager.prefixInputChoice(this._debateSystemInterface, this._dialogueHistory, this._computerCS);
+                //This method limits user inputs so they cant break the rules:
+                this._moveTypes = InputManager.getMoveTypes(this._dialogueHistory, this._computerCS);
 
                 if (this.getEndingMessage() !== null) {
                     this.endDebate();
@@ -136,15 +145,11 @@ export class DialogueManager {
         }
     }
 
-    itemStateChanged() {
-        //TODO: This method was used when imply checkbox was ticked.
-    }
-
     getEndingMessage() {
         let message = null;
         const currentMove = this._dialogueHistory.set[this._dialogueHistory.length -1];
 
-        let studentThesis = this._dialogueHistory.set[1].moveContentProposition().clone();
+        let studentThesis = this._dialogueHistory.set[1].moveContentProposition.clone();
         let computerThesis = studentThesis.denial();
 
         if (currentMove.turn === "S") {
@@ -158,7 +163,7 @@ export class DialogueManager {
         if (currentMove.turn === "C") {
             if (this._computerCS.onAssertion(computerThesis) === false) {
                 message = "The computer has given up it's view. Well done!";
-            } else if (this._studentCS.onAssertion(studentThesis)) {
+            } else if (this._computerCS.onAssertion(studentThesis)) {
                 message = "Congratulations! You win!";
             }
         }
@@ -172,7 +177,7 @@ export class DialogueManager {
 
     endDebate() {
         const message = this.getEndingMessage();
-
+        alert(message);
         //TODO: original would start a thread here
         if (this._end === false) {
             this._end = true;

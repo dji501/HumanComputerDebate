@@ -12,12 +12,20 @@ export class DebatingSystemInterface extends React.Component{
             debateLog: null,
             studentCS: null,
             computerCS: null,
-            moveTypes: null,
-            moveContents: null,
+            moveTypes: [],
+            moveContents: [],
             implies: false,
-        };
 
-        //this._interfaceManager = new InterfaceManager(this);
+            selectedType: "Yes",
+            selectedAntecedent: null,
+            selectedConsequent: null,
+            selectedAntecedentString: null,
+            selectedConsequentString: null,
+            moveContentsStrings: [],
+        };
+        this.handleMoveTypeChange= this.handleMoveTypeChange.bind(this);
+        this.handleMoveAntecedentChange = this.handleMoveAntecedentChange.bind(this);
+        this.handleMoveConsequentChange = this.handleMoveConsequentChange.bind(this);
     }
 
     componentDidMount() {
@@ -31,6 +39,13 @@ export class DebatingSystemInterface extends React.Component{
             computerCS: this.getCommitments(this._dialogueManager.computerCS.totalList),
             moveTypes: this._dialogueManager.moveTypes,
             moveContents: this._dialogueManager.moveContents,
+            moveContentsStrings: this.getContents(this._dialogueManager.moveContents),
+
+            selectedType: this._dialogueManager.moveTypes[0],
+            selectedAntecedent: this._dialogueManager.moveContents[0],
+            selectedConsequent: this._dialogueManager.moveContents[0],
+            selectedAntecedentString: this.state.moveContentsStrings[0],
+            selectedConsequentString: this.state.moveContentsStrings[0],
         });
     }
 
@@ -39,6 +54,32 @@ export class DebatingSystemInterface extends React.Component{
             return commitmentStore.map((commitment) => commitment.getContentAsString());
         }
         return [];
+    }
+
+    getContents(moveContents) {
+        if (moveContents !== null && moveContents !== undefined) {
+            return moveContents.map((content) => content.getContentAsString());
+        }
+        return [];
+    }
+
+    getSelectedRuleProp(text) {
+        let index = this.state.moveContentsStrings.indexOf(text);
+        return this.state.moveContents[index];
+    }
+
+    handleMoveTypeChange(event) {
+        this.setState({selectedType: event.target.value});
+    }
+
+    handleMoveAntecedentChange(event) {
+        let ruleProp = this.getSelectedRuleProp(event.target.value);
+        this.setState({selectedAntecedent: ruleProp});
+    }
+
+    handleMoveConsequentChange(event) {
+        let ruleProp = this.getSelectedRuleProp(event.target.value);
+        this.setState({selectedConsequent: ruleProp});
     }
 
     render() {
@@ -73,7 +114,7 @@ export class DebatingSystemInterface extends React.Component{
                         <div className="userinput__typesection">
                             <div className="userinput__label">Move Type:</div>
                             <div className="userinput__movetype">
-                                <MoveChoiceDropdown/>
+                                <MoveChoiceDropdown selected={this.state.selectedType} onChange={this.handleMoveTypeChange} moveTypes={this.state.moveTypes}/>
                             </div>
                             <div className="userinput__label">Implies</div>
                             <div className="userinput__implycheckbox">
@@ -83,16 +124,16 @@ export class DebatingSystemInterface extends React.Component{
                         <div className="userinput__contentsection">
                             <div className="userinput__label">Antecedent:</div>
                             <div className="userinput__movecontent">
-                                <MoveContentDropdown propositionType="antecedent"/>
+                                <MoveContentDropdown selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} moveContents={this.state.moveContentsStrings}/>
                             </div>
                             <div className="userinput__label">Consequent:</div>
                             <div className="userinput__movecontent">
-                                <MoveContentDropdown propositionType="consequent"/>
+                                <MoveContentDropdown selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} moveContents={this.state.moveContentsStrings}/>
                             </div>
                         </div>
                         <div className="userinput__buttonsection">
                             <div className="userinput__inputbutton">
-                                <InputButton onClick={() => { this.update();}}/>
+                                <InputButton onClick={() => { this._dialogueManager.actionPerformed(); }}/>
                             </div>
                         </div>
                     </div>
@@ -116,20 +157,31 @@ function CommitmentStore(props) {
 }
 
 function MoveChoiceDropdown(props) {
+    let moveChoice;
+    if (props.moveTypes !== null && props.moveTypes !== undefined) {
+        moveChoice= props.moveTypes.map((moveChoice) => <option value={moveChoice}>{moveChoice}</option>);
+    }
+
     return (
         <div id="movechoice-dropdown">
-            <select className="userinput_movetypeselect"></select>
+            <select className="userinput_movetypeselect" value={props.selected} onChange={props.onChange}>{moveChoice}</select>
         </div>
     );
 }
 
-
 function MoveContentDropdown(props) {
+    let moveContents;
+    if (props.moveContents !== null && props.moveContents !== undefined) {
+        moveContents = props.moveContents.map((moveContent) => <option value={moveContent}>{moveContent}</option>);
+
+
+    }
     return (
         <div id={props.propositionType}>
-            <select className="userinput_movecontentselect"></select>
+            <select className="userinput_movecontentselect" value={props.selected} onChange={props.onChange}>{moveContents}</select>
         </div>
     );
+
 }
 
 function InputButton(props) {

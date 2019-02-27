@@ -1,10 +1,10 @@
-import { Move } from "../scripts/move";
-import { PlanSet } from "../scripts/planSet";
-import { Plan } from "../scripts/plan";
-import { Proposition } from "../scripts/proposition";
-import { CommitmentStore } from "../scripts/commitmentStore";
-import { DialogueHistory } from "../scripts/dialogueHistory";
-import { Planner } from "../scripts/planner";
+import { Move } from "../src/scripts/move";
+import { PlanSet } from "../src/scripts/planSet";
+import { Plan } from "../src/scripts/plan";
+import { Proposition } from "../src/scripts/proposition";
+import { CommitmentStore } from "../src/scripts/commitmentStore";
+import { DialogueHistory } from "../src/scripts/dialogueHistory";
+import { Planner } from "../src/scripts/planner";
 
 test("initialisation works correctly", () => {
     const planSet = new PlanSet();

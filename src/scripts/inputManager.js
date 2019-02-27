@@ -136,8 +136,7 @@ export class InputManager {
                     fullMove = new Move("S","Withdraw",previousRuleProp);
                 }
             } else if (moveType === "Resolve") {
-                //TODO Get conflict from computer commitment commitmentStore
-                let conflictSet = {set: []};// = computerCS.getInput();
+                let conflictSet = debatingSystemInterface.state.selectedComputerCommitments;
                 if (conflictSet.set.length < 2) {
                     let message = "If you ask the computer to resolve conflicts, you need"
                                  +"to select two (P, not P) or three (P, R, R implies not P)"
@@ -158,8 +157,7 @@ export class InputManager {
                     fullMove = new Move("S","Resolve", conflictSet.mergeIntoProposition(), conflictSet);
                 }
             } else if (moveType === "Challenge") {
-                //TODO: Get challanged element from computer commitment store
-                let challengedElements = [];
+                let challengedElements =  debatingSystemInterface.state.selectedComputerCommitments;
                 if (challengedElements.length === 0) {
                     let message = "If you want to make a challenge, you needs to select one \n"
                                  +"statement from computer's positions, which are indeed \n"
@@ -181,14 +179,14 @@ export class InputManager {
                     }
                 }
             } else if (moveType === "Withdraw") {
-                let withdrawnElements = [];
+                let withdrawnElements =  debatingSystemInterface.state.selectedStudentCommitments;
 
                 if (withdrawnElements.length === 0) {
                     let message = "If you want to make a withdrawal, you needs to select one \n"
                                  +"statement from your own positions. \n";
                     alert(message); //TODO Make this something else;
                 } else if (withdrawnElements.length > 1) {
-                    let message = "You can withdraw only one options once, please select one\n"
+                    let message = "You can withdraw only one option at once, please select one\n"
                                  +"statement from your own positions.";
                     alert(message); //TODO Make this something else;
                 } else {
@@ -238,9 +236,9 @@ export class InputManager {
         } else {
             //TODO TEST THIS BECAUSE
             if (moveType === "Because...") {
-                fullMove = new Move("S","Ground", new Rule(debatingSystemInterface.selectedAntecedent,debatingSystemInterface.selectedConsequent));
+                fullMove = new Move("S","Ground", new Rule(debatingSystemInterface.state.selectedAntecedent,debatingSystemInterface.state.selectedConsequent));
             } else {
-                fullMove = new Move("S","Ground", new Rule(debatingSystemInterface.selectedAntecedent,debatingSystemInterface.selectedConsequent));
+                fullMove = new Move("S", moveType, new Rule(debatingSystemInterface.state.selectedAntecedent,debatingSystemInterface.state.selectedConsequent));
             }
         }
 

@@ -56,7 +56,7 @@ export class Planner {
             if (previousMove.getMoveContentName() === "Proposition") {
                 let previousProposition = previousMove.moveContentProposition.clone();
 
-                relevantMove = ChallengeStrategist.planChallProp(previousProposition, this._turn, selfCS, partnerCS, selfKBS);
+                relevantMove = ChallengeStrategist.planChallProp(previousProposition, this._turn, partnerCS, selfKBS);
             } else {
                 //Feature not available
             }

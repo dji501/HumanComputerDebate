@@ -10,8 +10,6 @@ export class DebatingSystemInterface extends React.Component{
         this._dialogueManager = new DialogueManager(this);
         this.state = {
             debateLog: null,
-            studentCS: null,
-            computerCS: null,
             moveTypes: [],
             moveContents: [],
             implies: false,
@@ -22,10 +20,19 @@ export class DebatingSystemInterface extends React.Component{
             selectedAntecedentString: null,
             selectedConsequentString: null,
             moveContentsStrings: [],
+
+            studentCS: null,
+            computerCS: null,
+            studentCSStrings:  null,
+            computerCSStrings: null,
+            selectedStudentCommitments: [],
+            selectedComputerCommitments: [],
         };
         this.handleMoveTypeChange= this.handleMoveTypeChange.bind(this);
         this.handleMoveAntecedentChange = this.handleMoveAntecedentChange.bind(this);
         this.handleMoveConsequentChange = this.handleMoveConsequentChange.bind(this);
+        this.handleStudentCommitmentClick = this.handleStudentCommitmentClick.bind(this);
+        this.handleComputerCommitmentClick = this.handleComputerCommitmentClick.bind(this);
     }
 
     componentDidMount() {
@@ -35,8 +42,11 @@ export class DebatingSystemInterface extends React.Component{
     update() {
         this.setState({
             debateLog: this._dialogueManager.dialogueHistory.moveStrings,
-            studentCS: this.getCommitments(this._dialogueManager.studentCS.totalList),
-            computerCS: this.getCommitments(this._dialogueManager.computerCS.totalList),
+            studentCS: this._dialogueManager.studentCS,
+            computerCS: this._dialogueManager.computerCS,
+            studentCSStrings: this.getCommitments(this._dialogueManager.studentCS),
+            computerCSStrings: this.getCommitments(this._dialogueManager.computerCS),
+
             moveTypes: this._dialogueManager.moveTypes,
             moveContents: this._dialogueManager.moveContents,
             moveContentsStrings: this.getContents(this._dialogueManager.moveContents),
@@ -51,9 +61,16 @@ export class DebatingSystemInterface extends React.Component{
 
     getCommitments(commitmentStore) {
         if (commitmentStore !== null && commitmentStore !== undefined) {
-            return commitmentStore.map((commitment) => commitment.getContentAsString());
+            return commitmentStore.totalList.map((commitment) => {
+                if (commitmentStore.onAssertion(commitment) === false) {
+                    return "* " + commitment.getContentAsString();
+                } else {
+                    return "  " + commitment.getContentAsString();
+                }
+            });
+        } else {
+            return [];
         }
-        return [];
     }
 
     getContents(moveContents) {
@@ -63,9 +80,9 @@ export class DebatingSystemInterface extends React.Component{
         return [];
     }
 
-    getSelectedRuleProp(text) {
-        let index = this.state.moveContentsStrings.indexOf(text);
-        return this.state.moveContents[index];
+    getRulePropFromString(string, stringArray, rulePropArray) {
+        let index= stringArray.indexOf(string);
+        return rulePropArray[index];
     }
 
     handleMoveTypeChange(event) {
@@ -73,13 +90,59 @@ export class DebatingSystemInterface extends React.Component{
     }
 
     handleMoveAntecedentChange(event) {
-        let ruleProp = this.getSelectedRuleProp(event.target.value);
+        let ruleProp = this.getRulePropFromString(event.target.value, this.state.moveContentsStrings, this.state.moveContents);
         this.setState({selectedAntecedent: ruleProp});
+        this.setState({selectedAntecedentString: event.target.value});
     }
 
     handleMoveConsequentChange(event) {
-        let ruleProp = this.getSelectedRuleProp(event.target.value);
+        let ruleProp = this.getRulePropFromString(event.target.value, this.state.moveContentsStrings, this.state.moveContents);
         this.setState({selectedConsequent: ruleProp});
+        this.setState({selectedConsequentString: event.target.value});
+    }
+
+    handleStudentCommitmentClick(event) {
+        // Update ClassName to apply new style
+        if (event.target.className === "commitmentstore__listelement") {
+            event.target.className = "commitmentstore__listelement__clicked";
+        } else {
+            event.target.className = "commitmentstore__listelement";
+        }
+
+        let ruleProp = this.getRulePropFromString(event.target.textContent, this.state.studentCSStrings, this.state.studentCS.totalList);
+
+        // If the element is clicked then we want to add it, if not then we want to remove it
+        if (event.target.className === "commitmentstore__listelement__clicked") {
+            let newState = this.state.selectedStudentCommitments;
+            newState.push(ruleProp);
+            this.setState({selectedStudentCommitments: newState});
+        } else {
+            let newState = this.state.selectedStudentCommitments;
+            newState.splice(this.state.selectedStudentCommitments.indexOf(ruleProp),1);
+            this.setState({selectedStudentCommitments: newState});
+        }
+    }
+
+    handleComputerCommitmentClick(event) {
+        if (event.target.className === "commitmentstore__listelement") {
+            event.target.className = "commitmentstore__listelement__clicked";
+        } else {
+            event.target.className = "commitmentstore__listelement";
+        }
+
+        //Event.target.value is the position in the html list element starting at 0
+        let ruleProp = this.getRulePropFromString(event.target.textContent, this.state.computerCSStrings, this.state.computerCS.totalList);
+
+        // If the element is clicked then we want to add it, if not then we want to remove it
+        if (event.target.className === "commitmentstore__listelement__clicked") {
+            let newState = this.state.selectedComputerCommitments;
+            newState.push(ruleProp);
+            this.setState({selectedComputerCommitments: newState});
+        } else {
+            let newState = this.state.selectedComputerCommitments;
+            newState.splice(this.state.selectedComputerCommitments.indexOf(ruleProp),1);
+            this.setState({selectedComputerCommitments: newState});
+        }
     }
 
     render() {
@@ -90,7 +153,7 @@ export class DebatingSystemInterface extends React.Component{
                         <div className="commitmentstore__title">My Commitments:</div>
                         <div className="commitmentstore__boundary">
                             <div id="student-store" className="commitmentstore__studentstore">
-                                <CommitmentStore owner={"Student"} commitmentStore={this.state.studentCS}/>
+                                <CommitmentStore owner={"Student"} onClick={this.handleStudentCommitmentClick} commitmentStore={this.state.studentCSStrings}/>
                             </div>
                         </div>
                     </div>
@@ -99,7 +162,7 @@ export class DebatingSystemInterface extends React.Component{
                         <div className="commitmentstore__title">Computer Commitments:</div>
                         <div className="commitmentstore__boundary">
                             <div id="computer-store" className="commitmentstore__computerstore">
-                                <CommitmentStore owner={"Computer"} commitmentStore={this.state.computerCS}/>
+                                <CommitmentStore owner={"Computer"} onClick={this.handleComputerCommitmentClick} commitmentStore={this.state.computerCSStrings}/>
                             </div>
                         </div>
                     </div>
@@ -147,7 +210,7 @@ export class DebatingSystemInterface extends React.Component{
 function CommitmentStore(props) {
     let commitments;
     if (props.commitmentStore !== null && props.commitmentStore !== undefined) {
-        commitments= props.commitmentStore.map((commitment) => <li>{commitment}</li>);
+        commitments= props.commitmentStore.map((commitment) => <li className="commitmentstore__listelement" onClick={props.onClick}>{commitment}</li>);
     }
     return (
         <div id={props.owner}>

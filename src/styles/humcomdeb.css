@@ -59,7 +59,17 @@
                         display: block;
                         padding-bottom: 6px;
                         padding-left: 3px;
+                        cursor: pointer;
                     }
+
+                        .commitmentstore__listelement__clicked {
+                            background-color: #66cdaa;
+                            list-style-type: none;
+                            display: block;
+                            padding-bottom: 6px;
+                            padding-left: 3px;
+                            cursor: pointer;
+                        }
 
 .debatehistory {
     height: 50vh;

@@ -14,7 +14,7 @@ export class ChallengeStrategist {
             relevantMove.push(new Move(currentTurn, "Resolve", prop, partnerConflictSet));
         } else if (acceptableGrounds.length > 0) {
             let i = Math.round((Math.random() * (acceptableGrounds.length - 1)));
-            relevantMove.push(new Move(currentTurn, "Resolve", acceptableGrounds[i]));
+            relevantMove.push(new Move(currentTurn, "Ground", acceptableGrounds[i]));
         }
 
         if (relevantMove.length === 0) {

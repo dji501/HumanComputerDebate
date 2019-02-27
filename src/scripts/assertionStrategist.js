@@ -73,7 +73,7 @@ export class AssertionStrategist {
              Check the previous statement supports S's view or against computer's,
              Check whether the current focus is retained
             */
-            if (prevMoveProp.equals(planner.computerThesis.denial()) || selfKBS.support(prevMoveProp, planner.computerThesis.denial()) || selfKBS.againstSupport(prevMoveProp, planner.computerThesis)) {
+            if (prevMoveProp.equals(planner.computerThesis.denial()) || selfKBS.supports(prevMoveProp, planner.computerThesis.denial()) || selfKBS.againstSupport(prevMoveProp, planner.computerThesis)) {
                 let nextMove;
                 if (selfCS.onAssertion(prevMoveProp) === false) {
                     nextMove = TacticManager.getAction(prevMoveProp, dialogueHistory, selfCS, partnerCS, selfKBS, planner);
@@ -83,6 +83,9 @@ export class AssertionStrategist {
                 }
                 if (relevantMove.length === 0) {
                     nextMove = FocusShiftManager.execute(dialogueHistory, selfCS, partnerCS,selfKBS, planner);
+                    if (nextMove !== null && nextMove !== undefined) {
+                        relevantMove.push(nextMove);
+                    }
                 }
             } else if (selfKBS.supports(prevMoveProp, planner.computerThesis)) {
                 // If statement supports Computers thesis

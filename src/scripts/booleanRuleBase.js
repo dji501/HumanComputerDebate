@@ -271,7 +271,7 @@ export class BooleanRuleBase {
 
                 if (tempPlan.set.length > 0 && tempPlan.containsProposition(prop)) {
                     let plan = new Plan();
-                    let j = tempPlan.set.indexOf(prop);
+                    let j = tempPlan.indexOfProposition(prop);
 
                     plan.add(p);
 

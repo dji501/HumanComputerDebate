@@ -7,18 +7,22 @@ import { Proposition } from "./proposition";
 import { InputManager } from "./inputManager";
 import { CommitmentManager } from "./commitmentManager";
 import { Filler } from "./filler";
+import { MoveChoiceInitialiser } from "./moveChoiceInitialiser";
 
 export class DialogueManager {
     constructor(dsi) {
         this._debateSystemInterface = dsi;
         this._computerKBS = KBSManager.getCompKBS();
         this._computerPlanner;
-        this._computerCS;
-        this._studentCS;
         this._comuterRelevantMove = [];
-        this._dialogueHistory;
         this._gameEnd = false;
         this._line = 2;
+
+        this._computerCS;
+        this._studentCS;
+        this._dialogueHistory;
+        this._moveTypes;
+        this._moveContents;
     }
 
     get computerCS() {
@@ -31,6 +35,14 @@ export class DialogueManager {
 
     get dialogueHistory() {
         return this._dialogueHistory;
+    }
+
+    get moveTypes() {
+        return this._moveTypes;
+    }
+
+    get moveContents() {
+        return this._moveContents;
     }
 
     actionPerformed() {
@@ -61,7 +73,7 @@ export class DialogueManager {
 
         //TODO: This is where input listener was set up
 
-        //TODO: This is where input choice was initialised
+        MoveChoiceInitialiser.initChoice(this._debateSystemInterface);
         this._debateSystemInterface.update();
     }
 

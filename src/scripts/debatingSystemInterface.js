@@ -1,5 +1,4 @@
 import { DialogueManager } from "./dialogueManager";
-import { InputManager } from "./inputManager";
 import { Proposition } from "./proposition";
 import { Move } from "./move";
 //import { InterfaceManager } from "./interfaceManager";
@@ -30,8 +29,8 @@ export class DebatingSystemInterface extends React.Component{
             debateLog: this._dialogueManager.dialogueHistory.moveStrings,
             studentCS: this.getCommitments(this._dialogueManager.studentCS.totalList),
             computerCS: this.getCommitments(this._dialogueManager.computerCS.totalList),
-            moveTypes: null,
-            moveContents: null,
+            moveTypes: this._dialogueManager.moveTypes,
+            moveContents: this._dialogueManager.moveContents,
         });
     }
 

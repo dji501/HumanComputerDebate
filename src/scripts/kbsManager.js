@@ -77,8 +77,8 @@ export class KBSManager {
         let r5 = new Rule(p8,  p7, null, booleanRuleBase,"R5");
         let r6 = new Rule(p10, p9, null, booleanRuleBase,"R6");
         let r7 = new Rule(p11, p2, null, booleanRuleBase,"R7");
-        let r8 = new Rule(p26, p1, null, booleanRuleBase,"R8");
-        let r9 = new Rule(p15, p2, null, booleanRuleBase,"R9");
+        let r8 = new Rule(p26, p12, null, booleanRuleBase,"R8");
+        let r9 = new Rule(p15, p26, null, booleanRuleBase,"R9");
 
         let r10 = new Rule(p13, p11, null, booleanRuleBase, "R10");
         let r11 = new Rule(p14, p13, null, booleanRuleBase, "R11");

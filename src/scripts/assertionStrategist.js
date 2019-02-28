@@ -89,7 +89,7 @@ export class AssertionStrategist {
                 }
             } else if (selfKBS.supports(prevMoveProp, planner.computerThesis)) {
                 // If statement supports Computers thesis
-                planner.currentPlan = selfKBS.getPlan(prevMoveProp);
+                planner.currentPlan = selfKBS.getPlanFromProposition(prevMoveProp);
                 planner.currentPlan.set.unshift(prevMoveProp);
                 planner.currentPlan.reform();
                 planner.currentPlan.set.splice(0,1);

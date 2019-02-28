@@ -31,7 +31,7 @@ export class WithdrawStrategist {
             }
         } else if (planner.currentPlan === null) {
             // if there is no plan
-            if (supportedProposition !== null && supportedProposition !== undefined && selfKBS.challengable(supportedProposition, partnerCS, selfCS) && supportedProposition.equals(planner.computerThesis.denial()) === false) {
+            if (supportedProposition !== null && supportedProposition !== undefined && selfKBS.challengeable(supportedProposition, partnerCS, selfCS) && supportedProposition.equals(planner.computerThesis.denial()) === false) {
                 relevantMove.push(new Move("C","Challenge",supportedProposition));
             } else if (previousProposition !== null && previousProposition !== undefined && planner.computerThesis.denial().equals(previousProposition) === false && (selfKBS.supports(prevMoveContent, planner.computerThesis.denial()) || selfKBS.againstSupport(prevMoveContent,planner.computerThesis))) {
                 relevantMove.push(new Move("C","Question",planner.computerThesis.denial()));

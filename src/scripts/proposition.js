@@ -113,11 +113,12 @@ export class Proposition extends RuleProp {
      * @return {boolean} true if equal false if not
      */
     equals(proposition) {
-        if (this._message === proposition.message && this._truth === proposition.truth){
-            return true;
-        } else {
-            return false;
+        if (proposition.getClassName() === "Proposition") {
+            if (this._message === proposition.message && this._truth === proposition.truth){
+                return true;
+            }
         }
+        return false;
     }
 
     /** Original: negate(prop)

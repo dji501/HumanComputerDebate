@@ -88,11 +88,12 @@ export class Rule extends RuleProp {
     }
 
     equals(rule) {
-        if (this._antecedent.equals(rule.antecedent) && this._consequent.equals(rule.consequent) && this._truth === rule.truth) {
-            return true;
-        } else {
-            return false;
+        if (rule.getClassName() === "Rule") {
+            if (this._antecedent.equals(rule.antecedent) && this._consequent.equals(rule.consequent) && this._truth === rule.truth) {
+                return true;
+            }
         }
+        return false;
     }
 
     clone() {

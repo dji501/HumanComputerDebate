@@ -11,10 +11,11 @@
     align-items: stretch;
     height: 25vh;
     width: 100vw;
+    min-width: 890px;
 }
 
     .commitmentstore__box {
-        width: inherit;
+        width: 90%;
         margin-top: 10px;
     }
 
@@ -74,13 +75,33 @@
 .debatehistory {
     height: 50vh;
     width: 100vw;
+    display: inline-flex;
+    background-color: silver;
+    min-width: 890px;
 }
+
+    .debatehistory__boundary {
+        height: 95%;
+        width: 95%;
+        margin: auto auto;
+        background-color: #ffffff;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #000000;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+        .debatehistory__list {
+            list-style-type: none;
+        }
 
 .userinput {
     background-color: #a2a2a2;
     height: 25vh;
     width: 100vw;
     display: inline-flex;
+    min-width: 890px;
 }
 
     .userinput__inset {

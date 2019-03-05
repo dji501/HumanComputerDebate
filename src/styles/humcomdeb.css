@@ -128,6 +128,11 @@
                 margin: inherit;
             }
 
+            .userinput__label__HIDDEN {
+                margin: inherit;
+                visibility: hidden;
+            }
+
             .userinput__movetype {
                 margin: inherit;
                 flex: 1 50%;
@@ -136,6 +141,12 @@
             .userinput__implycheckbox {
                 margin: inherit;
                 flex: 1 50%;
+            }
+
+            .userinput__implycheckbox__HIDDEN {
+                margin: inherit;
+                flex: 1 50%;
+                visibility: hidden;
             }
 
         .userinput__contentsection {
@@ -153,6 +164,16 @@
                 flex: 1 40%;
             }
 
+        .userinput__contentsection__HIDDEN {
+            margin: inherit;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex: 7 50%;
+            visibility: hidden;
+        }
         .userinput__buttonsection {
             margin: inherit;
             height: inherit;

@@ -13,6 +13,7 @@ export class DebatingSystemInterface extends React.Component{
             moveTypes: [],
             moveContents: [],
             implies: false,
+            hideUneededInputs: true,
 
             selectedType: "Yes",
             selectedAntecedent: null,
@@ -56,6 +57,12 @@ export class DebatingSystemInterface extends React.Component{
             selectedConsequent: this._dialogueManager.moveContents[0],
             selectedAntecedentString: this.state.moveContentsStrings[0],
             selectedConsequentString: this.state.moveContentsStrings[0],
+        });
+    }
+
+    updateMoveVisibility(boolean) {
+        this.setState({
+            hideUneededInputs: boolean,
         });
     }
 
@@ -179,12 +186,12 @@ export class DebatingSystemInterface extends React.Component{
                             <div className="userinput__movetype">
                                 <MoveChoiceDropdown selected={this.state.selectedType} onChange={this.handleMoveTypeChange} moveTypes={this.state.moveTypes}/>
                             </div>
-                            <div className="userinput__label">Implies</div>
-                            <div className="userinput__implycheckbox">
+                            <div className={this.state.hideUneededInputs ? "userinput__label__HIDDEN" :"userinput__label"}>Implies</div>
+                            <div className={this.state.hideUneededInputs ? "userinput__implycheckbox__HIDDEN" :"userinput__implycheckbox"}>
                                 <ImplyCheckbox onClick={() => this.setState( {implies: !this.state.implies,})} />
                             </div>
                         </div>
-                        <div className="userinput__contentsection">
+                        <div className={this.state.hideUneededInputs ? "userinput__contentsection__HIDDEN" :"userinput__contentsection"}>
                             <div className="userinput__label">Antecedent:</div>
                             <div className="userinput__movecontent">
                                 <MoveContentDropdown selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} moveContents={this.state.moveContentsStrings}/>
@@ -210,7 +217,7 @@ export class DebatingSystemInterface extends React.Component{
 function CommitmentStore(props) {
     let commitments;
     if (props.commitmentStore !== null && props.commitmentStore !== undefined) {
-        commitments= props.commitmentStore.map((commitment) => <li className="commitmentstore__listelement" onClick={props.onClick}>{commitment}</li>);
+        commitments = props.commitmentStore.map((commitment) => <li className="commitmentstore__listelement" onClick={props.onClick}>{commitment}</li>);
     }
     return (
         <div id={props.owner}>
@@ -227,7 +234,7 @@ function MoveChoiceDropdown(props) {
 
     return (
         <div id="movechoice-dropdown">
-            <select className="userinput_movetypeselect" value={props.selected} onChange={props.onChange}>{moveChoice}</select>
+            <select className="userinput__movetypeselect" value={props.selected} onChange={props.onChange}>{moveChoice}</select>
         </div>
     );
 }
@@ -241,7 +248,7 @@ function MoveContentDropdown(props) {
     }
     return (
         <div id={props.propositionType}>
-            <select className="userinput_movecontentselect" value={props.selected} onChange={props.onChange}>{moveContents}</select>
+            <select className="userinput__movecontentselect" value={props.selected} onChange={props.onChange}>{moveContents}</select>
         </div>
     );
 
@@ -272,7 +279,7 @@ function DialogueHistory(props) {
 
 function ImplyCheckbox(props) {
     return (
-            <div id="imply-checkbox">
+            <div id="imply-checkbox" cla>
                 <input type="checkbox" name="implies" onClick={props.onClick}/>
             </div>
     );

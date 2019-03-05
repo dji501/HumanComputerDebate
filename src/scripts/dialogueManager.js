@@ -136,7 +136,11 @@ export class DialogueManager {
                 //TODO: This is where original would notify users it was their turn
                 //This method limits user inputs so they cant break the rules:
                 this._moveTypes = InputManager.getMoveTypes(this._dialogueHistory, this._computerCS);
-
+                if (chosenMove.moveType === "Question") {
+                    this._debateSystemInterface.updateMoveVisibility(true);
+                } else {
+                    this._debateSystemInterface.updateMoveVisibility(false);
+                }
                 if (this.getEndingMessage() !== null) {
                     this.endDebate();
                 }

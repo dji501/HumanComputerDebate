@@ -1,0 +1,205 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.commitmentstore {
+    background-color: #f1f1f1;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    height: 25vh;
+    width: 100vw;
+    min-width: 890px;
+}
+
+    .commitmentstore__box {
+        width: 90%;
+        margin-top: 10px;
+    }
+
+        .commitmentstore__boundary {
+            background-color: #ffffff;
+            margin: 0 auto;
+            width: 85%;
+            height: 85%;
+            overflow: scroll;
+            overflow-x: hidden;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #000000;
+        }
+
+            .commitmentstore__title {
+                margin: 0 auto;
+                width: 85%;
+            }
+
+            .commitmentstore__studentstore {
+                height: inherit;
+                order: 0;
+                flex: 1 50%;
+            }
+
+            .commitmentstore__computerstore {
+                height: inherit;
+                order: 1;
+                flex: 1 50%;
+            }
+
+                .commitmentstore__list {
+                    height: inherit;
+                    width: inherit;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                    .commitmentstore__listelement {
+                        list-style-type: none;
+                        display: block;
+                        padding-bottom: 6px;
+                        padding-left: 3px;
+                        cursor: pointer;
+                    }
+
+                        .commitmentstore__listelement__clicked {
+                            background-color: #66cdaa;
+                            list-style-type: none;
+                            display: block;
+                            padding-bottom: 6px;
+                            padding-left: 3px;
+                            cursor: pointer;
+                        }
+
+.debatehistory {
+    height: 50vh;
+    width: 100vw;
+    display: inline-flex;
+    background-color: silver;
+    min-width: 890px;
+}
+
+    .debatehistory__boundary {
+        height: 95%;
+        width: 95%;
+        margin: auto auto;
+        background-color: #ffffff;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #000000;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+        .debatehistory__list {
+            list-style-type: none;
+        }
+
+.userinput {
+    background-color: #a2a2a2;
+    height: 25vh;
+    width: 100vw;
+    display: inline-flex;
+    min-width: 890px;
+}
+
+    .userinput__inset {
+        width: 95%;
+        height: 85%;
+        background-color: #fffff8;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        margin: auto auto;
+    }
+
+        .userinput__typesection {
+            margin: inherit;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex: 2 20%;
+        }
+
+            .userinput__label {
+                margin: inherit;
+            }
+
+            .userinput__label__HIDDEN {
+                margin: inherit;
+                visibility: hidden;
+            }
+
+            .userinput__movetype {
+                margin: inherit;
+                flex: 1 50%;
+            }
+
+            .userinput__implycheckbox {
+                margin: inherit;
+                flex: 1 50%;
+            }
+
+            .userinput__implycheckbox__HIDDEN {
+                margin: inherit;
+                flex: 1 50%;
+                visibility: hidden;
+            }
+
+        .userinput__contentsection {
+            margin: inherit;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex: 7 50%;
+        }
+
+            .userinput__movecontent {
+                margin: inherit;
+                flex: 1 40%;
+            }
+
+        .userinput__contentsection__HIDDEN {
+            margin: inherit;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex: 7 50%;
+            visibility: hidden;
+        }
+        .userinput__buttonsection {
+            margin: inherit;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex: 1 10%;
+        }
+
+            .userinput__inputbutton {
+                margin: inherit;
+            }
+
+::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+}

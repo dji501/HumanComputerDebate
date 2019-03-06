@@ -187,6 +187,10 @@ export class DebatingSystemInterface extends React.Component{
 
     clearAllFields() {
         document.getElementById("movechoice-input").value = "";
+        document.getElementById("antecedent-input").value = "";
+        document.getElementById("consequent-input").value = "";
+        document.getElementById("impliescheckbox-input").checked = false;
+        this.setState({implies: false});
     }
 
 
@@ -214,7 +218,7 @@ export class DebatingSystemInterface extends React.Component{
                         <div className="userinput__typesection">
                             <div className="userinput__label">Move Type:</div>
                             <div className="userinput__movetype">
-                                <MoveChoiceInput selected={this.state.selectedType} onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
+                                <MoveChoiceInput onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
                             </div>
                             <div className={this.state.hideUneededInputs ? "userinput__label__HIDDEN" :"userinput__label"}>Implies</div>
                             <div className={this.state.hideUneededInputs ? "userinput__implycheckbox__HIDDEN" :"userinput__implycheckbox"}>
@@ -224,11 +228,11 @@ export class DebatingSystemInterface extends React.Component{
                         <div className={this.state.hideUneededInputs ? "userinput__contentsection__HIDDEN" :"userinput__contentsection"}>
                             <div className="userinput__label">Antecedent:</div>
                             <div className="userinput__movecontent">
-                                <MoveContentDropdown selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} moveContents={this.state.moveContentsStrings}/>
+                                <MoveContentInput selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings}/>
                             </div>
                             <div className="userinput__label">Consequent:</div>
                             <div className="userinput__movecontent">
-                                <MoveContentDropdown selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} moveContents={this.state.moveContentsStrings}/>
+                                <MoveContentInput selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings}/>
                             </div>
                         </div>
                         <div className="userinput__buttonsection">
@@ -259,6 +263,22 @@ function MoveChoiceInput(props) {
     );
 }
 
+function MoveContentInput(props) {
+    let moveContents;
+    if (props.moveContents !== null && props.moveContents !== undefined) {
+        moveContents = props.moveContents.map((moveContent) => <option value={moveContent}/>);
+    }
+    return (
+        <div id={props.propositionType + "-datalist"}>
+            <input id={props.propositionType + "-input"} type="text" list={props.propositionType + "-contents"} onChange={props.onChange} onFocus={props.onFocus} placeholder={props.moveContents[0]}/>
+            <datalist id={props.propositionType + "-contents"}>
+                {moveContents}
+            </datalist>
+        </div>
+    );
+
+}
+
 function CommitmentStore(props) {
     let commitments;
     if (props.commitmentStore !== null && props.commitmentStore !== undefined) {
@@ -282,34 +302,6 @@ function CommitmentStorePopup(props) {
             </div>
         </div>
     );
-}
-
-function MoveChoiceDropdown(props) {
-    let moveChoice;
-    if (props.moveTypes !== null && props.moveTypes !== undefined) {
-        moveChoice= props.moveTypes.map((moveChoice) => <option value={moveChoice}>{moveChoice}</option>);
-    }
-
-    return (
-        <div id="movechoice-dropdown">
-            <select className="userinput__movetypeselect" value={props.selected} onChange={props.onChange}>{moveChoice}</select>
-        </div>
-    );
-}
-
-function MoveContentDropdown(props) {
-    let moveContents;
-    if (props.moveContents !== null && props.moveContents !== undefined) {
-        moveContents = props.moveContents.map((moveContent) => <option value={moveContent}>{moveContent}</option>);
-
-
-    }
-    return (
-        <div id={props.propositionType}>
-            <select className="userinput__movecontentselect" value={props.selected} onChange={props.onChange}>{moveContents}</select>
-        </div>
-    );
-
 }
 
 function InputButton(props) {
@@ -338,7 +330,7 @@ function DialogueHistory(props) {
 function ImplyCheckbox(props) {
     return (
             <div id="imply-checkbox" cla>
-                <input type="checkbox" name="implies" onClick={props.onClick}/>
+                <input id="impliescheckbox-input" type="checkbox" name="implies" onClick={props.onClick}/>
             </div>
     );
 }

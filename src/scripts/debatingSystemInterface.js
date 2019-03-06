@@ -179,6 +179,18 @@ export class DebatingSystemInterface extends React.Component{
         }
     }
 
+    clearInput(event) {
+        if (event.target.value !== null && event.target.value !== undefined) {
+            event.target.value = "";
+        }
+    }
+
+    clearAllFields() {
+        document.getElementById("movechoice-input").value = "";
+    }
+
+
+
     render() {
         return (
             <div id="debate-system">
@@ -202,7 +214,7 @@ export class DebatingSystemInterface extends React.Component{
                         <div className="userinput__typesection">
                             <div className="userinput__label">Move Type:</div>
                             <div className="userinput__movetype">
-                                <MoveChoiceDropdown selected={this.state.selectedType} onChange={this.handleMoveTypeChange} moveTypes={this.state.moveTypes}/>
+                                <MoveChoiceInput selected={this.state.selectedType} onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
                             </div>
                             <div className={this.state.hideUneededInputs ? "userinput__label__HIDDEN" :"userinput__label"}>Implies</div>
                             <div className={this.state.hideUneededInputs ? "userinput__implycheckbox__HIDDEN" :"userinput__implycheckbox"}>
@@ -221,7 +233,7 @@ export class DebatingSystemInterface extends React.Component{
                         </div>
                         <div className="userinput__buttonsection">
                             <div className="userinput__inputbutton">
-                                <InputButton onClick={() => { this._dialogueManager.actionPerformed(); }}/>
+                                <InputButton onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}/>
                             </div>
                         </div>
                     </div>
@@ -231,6 +243,22 @@ export class DebatingSystemInterface extends React.Component{
     }
 }
 /* eslint-disable no-unused-vars */
+
+function MoveChoiceInput(props) {
+    let moveChoices;
+    if (props.moveTypes !== null && props.moveTypes !== undefined) {
+        moveChoices = props.moveTypes.map((moveChoice) => <option value={moveChoice}/>);
+    }
+    return (
+        <div id="movechoice-datalist">
+            <input id="movechoice-input" type="text" list="types" onChange={props.onChange} onFocus={props.onFocus} placeholder={props.moveTypes[0]}/>
+            <datalist id="types">
+                {moveChoices}
+            </datalist>
+        </div>
+    );
+}
+
 function CommitmentStore(props) {
     let commitments;
     if (props.commitmentStore !== null && props.commitmentStore !== undefined) {

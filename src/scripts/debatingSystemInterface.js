@@ -32,6 +32,7 @@ export class DebatingSystemInterface extends React.Component{
         this.handleMoveConsequentChange = this.handleMoveConsequentChange.bind(this);
         this.handleStudentCommitmentClick = this.handleStudentCommitmentClick.bind(this);
         this.handleComputerCommitmentClick = this.handleComputerCommitmentClick.bind(this);
+        this.handleImpliesChange = this.handleImpliesChange.bind(this);
     }
 
     componentDidMount() {
@@ -104,6 +105,14 @@ export class DebatingSystemInterface extends React.Component{
         let ruleProp = this.getRulePropFromString(event.target.value, this.state.moveContentsStrings, this.state.moveContents);
         this.setState({selectedConsequent: ruleProp});
         this.setState({selectedConsequentString: event.target.value});
+    }
+
+    handleImpliesChange(event) {
+        if (event.target.value === "implies...") {
+            this.setState({implies: true});
+        } else {
+            this.setState({implies: false});
+        }
     }
 
     handleStudentCommitmentClick(event) {
@@ -189,7 +198,7 @@ export class DebatingSystemInterface extends React.Component{
         document.getElementById("movechoice-input").value = "";
         document.getElementById("antecedent-input").value = "";
         document.getElementById("consequent-input").value = "";
-        document.getElementById("impliescheckbox-input").checked = false;
+        document.getElementById("impliesbox-input").value = "";
         this.setState({implies: false});
     }
 
@@ -222,7 +231,7 @@ export class DebatingSystemInterface extends React.Component{
                             </div>
                             <div className={this.state.hideUneededInputs ? "userinput__label__HIDDEN" :"userinput__label"}>Implies</div>
                             <div className={this.state.hideUneededInputs ? "userinput__implycheckbox__HIDDEN" :"userinput__implycheckbox"}>
-                                <ImplyCheckbox onClick={() => this.setState( {implies: !this.state.implies,})} />
+                                <ImpliesInput onChange={this.handleImpliesChange} onFocus={this.clearInput} />
                             </div>
                         </div>
                         <div className={this.state.hideUneededInputs ? "userinput__contentsection__HIDDEN" :"userinput__contentsection"}>
@@ -277,6 +286,18 @@ function MoveContentInput(props) {
         </div>
     );
 
+}
+
+function ImpliesInput(props) {
+    return (
+        <div id="impliesbox">
+            <input id="impliesbox-input" type="text" list="implies" onChange={props.onChange} onFocus={props.onFocus} placeholder=""/>
+            <datalist id="implies">
+                <option value=""/>
+                <option value="implies..."/>
+            </datalist>
+        </div>
+    );
 }
 
 function CommitmentStore(props) {

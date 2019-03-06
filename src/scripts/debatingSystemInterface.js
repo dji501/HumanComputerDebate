@@ -1,7 +1,5 @@
 import { DialogueManager } from "./dialogueManager";
-import { Proposition } from "./proposition";
-import { Move } from "./move";
-//import { InterfaceManager } from "./interfaceManager";
+
 import React from "react";
 
 export class DebatingSystemInterface extends React.Component{
@@ -152,28 +150,38 @@ export class DebatingSystemInterface extends React.Component{
         }
     }
 
+    handleStudentTabClick(event) {
+        if (event.target.tagName === "P") {
+            event.target = event.target.parentElement;
+        }
+
+        if (event.target.className ===  "debatehistorytree__studentcs__tab__clicked") {
+            event.target.className = "debatehistorytree__studentcs__tab";
+            event.target.nextSibling.className = "debatehistorytree__studentcs__store";
+        } else {
+            event.target.className =  "debatehistorytree__studentcs__tab__clicked";
+            event.target.nextSibling.className = "debatehistorytree__studentcs__store__HIDDEN";
+        }
+
+    }
+
+    handleComputerTabClick(event) {
+        if (event.target.tagName === "P") {
+            event.target = event.target.parentElement;
+        }
+
+        if (event.target.className ===  "debatehistorytree__computercs__tab__clicked") {
+            event.target.className = "debatehistorytree__computercs__tab";
+            event.target.nextSibling.className = "debatehistorytree__computercs__store";
+        } else {
+            event.target.className =  "debatehistorytree__computercs__tab__clicked";
+            event.target.nextSibling.className = "debatehistorytree__computercs__store__HIDDEN";
+        }
+    }
+
     render() {
         return (
             <div id="debate-system">
-                <div id="commitment-store" className="commitmentstore">
-                    <div className="commitmentstore__box">
-                        <div className="commitmentstore__title">My Commitments:</div>
-                        <div className="commitmentstore__boundary">
-                            <div id="student-store" className="commitmentstore__studentstore">
-                                <CommitmentStore owner={"Student"} onClick={this.handleStudentCommitmentClick} commitmentStore={this.state.studentCSStrings}/>
-                            </div>
-                        </div>
-                    </div>
-                    <hr></hr>
-                    <div className="commitmentstore__box">
-                        <div className="commitmentstore__title">Computer Commitments:</div>
-                        <div className="commitmentstore__boundary">
-                            <div id="computer-store" className="commitmentstore__computerstore">
-                                <CommitmentStore owner={"Computer"} onClick={this.handleComputerCommitmentClick} commitmentStore={this.state.computerCSStrings}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div className="debatehistory">
                     <div className="debatehistorydialogue">
                         <div className="debatehistorydialogue__boundary">
@@ -182,6 +190,10 @@ export class DebatingSystemInterface extends React.Component{
                     </div>
                     <div className="debatehistorytree">
                         <div className="debatehistorytree__boundary">
+                            <div className="debatehistorytree__treearea">
+                            </div>
+                            <CommitmentStorePopup owner="My" className={"debatehistorytree__studentcs"} onTabClick={this.handleStudentTabClick} onCommitmentClick={this.handleStudentCommitmentClick} commitmentStore={this.state.studentCSStrings}/>
+                            <CommitmentStorePopup owner="Computer" className={"debatehistorytree__computercs"}  onTabClick={this.handleComputerTabClick} onCommitmentClick={this.handleComputerCommitmentClick} commitmentStore={this.state.computerCSStrings}/>
                         </div>
                     </div>
                 </div>
@@ -218,8 +230,7 @@ export class DebatingSystemInterface extends React.Component{
         );
     }
 }
-//_dialogueManager.dialogueHistory.add(new Move("S","Concession", new Proposition("CP is acceptable", true)));}}/>
-
+/* eslint-disable no-unused-vars */
 function CommitmentStore(props) {
     let commitments;
     if (props.commitmentStore !== null && props.commitmentStore !== undefined) {
@@ -228,6 +239,19 @@ function CommitmentStore(props) {
     return (
         <div id={props.owner}>
             <ul className="commitmentstore__list">{commitments}</ul>
+        </div>
+    );
+}
+
+function CommitmentStorePopup(props) {
+    return (
+        <div className={props.className}>
+            <div className={props.className + "__tab"} onClick={props.onTabClick}>
+                <p className={props.className + "__tabtext"}>{props.owner + " Commitments"}</p>
+            </div>
+            <div className={props.className + "__store"}>
+                <CommitmentStore owner={props.owner} onClick={props.onCommitmentClick} commitmentStore={props.commitmentStore}/>
+            </div>
         </div>
     );
 }

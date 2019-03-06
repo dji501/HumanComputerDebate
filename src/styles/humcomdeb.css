@@ -3,77 +3,8 @@
     margin: 0;
 }
 
-.commitmentstore {
-    background-color: #f1f1f1;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items: stretch;
-    height: 25vh;
-    width: 100vw;
-    min-width: 890px;
-}
-
-    .commitmentstore__box {
-        width: 90%;
-        margin-top: 10px;
-    }
-
-        .commitmentstore__boundary {
-            background-color: #ffffff;
-            margin: 0 auto;
-            width: 85%;
-            height: 85%;
-            overflow: scroll;
-            overflow-x: hidden;
-            border-width: 1px;
-            border-style: solid;
-            border-color: #000000;
-        }
-
-            .commitmentstore__title {
-                margin: 0 auto;
-                width: 85%;
-            }
-
-            .commitmentstore__studentstore {
-                height: inherit;
-                order: 0;
-                flex: 1 50%;
-            }
-
-            .commitmentstore__computerstore {
-                height: inherit;
-                order: 1;
-                flex: 1 50%;
-            }
-
-                .commitmentstore__list {
-                    height: inherit;
-                    width: inherit;
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                    .commitmentstore__listelement {
-                        list-style-type: none;
-                        display: block;
-                        padding-bottom: 6px;
-                        padding-left: 3px;
-                        cursor: pointer;
-                    }
-
-                        .commitmentstore__listelement__clicked {
-                            background-color: #66cdaa;
-                            list-style-type: none;
-                            display: block;
-                            padding-bottom: 6px;
-                            padding-left: 3px;
-                            cursor: pointer;
-                        }
-
 .debatehistory {
-    height: 50vh;
+    height: 75vh;
     width: 100vw;
     display: inline-flex;
     background-color: silver;
@@ -117,6 +48,193 @@
             border-width: 1px;
             border-style: solid;
             border-color: #000000;
+            position: relative;
+        }
+            .debatehistorytree__studentcs {
+                height: 40%;
+                width: 40%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                min-width: 200px;
+            }
+                .debatehistorytree__studentcs__tab {
+                    background: #5e6965;
+                    height: 15%;
+                    width: 170px;
+
+                    position: absolute;
+                    left: 0;
+
+                    border-width: 2px;
+                    border-color: #343631;
+                    border-style: groove;
+                    border-radius: 0px 15px 5px 0px;
+                    border-bottom: unset;
+                    border-left: unset;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    cursor: pointer;
+                }
+
+                .debatehistorytree__studentcs__tab__clicked {
+                    background: #5e6965;
+                    height: 15%;
+                    width: 170px;
+
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+
+                    border-width: 2px;
+                    border-color: #343631;
+                    border-style: groove;
+                    border-radius: 0px 15px 5px 0px;
+                    border-bottom: unset;
+                    border-left: unset;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    cursor: pointer;
+                }
+
+                    .debatehistorytree__studentcs__tabtext {
+                        position: absolute;
+                        left: 5px;
+                        color: #F0F8F5;
+                    }
+
+                .debatehistorytree__studentcs__store {
+                    background: #e3e5e3;
+                    height: 85%;
+                    width: 100%;
+
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+
+                    border-width: 2px;
+                    border-color: #343631;
+                    border-style: groove;
+                    border-bottom: unset;
+                    border-left: unset;
+                    border-radius: 0px 10px 0px 0px;
+
+                    overflow: scroll;
+                    overflow-x: hidden;
+                }
+
+                    .debatehistorytree__studentcs__store__HIDDEN {
+                        display: none;
+                    }
+
+            .debatehistorytree__computercs {
+                height: 40%;
+                width: 40%;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                min-width: 200px;
+            }
+
+                .debatehistorytree__computercs__tab {
+                    background: #5e6965;
+                    height: 15%;
+                    width: 170px;
+
+                    position: absolute;
+                    right: 0;
+
+                    border-width: 2px;
+                    border-color: #343631;
+                    border-style: groove;
+                    border-radius: 15px 0px 0px 5px;
+                    border-bottom: unset;
+                    border-right: unset;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    cursor: pointer;
+                }
+
+                    .debatehistorytree__computercs__tab__clicked {
+                        background: #5e6965;
+                        height: 15%;
+                        width: 170px;
+
+                        position: absolute;
+                        right: 0;
+                        bottom: 0;
+
+                        border-width: 2px;
+                        border-color: #343631;
+                        border-style: groove;
+                        border-radius: 15px 0px 0px 5px;
+                        border-bottom: unset;
+                        border-right: unset;
+
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        cursor: pointer;
+                    }
+
+                    .debatehistorytree__computercs__tabtext {
+                        position: absolute;
+                        right: 5px;
+                        color: #F0F8F5;
+                    }
+
+                .debatehistorytree__computercs__store {
+                    background: #e3e5e3;
+                    height: 85%;
+                    width: 100%;
+
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+
+                    border-width: 2px;
+                    border-color: #343631;
+                    border-style: groove;
+                    border-bottom: unset;
+                    border-right: unset;
+                    border-radius: 10px 0px 0px 0px;
+
+                    overflow: scroll;
+                    overflow-x: hidden;
+                }
+
+                    .debatehistorytree__computercs__store__HIDDEN {
+                        display: none;
+                    }
+
+.commitmentstore__list {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+    .commitmentstore__listelement {
+        list-style-type: none;
+        display: block;
+        padding-bottom: 6px;
+        padding-left: 3px;
+        cursor: pointer;
+    }
+
+        .commitmentstore__listelement__clicked {
+            background-color: #66cdaa;
+            list-style-type: none;
+            display: block;
+            padding-bottom: 6px;
+            padding-left: 3px;
+            cursor: pointer;
         }
 
 .userinput {

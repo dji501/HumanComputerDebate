@@ -175,8 +175,14 @@ export class DebatingSystemInterface extends React.Component{
                     </div>
                 </div>
                 <div className="debatehistory">
-                    <div className="debatehistory__boundary">
-                        <DialogueHistory dialogueHistory={this.state.debateLog}/>
+                    <div className="debatehistorydialogue">
+                        <div className="debatehistorydialogue__boundary">
+                            <DialogueHistory dialogueHistory={this.state.debateLog}/>
+                        </div>
+                    </div>
+                    <div className="debatehistorytree">
+                        <div className="debatehistorytree__boundary">
+                        </div>
                     </div>
                 </div>
                 <div className="userinput">

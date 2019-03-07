@@ -159,33 +159,19 @@ export class DebatingSystemInterface extends React.Component{
         }
     }
 
-    handleStudentTabClick(event) {
+    handleTabClick(event) {
         if (event.target.tagName === "P") {
             event.target = event.target.parentElement;
         }
 
-        if (event.target.className ===  "debatehistorytree__studentcs__tab__clicked") {
-            event.target.className = "debatehistorytree__studentcs__tab";
-            event.target.nextSibling.className = "debatehistorytree__studentcs__store";
+        if (event.target.classList.contains("debatehistorytree__tab__clicked")) {
+            event.target.classList.remove("debatehistorytree__tab__clicked");
+            event.target.nextSibling.classList.remove("debatehistorytree__store__HIDDEN");
         } else {
-            event.target.className =  "debatehistorytree__studentcs__tab__clicked";
-            event.target.nextSibling.className = "debatehistorytree__studentcs__store__HIDDEN";
+            event.target.classList.add("debatehistorytree__tab__clicked");
+            event.target.nextSibling.classList.add("debatehistorytree__store__HIDDEN");
         }
 
-    }
-
-    handleComputerTabClick(event) {
-        if (event.target.tagName === "P") {
-            event.target = event.target.parentElement;
-        }
-
-        if (event.target.className ===  "debatehistorytree__computercs__tab__clicked") {
-            event.target.className = "debatehistorytree__computercs__tab";
-            event.target.nextSibling.className = "debatehistorytree__computercs__store";
-        } else {
-            event.target.className =  "debatehistorytree__computercs__tab__clicked";
-            event.target.nextSibling.className = "debatehistorytree__computercs__store__HIDDEN";
-        }
     }
 
     clearInput(event) {
@@ -215,8 +201,8 @@ export class DebatingSystemInterface extends React.Component{
                         <div className="debatehistorytree__boundary">
                             <div className="debatehistorytree__treearea">
                             </div>
-                            <CommitmentStorePopup owner="My" className={"debatehistorytree__studentcs"} onTabClick={this.handleStudentTabClick} onCommitmentClick={this.handleStudentCommitmentClick} commitmentStore={this.state.studentCSStrings}/>
-                            <CommitmentStorePopup owner="Computer" className={"debatehistorytree__computercs"}  onTabClick={this.handleComputerTabClick} onCommitmentClick={this.handleComputerCommitmentClick} commitmentStore={this.state.computerCSStrings}/>
+                            <CommitmentStorePopup owner="My" className={"debatehistorytree__studentcs"} onTabClick={this.handleTabClick} onCommitmentClick={this.handleStudentCommitmentClick} commitmentStore={this.state.studentCSStrings}/>
+                            <CommitmentStorePopup owner="Computer" className={"debatehistorytree__computercs"}  onTabClick={this.handleTabClick} onCommitmentClick={this.handleComputerCommitmentClick} commitmentStore={this.state.computerCSStrings}/>
                         </div>
                     </div>
                 </div>
@@ -311,10 +297,10 @@ function CommitmentStore(props) {
 function CommitmentStorePopup(props) {
     return (
         <div className={props.className}>
-            <div className={props.className + "__tab"} onClick={props.onTabClick}>
+            <div className={"debatehistorytree__tab " + props.className + "__tab"} onClick={props.onTabClick}>
                 <p className={props.className + "__tabtext"}>{props.owner + " Commitments"}</p>
             </div>
-            <div className={props.className + "__store"}>
+            <div className={"debatehistorytree__store " + props.className + "__store"}>
                 <CommitmentStore owner={props.owner} onClick={props.onCommitmentClick} commitmentStore={props.commitmentStore}/>
             </div>
         </div>
@@ -326,7 +312,7 @@ function InputButton(props) {
         <div id="moveinput-button">
             <button className="userinput__button"
                     onClick={props.onClick}>
-                    Enter
+                    >>
             </button>
         </div>
     );

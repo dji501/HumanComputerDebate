@@ -242,9 +242,7 @@ export class DebatingSystemInterface extends React.Component{
                         </div>
                         <div className="userinput__buttonsection">
                             <div className="userinput__inputbutton">
-                                <InputButton className={!this.inputIsValid() ? "userinput__button__disabled" : ""} disabled={!this.inputIsValid()} onClick={() => { this._dialogueManager.actionPerformed();
-                                                                                              this.clearAllFields();
-                                                                                            }}/>
+                                <InputButton className={!this.inputIsValid() ? "userinput__button__disabled" : ""} disabled={!this.inputIsValid()} onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}/>
                             </div>
                         </div>
                     </div>
@@ -326,7 +324,7 @@ function CommitmentStorePopup(props) {
 function InputButton(props) {
     return (
         <div id="moveinput-button">
-            <button className={"userinput__button " + props.className} 
+            <button className={"userinput__button " + props.className}
                     onClick={props.onClick}
                     disabled={props.disabled}>
                     >>
@@ -338,19 +336,23 @@ function InputButton(props) {
 function DialogueHistory(props) {
     let dialogue;
     if (props.dialogueHistory !== null && props.dialogueHistory !== undefined) {
-        dialogue = props.dialogueHistory.map((move) => <li className="debatehistory__listitem">{move}</li>);
+        dialogue = props.dialogueHistory.map((move) => {
+            return (
+                <div className="debatehistorydialogue__logitem">
+                    <div className="debatehistorydialogue__logitemturn">
+                        <li className="debatehistory__listitem">{move.split(">")[0]+ ">"}</li>
+                    </div>
+                    <div className="debatehistorydialogue__logitemcontent">
+                        <li className="debatehistory__listitem">{move.split(">")[1]}</li>
+                    </div>
+                </div>
+            );
+        });
     }
     return (
-        <div id="debate-history">
-            <ul className="debatehistory__list">{dialogue}</ul>
+        <div id="debate-history" className="debatehistorydialogue__log">
+            <ul className="debatehistorydialogue__list">{dialogue}</ul>
+            <div className="debatehistorydialogue__turncolumnholder"/>
         </div>
-    );
-}
-
-function ImplyCheckbox(props) {
-    return (
-            <div id="imply-checkbox" cla>
-                <input id="impliescheckbox-input" type="checkbox" name="implies" onClick={props.onClick}/>
-            </div>
     );
 }

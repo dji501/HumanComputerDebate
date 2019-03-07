@@ -28,43 +28,83 @@ input[type=text], select {
         height: inherit;
         width: 50%;
         display: inline-flex;
-        background-color: #f9f9f9;
+        background-color: #eeeeee;
     }
 
         .debatehistorydialogue__boundary {
-            height: 95%;
-            width: 95%;
+            height: 98%;
+            width: 98%;
             margin: auto auto;
             background-color: #ffffff;
-            border-width: 1px;
-            border-style: solid;
-            border-color: #000000;
+            position: relative;
             overflow: scroll;
             overflow-x: hidden;
             border-radius: 5px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         }
 
-            .debatehistory__list {
+        .debatehistorydialogue__log {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .debatehistorydialogue__list {
                 list-style-type: none;
+                display: inline-grid;
+            }
+
+                .debatehistorydialogue__logitem {
+                    height: 100%;
+                    display: flex;
+                }
+
+                    .debatehistorydialogue__logitemturn {
+                        min-width: 50px;
+                        padding-left: 3px;
+
+                        background: #8c8c8c;
+                        color: #ffffff;
+                        border-right: #3a3a3a;
+                        border-right-style: solid;
+                        border-right-width: thin;
+                    }
+
+                    .debatehistorydialogue__logitemcontent {
+                        flex: 1 100%;
+                        padding-left: 3px;
+                    }
+
+
+            .debatehistorydialogue__turncolumnholder {
+                flex: 1 0%;
+
+                width: 50px;
+                padding-left: 3px;
+
+                background: #8c8c8c;
+                color: #ffffff;
+                border-right: #3a3a3a;
+                border-right-style: solid;
+                border-right-width: thin;
             }
 
     .debatehistorytree {
         height: inherit;
         width: 50%;
         display: inline-flex;
-        background-color: #f9f9f9;
+        background-color: #eeeeee;
     }
 
         .debatehistorytree__boundary {
-            height: 95%;
-            width: 95%;
+            height: 98%;
+            width: 98%;
             margin: auto auto;
             background-color: #ffffff;
-            border-width: 1px;
-            border-style: solid;
-            border-color: #000000;
             position: relative;
             border-radius: 5px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         }
 
             .debatehistorytree__store {
@@ -130,7 +170,7 @@ input[type=text], select {
                 .debatehistorytree__studentcs__tab {
                     border-left: unset;
                     left: 0;
-                    border-radius: 0px 15px 5px 0px;
+                    border-radius: 0px 15px 0px 4px;
                 }
 
                 .debatehistorytree__studentcs__tabtext {
@@ -157,7 +197,7 @@ input[type=text], select {
                 .debatehistorytree__computercs__tab {
                     border-right: unset;
                     right: 0;
-                    border-radius: 15px 0px 0px 5px;
+                    border-radius: 15px 0px 4px 0px;
                 }
 
                 .debatehistorytree__computercs__tabtext {
@@ -204,7 +244,7 @@ input[type=text], select {
 
 
 .userinput {
-    background-color: #e0e0e0;
+    background-color: #eeeeee;
     height: 25vh;
     width: 100vw;
     display: inline-flex;

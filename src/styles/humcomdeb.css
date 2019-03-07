@@ -3,6 +3,21 @@
     margin: 0;
 }
 
+body {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 .debatehistory {
     height: 75vh;
     width: 100vw;
@@ -187,6 +202,7 @@
                         position: absolute;
                         right: 5px;
                         color: #F0F8F5;
+                        font-size: 0.9em;
                     }
 
                 .debatehistorytree__computercs__store {
@@ -254,67 +270,37 @@
         justify-content: space-evenly;
         margin: auto auto;
     }
-
-        .userinput__typesection {
+        .userinput__inputarea {
             margin: inherit;
             height: inherit;
             width: inherit;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            flex: 2 20%;
+            flex: 9 90%;
         }
 
-            .userinput__label {
+            .userinput__inputarea__inputs{
                 margin: inherit;
+                height: 100%;
+                width: 90%;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: center;
             }
 
-            .userinput__label__HIDDEN {
-                margin: inherit;
-                visibility: hidden;
-            }
+                .userinput__movetype {
+                    margin: inherit;
+                    flex: 2 25%;
+                }
 
-            .userinput__movetype {
-                margin: inherit;
-                flex: 1 50%;
-            }
+                .userinput__implytextbox {
+                    margin: inherit;
+                    flex: 1 15%;
+                }
 
-            .userinput__implycheckbox {
-                margin: inherit;
-                flex: 1 50%;
-            }
+                .userinput__movecontent {
+                    margin: inherit;
+                    flex: 7 75%;
+                }
 
-            .userinput__implycheckbox__HIDDEN {
-                margin: inherit;
-                flex: 1 50%;
-                visibility: hidden;
-            }
-
-        .userinput__contentsection {
-            margin: inherit;
-            height: inherit;
-            width: inherit;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            flex: 7 50%;
-        }
-
-            .userinput__movecontent {
-                margin: inherit;
-                flex: 1 40%;
-            }
-
-        .userinput__contentsection__HIDDEN {
-            margin: inherit;
-            height: inherit;
-            width: inherit;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            flex: 7 50%;
-            visibility: hidden;
-        }
         .userinput__buttonsection {
             margin: inherit;
             height: inherit;

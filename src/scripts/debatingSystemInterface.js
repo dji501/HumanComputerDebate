@@ -11,7 +11,7 @@ export class DebatingSystemInterface extends React.Component{
             moveTypes: [],
             moveContents: [],
             implies: false,
-            hideUneededInputs: true,
+            disableUneededInputs: true,
 
             selectedType: "Yes",
             selectedAntecedent: null,
@@ -59,9 +59,9 @@ export class DebatingSystemInterface extends React.Component{
         });
     }
 
-    updateMoveVisibility(boolean) {
+    updateDisableUneededInputs(boolean) {
         this.setState({
-            hideUneededInputs: boolean,
+            disableUneededInputs: boolean,
         });
     }
 
@@ -202,8 +202,6 @@ export class DebatingSystemInterface extends React.Component{
         this.setState({implies: false});
     }
 
-
-
     render() {
         return (
             <div id="debate-system">
@@ -224,29 +222,27 @@ export class DebatingSystemInterface extends React.Component{
                 </div>
                 <div className="userinput">
                     <div className="userinput__inset">
-                        <div className="userinput__typesection">
-                            <div className="userinput__label">Move Type:</div>
-                            <div className="userinput__movetype">
-                                <MoveChoiceInput onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
-                            </div>
-                            <div className={this.state.hideUneededInputs ? "userinput__label__HIDDEN" :"userinput__label"}>Implies</div>
-                            <div className={this.state.hideUneededInputs ? "userinput__implycheckbox__HIDDEN" :"userinput__implycheckbox"}>
-                                <ImpliesInput onChange={this.handleImpliesChange} onFocus={this.clearInput} />
-                            </div>
-                        </div>
-                        <div className={this.state.hideUneededInputs ? "userinput__contentsection__HIDDEN" :"userinput__contentsection"}>
-                            <div className="userinput__label">Antecedent:</div>
-                            <div className="userinput__movecontent">
-                                <MoveContentInput selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings}/>
-                            </div>
-                            <div className="userinput__label">Consequent:</div>
-                            <div className="userinput__movecontent">
-                                <MoveContentInput selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings}/>
+                        <div className="userinput__inputarea">
+                            <div className="userinput__inputarea__inputs">
+                                <div className="userinput__movetype">
+                                    <MoveChoiceInput onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
+                                </div>
+                                <div className="userinput__movecontent">
+                                    <MoveContentInput selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs}/>
+                                </div>
+                                <div className="userinput__implytextbox">
+                                    <ImpliesInput onChange={this.handleImpliesChange} onFocus={this.clearInput} disabled={this.state.disableUneededInputs}/>
+                                </div>
+                                <div className="userinput__movecontent">
+                                    <MoveContentInput selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs || !this.state.implies}/>
+                                </div>
                             </div>
                         </div>
                         <div className="userinput__buttonsection">
                             <div className="userinput__inputbutton">
-                                <InputButton onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}/>
+                                <InputButton onClick={() => { this._dialogueManager.actionPerformed();
+                                                              this.clearAllFields();
+                                                            }}/>
                             </div>
                         </div>
                     </div>
@@ -279,7 +275,7 @@ function MoveContentInput(props) {
     }
     return (
         <div id={props.propositionType + "-datalist"}>
-            <input id={props.propositionType + "-input"} type="text" list={props.propositionType + "-contents"} onChange={props.onChange} onFocus={props.onFocus} placeholder={props.moveContents[0]}/>
+            <input id={props.propositionType + "-input"} type="text" list={props.propositionType + "-contents"} onChange={props.onChange} onFocus={props.onFocus} placeholder={props.moveContents[0]} disabled={props.disabled}/>
             <datalist id={props.propositionType + "-contents"}>
                 {moveContents}
             </datalist>
@@ -291,7 +287,7 @@ function MoveContentInput(props) {
 function ImpliesInput(props) {
     return (
         <div id="impliesbox">
-            <input id="impliesbox-input" type="text" list="implies" onChange={props.onChange} onFocus={props.onFocus} placeholder=""/>
+            <input id="impliesbox-input" type="text" list="implies" onChange={props.onChange} onFocus={props.onFocus} placeholder="implies..." disabled={props.disabled}/>
             <datalist id="implies">
                 <option value=""/>
                 <option value="implies..."/>

@@ -33,6 +33,7 @@ export class DebatingSystemInterface extends React.Component{
         this.handleStudentCommitmentClick = this.handleStudentCommitmentClick.bind(this);
         this.handleComputerCommitmentClick = this.handleComputerCommitmentClick.bind(this);
         this.handleImpliesChange = this.handleImpliesChange.bind(this);
+        this.inputIsValid = this.inputIsValid.bind(this);
     }
 
     componentDidMount() {
@@ -63,6 +64,21 @@ export class DebatingSystemInterface extends React.Component{
         this.setState({
             disableUneededInputs: boolean,
         });
+    }
+
+    inputIsValid() {
+        if (this.state.moveTypes.includes(this.state.selectedType)) {
+            if (this.state.moveContents.includes(this.state.selectedAntecedent)) {
+                if (this.state.implies === false) {
+                    return true;
+                } else {
+                    if (this.state.moveContents.includes(this.state.selectedConsequent)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     getCommitments(commitmentStore) {
@@ -226,9 +242,9 @@ export class DebatingSystemInterface extends React.Component{
                         </div>
                         <div className="userinput__buttonsection">
                             <div className="userinput__inputbutton">
-                                <InputButton onClick={() => { this._dialogueManager.actionPerformed();
-                                                              this.clearAllFields();
-                                                            }}/>
+                                <InputButton className={!this.inputIsValid() ? "userinput__button__disabled" : ""} disabled={!this.inputIsValid()} onClick={() => { this._dialogueManager.actionPerformed();
+                                                                                              this.clearAllFields();
+                                                                                            }}/>
                             </div>
                         </div>
                     </div>
@@ -310,8 +326,9 @@ function CommitmentStorePopup(props) {
 function InputButton(props) {
     return (
         <div id="moveinput-button">
-            <button className="userinput__button"
-                    onClick={props.onClick}>
+            <button className={"userinput__button " + props.className} 
+                    onClick={props.onClick}
+                    disabled={props.disabled}>
                     >>
             </button>
         </div>

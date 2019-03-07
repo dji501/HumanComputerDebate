@@ -291,6 +291,16 @@ input[type=text], select {
                     transform: translateY(2px);
                 }
 
+                .userinput__button__disabled {
+                    background-color: #87afd6;
+                    cursor: default;
+
+                }
+
+                .userinput__button__disabled:hover {
+                    background-color: #87afd6;
+                }
+
 ::-webkit-scrollbar
 {
   width: 12px;  /* for vertical scrollbars */

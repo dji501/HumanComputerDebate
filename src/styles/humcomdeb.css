@@ -353,3 +353,92 @@ input[type=text], select {
 {
   background: rgba(0, 0, 0, 0.5);
 }
+
+.startpage {
+    height: 100vh;
+    width: 100vw;
+    background-color: #eeeeee;
+    min-width: 890px;
+}
+
+    .startpage__titlearea {
+        margin: auto auto;
+        height: 30%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .startpage__titleareatitle {
+            margin: inherit;
+            width: 50%;
+            flex: 2 50%;
+        }
+
+        .startpage__titleareadescription {
+            margin: inherit;
+            width: 50%;
+            flex: 1 30%;
+        }
+
+    .startpage__startarea {
+        margin: auto auto;
+        height: 30%;
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+    }
+
+        .startpage__startareadropdown {
+            margin: inherit;
+            flex: 2 30%;
+        }
+
+            .startpage__topicdropdown {
+                margin: inherit;
+                width: 80%;
+            }
+
+        .startpage__startareabutton {
+            margin: auto auto;
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            flex: 1 15%;
+        }
+
+            .startpage__gobuttoncontainer {
+                margin: inherit;
+            }
+
+                .startpage__gobutton {
+                    margin: inherit;
+                    background-color: #1976d2;
+                    border: none;
+                    border-radius: 50%;
+                    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+                    color: white;
+                    font-size: 45px;
+                    padding: 45px 19px;
+
+                    cursor: pointer;
+                }
+
+                .startpage__gobutton:focus {
+                    outline:0;
+                }
+
+                .startpage__gobutton:hover {
+                    background-color: #63a4ff;
+                }
+
+                .startpage__gobutton:active {
+                    background-color: #004ba0;
+                    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3), 0 6px 20px 0 rgba(0,0,0,0.29);
+                    transform: translateY(2px);
+                }
+
+.hidden {
+    display: none;
+}

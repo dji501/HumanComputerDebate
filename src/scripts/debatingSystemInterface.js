@@ -206,7 +206,7 @@ export class DebatingSystemInterface extends React.Component{
 
     render() {
         return (
-            <div id="debate-system">
+            <div id="debate-system" className={this.props.active ? "debatesystem" : "hidden"}>
                 <div className="debatehistory">
                     <div className="debatehistorydialogue">
                         <div className="debatehistorydialogue__boundary">

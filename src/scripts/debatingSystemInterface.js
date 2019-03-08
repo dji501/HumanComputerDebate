@@ -339,7 +339,7 @@ function DialogueHistory(props) {
         dialogue = props.dialogueHistory.map((move) => {
             return (
                 <div className="debatehistorydialogue__logitem">
-                    <div className="debatehistorydialogue__logitemturn">
+                    <div className="debatehistorydialogue__turncolumn debatehistorydialogue__logitemturn">
                         <li className="debatehistory__listitem">{move.split(">")[0]+ ">"}</li>
                     </div>
                     <div className="debatehistorydialogue__logitemcontent">
@@ -352,7 +352,7 @@ function DialogueHistory(props) {
     return (
         <div id="debate-history" className="debatehistorydialogue__log">
             <ul className="debatehistorydialogue__list">{dialogue}</ul>
-            <div className="debatehistorydialogue__turncolumnholder"/>
+            <div className="debatehistorydialogue__turncolumn debatehistorydialogue__turncolumnholder"/>
         </div>
     );
 }

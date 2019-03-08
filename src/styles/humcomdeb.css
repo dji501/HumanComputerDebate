@@ -63,12 +63,6 @@ input[type=text], select {
                     .debatehistorydialogue__logitemturn {
                         min-width: 50px;
                         padding-left: 3px;
-
-                        background: #8c8c8c;
-                        color: #ffffff;
-                        border-right: #3a3a3a;
-                        border-right-style: solid;
-                        border-right-width: thin;
                     }
 
                     .debatehistorydialogue__logitemcontent {
@@ -82,12 +76,11 @@ input[type=text], select {
 
                 width: 50px;
                 padding-left: 3px;
+            }
 
+            .debatehistorydialogue__turncolumn {
                 background: #8c8c8c;
                 color: #ffffff;
-                border-right: #3a3a3a;
-                border-right-style: solid;
-                border-right-width: thin;
             }
 
     .debatehistorytree {

@@ -34,6 +34,7 @@ export class DebatingSystemInterface extends React.Component{
         this.handleComputerCommitmentClick = this.handleComputerCommitmentClick.bind(this);
         this.handleImpliesChange = this.handleImpliesChange.bind(this);
         this.inputIsValid = this.inputIsValid.bind(this);
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
     componentDidMount() {
@@ -190,6 +191,10 @@ export class DebatingSystemInterface extends React.Component{
 
     }
 
+    handleBackButtonClick() {
+        this.props.startPage.setState({active: true, debateActive: false});
+    }
+
     clearInput(event) {
         if (event.target.value !== null && event.target.value !== undefined) {
             event.target.value = "";
@@ -226,7 +231,10 @@ export class DebatingSystemInterface extends React.Component{
                     <div className="userinput">
                         <div className="userinput__backbuttonarea">
                             <div className="userinput__backbuttoncontainer">
-                                <button className={"userinput__backbutton"}>{"<"}</button>
+                                <button className={"userinput__backbutton"}
+                                        onClick={this.handleBackButtonClick}>
+                                        {"<"}
+                                </button>
                             </div>
                         </div>
                         <div className="userinput__inset">
@@ -248,7 +256,11 @@ export class DebatingSystemInterface extends React.Component{
                             </div>
                             <div className="userinput__buttonsection">
                                 <div className="userinput__inputbutton">
-                                    <InputButton className={!this.inputIsValid() ? "userinput__button__disabled" : ""} disabled={!this.inputIsValid()} onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}/>
+                                    <button className={"userinput__button " + (!this.inputIsValid() ? "userinput__button__disabled" : "")}
+                                            onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}
+                                            disabled={!this.inputIsValid()}>
+                                            {">>"}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -324,18 +336,6 @@ function CommitmentStorePopup(props) {
             <div className={"debatehistorytree__store " + props.className + "__store"}>
                 <CommitmentStore owner={props.owner} onClick={props.onCommitmentClick} commitmentStore={props.commitmentStore}/>
             </div>
-        </div>
-    );
-}
-
-function InputButton(props) {
-    return (
-        <div id="moveinput-button">
-            <button className={"userinput__button " + props.className}
-                    onClick={props.onClick}
-                    disabled={props.disabled}>
-                    >>
-            </button>
         </div>
     );
 }

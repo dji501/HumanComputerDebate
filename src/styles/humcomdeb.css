@@ -402,14 +402,14 @@ input[type=text], select {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.startpage {
+.homepage {
     height: 100vh;
     width: 100vw;
     background-color: #eeeeee;
     min-width: 890px;
 }
 
-    .startpage__titlearea {
+    .homepage__titlearea {
         margin: auto auto;
         height: 30%;
         width: 100%;
@@ -417,19 +417,19 @@ input[type=text], select {
         flex-direction: column;
     }
 
-        .startpage__titleareatitle {
+        .homepage__titleareatitle {
             margin: inherit;
             width: 50%;
             flex: 2 50%;
         }
 
-        .startpage__titleareadescription {
+        .homepage__titleareadescription {
             margin: inherit;
             width: 50%;
             flex: 1 30%;
         }
 
-    .startpage__startarea {
+    .homepage__startarea {
         margin: auto auto;
         height: 30%;
         width: 50%;
@@ -437,17 +437,17 @@ input[type=text], select {
         flex-direction: row;
     }
 
-        .startpage__startareadropdown {
+        .homepage__startareadropdown {
             margin: inherit;
             flex: 2 30%;
         }
 
-            .startpage__topicdropdown {
+            .homepage__topicdropdown {
                 margin: inherit;
                 width: 80%;
             }
 
-        .startpage__startareabutton {
+        .homepage__startareabutton {
             margin: auto auto;
             width: inherit;
             display: flex;
@@ -455,11 +455,11 @@ input[type=text], select {
             flex: 1 15%;
         }
 
-            .startpage__gobuttoncontainer {
+            .homepage__gobuttoncontainer {
                 margin: inherit;
             }
 
-                .startpage__gobutton {
+                .homepage__gobutton {
                     margin: inherit;
                     background-color: #1976d2;
                     border: none;
@@ -473,15 +473,15 @@ input[type=text], select {
                     cursor: pointer;
                 }
 
-                .startpage__gobutton:focus {
+                .homepage__gobutton:focus {
                     outline:0;
                 }
 
-                .startpage__gobutton:hover {
+                .homepage__gobutton:hover {
                     background-color: #63a4ff;
                 }
 
-                .startpage__gobutton:active {
+                .homepage__gobutton:active {
                     background-color: #004ba0;
                     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3), 0 6px 20px 0 rgba(0,0,0,0.29);
                     transform: translateY(2px);

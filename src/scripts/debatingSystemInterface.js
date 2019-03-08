@@ -192,7 +192,7 @@ export class DebatingSystemInterface extends React.Component{
     }
 
     handleBackButtonClick() {
-        this.props.startPage.setState({active: true, debateActive: false});
+        this.props.homePage.setState({active: true, debateActive: false});
     }
 
     clearInput(event) {

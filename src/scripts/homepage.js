@@ -1,7 +1,7 @@
 import React from "react";
 import { DebatingSystemInterface } from "./debatingSystemInterface.js";
 
-export class StartPage extends React.Component {
+export class HomePage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -25,24 +25,24 @@ export class StartPage extends React.Component {
     render() {
         return (
             <div id="webapplication">
-                <div id="start-page" className={this.state.active ? "startpage" : "hidden"}>
-                    <div className="startpage__titlearea">
-                        <div className="startpage__titleareatitle"><h1>Human Computer Debate</h1></div>
-                        <div className="startpage__titleareadescription"><p>This is a program to enable debate between a human and a computer</p></div>
+                <div id="home-page" className={this.state.active ? "homepage" : "hidden"}>
+                    <div className="homepage__titlearea">
+                        <div className="homepage__titleareatitle"><h1>Human Computer Debate</h1></div>
+                        <div className="homepage__titleareadescription"><p>This is a program to enable debate between a human and a computer</p></div>
                     </div>
-                    <div className="startpage__startarea">
-                        <div className="startpage__startareadropdown">
+                    <div className="homepage__startarea">
+                        <div className="homepage__startareadropdown">
                             <TopicDropdown />
                         </div>
-                        <div className="startpage__startareabutton">
+                        <div className="homepage__startareabutton">
                             <GoButton onClick={() => {this.startDebate();}} />
                         </div>
                     </div>
-                    <div className="startpage__menuarea">
+                    <div className="homepage__menuarea">
 
                     </div>
                 </div>
-            <DebatingSystemInterface active={this.state.debateActive} key={this.state.debateActive} startPage={this}/>
+            <DebatingSystemInterface active={this.state.debateActive} key={this.state.debateActive} homePage={this}/>
             </div>
         );
     }
@@ -50,7 +50,7 @@ export class StartPage extends React.Component {
 
 function TopicDropdown(props) {
     return (
-        <div className="startpage__topicdropdown">
+        <div className="homepage__topicdropdown">
             <select id="topic-dropdown">
                 <option value="Capital Punishment">Capital Punishment</option>
             </select>
@@ -60,8 +60,8 @@ function TopicDropdown(props) {
 
 function GoButton(props) {
     return (
-        <div className="startpage__gobuttoncontainer">
-            <button id="go-button" type="button" className="startpage__gobutton" onClick={props.onClick}>
+        <div className="homepage__gobuttoncontainer">
+            <button id="go-button" type="button" className="homepage__gobutton" onClick={props.onClick}>
             Start!
             </button>
         </div>

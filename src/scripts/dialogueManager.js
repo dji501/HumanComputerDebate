@@ -137,9 +137,9 @@ export class DialogueManager {
                 //This method limits user inputs so they cant break the rules:
                 this._moveTypes = InputManager.getMoveTypes(this._dialogueHistory, this._computerCS);
                 if (chosenMove.moveType === "Question") {
-                    this._debateSystemInterface.updateMoveVisibility(true);
+                    this._debateSystemInterface.updateDisableUneededInputs(true);
                 } else {
-                    this._debateSystemInterface.updateMoveVisibility(false);
+                    this._debateSystemInterface.updateDisableUneededInputs(false);
                 }
                 if (this.getEndingMessage() !== null) {
                     this.endDebate();

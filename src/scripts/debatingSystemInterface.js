@@ -222,27 +222,34 @@ export class DebatingSystemInterface extends React.Component{
                         </div>
                     </div>
                 </div>
-                <div className="userinput">
-                    <div className="userinput__inset">
-                        <div className="userinput__inputarea">
-                            <div className="userinput__inputarea__inputs">
-                                <div className="userinput__movetype">
-                                    <MoveChoiceInput onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
-                                </div>
-                                <div className="userinput__movecontent">
-                                    <MoveContentInput selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs}/>
-                                </div>
-                                <div className="userinput__implytextbox">
-                                    <ImpliesInput onChange={this.handleImpliesChange} onFocus={this.clearInput} disabled={this.state.disableUneededInputs}/>
-                                </div>
-                                <div className="userinput__movecontent">
-                                    <MoveContentInput selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs || !this.state.implies}/>
-                                </div>
+                <div className="lowersection">
+                    <div className="userinput">
+                        <div className="userinput__backbuttonarea">
+                            <div className="userinput__backbuttoncontainer">
+                                <button className={"userinput__backbutton"}>{"<"}</button>
                             </div>
                         </div>
-                        <div className="userinput__buttonsection">
-                            <div className="userinput__inputbutton">
-                                <InputButton className={!this.inputIsValid() ? "userinput__button__disabled" : ""} disabled={!this.inputIsValid()} onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}/>
+                        <div className="userinput__inset">
+                            <div className="userinput__inputarea">
+                                <div className="userinput__inputarea__inputs">
+                                    <div className="userinput__movetype">
+                                        <MoveChoiceInput onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
+                                    </div>
+                                    <div className="userinput__movecontent">
+                                        <MoveContentInput selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs}/>
+                                    </div>
+                                    <div className="userinput__implytextbox">
+                                        <ImpliesInput onChange={this.handleImpliesChange} onFocus={this.clearInput} disabled={this.state.disableUneededInputs}/>
+                                    </div>
+                                    <div className="userinput__movecontent">
+                                        <MoveContentInput selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs || !this.state.implies}/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="userinput__buttonsection">
+                                <div className="userinput__inputbutton">
+                                    <InputButton className={!this.inputIsValid() ? "userinput__button__disabled" : ""} disabled={!this.inputIsValid()} onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}/>
+                                </div>
                             </div>
                         </div>
                     </div>

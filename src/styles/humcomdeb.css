@@ -235,108 +235,156 @@ input[type=text], select {
             cursor: pointer;
         }
 
-
-.userinput {
+.lowersection {
     background-color: #eeeeee;
     height: 25vh;
     width: 100vw;
-    display: inline-flex;
     min-width: 890px;
 }
 
-    .userinput__inset {
-        width: 95%;
-        height: 85%;
-        background-color: #ffffff;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-evenly;
+    .userinput {
         margin: auto auto;
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        border-radius: 5px;
+        width: 95%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
     }
-        .userinput__inputarea {
-            margin: inherit;
-            height: inherit;
-            width: inherit;
-            flex: 9 85%;
-        }
-
-            .userinput__inputarea__inputs{
-                margin: inherit;
-                height: 100%;
-                width: 90%;
-                display: flex;
-                flex-wrap: wrap;
-                align-content: center;
-            }
-
-                .userinput__movetype {
-                    margin: inherit;
-                    flex: 2 25%;
-                }
-
-                .userinput__implytextbox {
-                    margin: inherit;
-                    flex: 1 15%;
-                }
-
-                .userinput__movecontent {
-                    margin: inherit;
-                    flex: 7 75%;
-                }
-
-        .userinput__buttonsection {
-            margin: inherit;
-            height: inherit;
-            width: inherit;
+        .userinput__backbuttonarea {
+            margin: auto 0;
+            width: 7%;
+            height: 85%;
             display: flex;
             flex-direction: column;
-            flex-wrap: nowrap;
-            flex: 1 15%;
+            justify-content: flex-end;
         }
 
-            .userinput__inputbutton {
-                margin: inherit;
+            .userinput__backbuttoncontainer {
+                margin: 0 auto;
             }
 
-                .userinput__button {
+                .userinput__backbutton {
                     margin: inherit;
-                    background-color: #1976d2;
+                    background-color: #8c8c8c;
                     border: none;
-                    border-radius: 50%;
-                    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                    border-radius: 25%;
 
-                    color: white;
-                    font-size: 45px;
-                    padding: 19px 19px;
+                    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                    color: #343631;
+                    font-size: 50px;
+                    padding: 0px 13px;
 
                     cursor: pointer;
                 }
 
-                .userinput__button:focus {
+                .userinput__backbutton:focus {
                     outline:0;
                 }
 
-                .userinput__button:hover {
-                    background-color: #63a4ff;
+                .userinput__backbutton:hover {
+                    background-color: #bdbdbd;
                 }
 
-                .userinput__button:active {
-                    background-color: #004ba0;
+                .userinput__backbutton:active {
+                    background-color: #494949;
+                    color: #ffffff;
                     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3), 0 6px 20px 0 rgba(0,0,0,0.29);
                     transform: translateY(2px);
                 }
 
-                .userinput__button__disabled {
-                    background-color: #87afd6;
-                    cursor: default;
+        .userinput__inset {
+            width: 85%;
+            height: 85%;
+            background-color: #ffffff;
+            flex: inherit;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-evenly;
+            margin: auto auto;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            border-radius: 5px;
+        }
+            .userinput__inputarea {
+                margin: inherit;
+                height: inherit;
+                width: inherit;
+                flex: 9 85%;
+            }
 
+                .userinput__inputarea__inputs{
+                    margin: inherit;
+                    height: 100%;
+                    width: 90%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content: center;
                 }
 
-                .userinput__button__disabled:hover {
-                    background-color: #87afd6;
+                    .userinput__movetype {
+                        margin: inherit;
+                        flex: 2 25%;
+                    }
+
+                    .userinput__implytextbox {
+                        margin: inherit;
+                        flex: 1 15%;
+                    }
+
+                    .userinput__movecontent {
+                        margin: inherit;
+                        flex: 7 75%;
+                    }
+
+            .userinput__buttonsection {
+                margin: inherit;
+                height: inherit;
+                width: inherit;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                flex: 1 15%;
+            }
+
+                .userinput__inputbutton {
+                    margin: inherit;
                 }
+
+                    .userinput__button {
+                        margin: inherit;
+                        background-color: #1976d2;
+                        border: none;
+                        border-radius: 50%;
+                        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+                        color: white;
+                        font-size: 45px;
+                        padding: 19px 19px;
+
+                        cursor: pointer;
+                    }
+
+                    .userinput__button:focus {
+                        outline:0;
+                    }
+
+                    .userinput__button:hover {
+                        background-color: #63a4ff;
+                    }
+
+                    .userinput__button:active {
+                        background-color: #004ba0;
+                        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3), 0 6px 20px 0 rgba(0,0,0,0.29);
+                        transform: translateY(2px);
+                    }
+
+                    .userinput__button__disabled {
+                        background-color: #87afd6;
+                        cursor: default;
+
+                    }
+
+                    .userinput__button__disabled:hover {
+                        background-color: #87afd6;
+                    }
 
 ::-webkit-scrollbar
 {

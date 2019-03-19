@@ -487,6 +487,39 @@ input[type=text], select {
                     transform: translateY(2px);
                 }
 
+.settingspage {
+
+}
+
+    .settingspage__titlearea {
+
+    }
+
+        .settingspage__titleareatitle {
+
+        }
+
+    .settingspage__settingsarea {
+
+    }
+
+        .settingspage__settingsareaoption {
+
+        }
+
+    .settingspage__backbuttonarea {
+
+    }
+
+        .userinput__backbuttoncontainer {
+
+        }
+
+            .userinput__backbutton {
+
+            }
+
+
 .hidden {
     display: none;
 }

@@ -22,6 +22,12 @@ export class HomePage extends React.Component {
 
     }
 
+    startSettings() {
+        this.setState({ active: false,
+                        settingsActive: true,
+                     });
+    }
+
     render() {
         return (
             <div id="webapplication">
@@ -39,7 +45,9 @@ export class HomePage extends React.Component {
                         </div>
                     </div>
                     <div className="homepage__menuarea">
-
+                        <div className="homepage__settingsmenubutton">
+                            <MenuButton onClick={() => {this.startSettings();}} name="Settings" />
+                        </div>
                     </div>
                 </div>
             <DebatingSystemInterface active={this.state.debateActive} key={this.state.debateActive} homePage={this}/>
@@ -47,7 +55,7 @@ export class HomePage extends React.Component {
         );
     }
 }
-
+/* eslint-disable no-unused-vars */
 function TopicDropdown(props) {
     return (
         <div className="homepage__topicdropdown">
@@ -63,6 +71,16 @@ function GoButton(props) {
         <div className="homepage__gobuttoncontainer">
             <button id="go-button" type="button" className="homepage__gobutton" onClick={props.onClick}>
             Start!
+            </button>
+        </div>
+    );
+}
+
+function MenuButton(props) {
+    return (
+        <div className="homepage__menubuttoncontainer">
+            <button type="button" class="homepage__menubutton" onClick={props.onClick}>
+            {props.name}
             </button>
         </div>
     );

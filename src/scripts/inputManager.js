@@ -118,7 +118,7 @@ export class InputManager {
         }
     }
 
-    static getInput(debatingSystemInterface, dialogueHistory, computerCS, studentCS) {
+    static getInput(debatingSystemInterface, dialogueHistory) {
         let fullMove;
         let previousMove = dialogueHistory.set[dialogueHistory.length -1];
         let previousMoveType = previousMove.moveType;

@@ -61,7 +61,7 @@ function TopicDropdown(props) {
 function GoButton(props) {
     return (
         <div className="homepage__gobuttoncontainer">
-            <button id="go-button" type="button" className="homepage__gobutton" onClick={props.onClick}>
+            <button id="go-button" type="button" className="unselectable homepage__gobutton" onClick={props.onClick}>
             Start!
             </button>
         </div>

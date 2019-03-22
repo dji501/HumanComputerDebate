@@ -177,18 +177,20 @@ export class DebatingSystemInterface extends React.Component{
     }
 
     handleTabClick(event) {
-        if (event.target.tagName === "P") {
+        if (event.target.classList.contains("commitmenttabs__tabbutton") || event.target.classList.contains("commitmenttabs__tabedge")) {
             event.target = event.target.parentElement;
-        }
 
-        if (event.target.classList.contains("debatehistorytree__tab__clicked")) {
-            event.target.classList.remove("debatehistorytree__tab__clicked");
-            event.target.nextSibling.classList.remove("debatehistorytree__store__HIDDEN");
-        } else {
-            event.target.classList.add("debatehistorytree__tab__clicked");
-            event.target.nextSibling.classList.add("debatehistorytree__store__HIDDEN");
-        }
+            if (event.target.classList.contains("commitmenttabs__tabbuttonarea__clicked")) {
+                event.target.classList.remove("commitmenttabs__tabbuttonarea__clicked");
+                event.target.parentElement.classList.remove("commitmenttabs__tab__open");
 
+                event.target.nextSibling.classList.add("commitmenttabs__store__hidden");
+            } else {
+                event.target.classList.add("commitmenttabs__tabbuttonarea__clicked");
+                event.target.parentElement.classList.add("commitmenttabs__tab__open");
+                event.target.nextSibling.classList.remove("commitmenttabs__store__hidden");
+            }
+        }
     }
 
     handleBackButtonClick() {
@@ -212,18 +214,20 @@ export class DebatingSystemInterface extends React.Component{
     render() {
         return (
             <div id="debate-system" className={this.props.active ? "debatesystem" : "hidden"}>
-                <div className="debatehistory">
-                    <div className="debatehistorydialogue">
-                        <div className="debatehistorydialogue__boundary">
-                            <DialogueHistory dialogueHistory={this.state.debateLog}/>
-                        </div>
-                    </div>
-                    <div className="debatehistorytree">
-                        <div className="debatehistorytree__boundary">
-                            <div className="debatehistorytree__treearea">
+                <div className="uppersection">
+                    <div className="debatehistory">
+                        <div className="debatehistorydialogue">
+                            <div className="debatehistorydialogue__boundary">
+                                <DialogueHistory dialogueHistory={this.state.debateLog}/>
                             </div>
-                            <CommitmentStorePopup owner="My" className={"debatehistorytree__studentcs"} onTabClick={this.handleTabClick} onCommitmentClick={this.handleStudentCommitmentClick} commitmentStore={this.state.studentCSStrings}/>
-                            <CommitmentStorePopup owner="Computer" className={"debatehistorytree__computercs"}  onTabClick={this.handleTabClick} onCommitmentClick={this.handleComputerCommitmentClick} commitmentStore={this.state.computerCSStrings}/>
+                        </div>
+                        <div className="commitmenttabs">
+                            <div className="commitmenttabs__tabcontainer">
+                                <CommitmentStoreTab owner="Student" className={"commitmenttabs__studentcs"} onTabClick={this.handleTabClick} onCommitmentClick={this.handleStudentCommitmentClick} commitmentStore={this.state.studentCSStrings}/>
+                            </div>
+                            <div className="commitmenttabs__tabcontainer">
+                                <CommitmentStoreTab owner="Computer" className={"commitmenttabs__computercs"}  onTabClick={this.handleTabClick} onCommitmentClick={this.handleComputerCommitmentClick} commitmentStore={this.state.computerCSStrings}/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -231,7 +235,7 @@ export class DebatingSystemInterface extends React.Component{
                     <div className="userinput">
                         <div className="userinput__backbuttonarea">
                             <div className="userinput__backbuttoncontainer">
-                                <button className={"userinput__backbutton"}
+                                <button className={"unselectable userinput__backbutton"}
                                         onClick={this.handleBackButtonClick}>
                                         {"<"}
                                 </button>
@@ -256,7 +260,7 @@ export class DebatingSystemInterface extends React.Component{
                             </div>
                             <div className="userinput__buttonsection">
                                 <div className="userinput__inputbutton">
-                                    <button className={"userinput__button " + (!this.inputIsValid() ? "userinput__button__disabled" : "")}
+                                    <button className={"unselectable userinput__button " + (!this.inputIsValid() ? "userinput__button__disabled" : "")}
                                             onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}
                                             disabled={!this.inputIsValid()}>
                                             {">>"}
@@ -327,13 +331,16 @@ function CommitmentStore(props) {
     );
 }
 
-function CommitmentStorePopup(props) {
+function CommitmentStoreTab(props) {
     return (
-        <div className={props.className}>
-            <div className={"debatehistorytree__tab " + props.className + "__tab"} onClick={props.onTabClick}>
-                <p className={props.className + "__tabtext"}>{props.owner + " Commitments"}</p>
+        <div className="commitmenttabs__tab">
+            <div className="commitmenttabs__tabbuttonarea" onClick={props.onTabClick}>
+                <div className="commitmenttabs__tabbutton unselectable">
+                    {props.owner + " Commitments"}
+                </div>
+                <div className="commitmenttabs__tabedge"></div>
             </div>
-            <div className={"debatehistorytree__store " + props.className + "__store"}>
+            <div className={"commitmenttabs__store commitmenttabs__store__hidden " + props.className + "__store"}>
                 <CommitmentStore owner={props.owner} onClick={props.onCommitmentClick} commitmentStore={props.commitmentStore}/>
             </div>
         </div>

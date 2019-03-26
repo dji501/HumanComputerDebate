@@ -28,7 +28,8 @@ export class HomePage extends React.Component {
                 <div id="home-page" className={this.state.active ? "homepage" : "hidden"}>
                     <div className="homepage__titlearea">
                         <div className="homepage__titleareatitle"><h1>Human Computer Debate</h1></div>
-                        <div className="homepage__titleareadescription"><p>This is a program to enable debate between a human and a computer</p></div>
+                        <div className="homepage__titleareadescription"><p>This is a program to enable debate between a human and a computer. Developed by Declan Ibberson based off
+                                                                           and adapted from work by Tangming Yuan https://www-users.cs.york.ac.uk/~tommy/. </p></div>
                     </div>
                     <div className="homepage__startarea">
                         <div className="homepage__startareadropdown">

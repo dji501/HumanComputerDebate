@@ -41,6 +41,10 @@ export class DebatingSystemInterface extends React.Component{
         this._dialogueManager.start();
     }
 
+    componentDidUpdate() {
+        this.scrollToBottom("dialogue-history-boundary");
+    }
+
     update() {
         this.setState({
             debateLog: this._dialogueManager.dialogueHistory.moveStrings,
@@ -211,13 +215,18 @@ export class DebatingSystemInterface extends React.Component{
         this.setState({implies: false});
     }
 
+    scrollToBottom(divId) {
+        var objDiv = document.getElementById(divId);
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
     render() {
         return (
             <div id="debate-system" className={this.props.active ? "debatesystem" : "hidden"}>
                 <div className="uppersection">
                     <div className="debatehistory">
                         <div className="debatehistorydialogue">
-                            <div className="debatehistorydialogue__boundary">
+                            <div id="dialogue-history-boundary" className="debatehistorydialogue__boundary">
                                 <DialogueHistory dialogueHistory={this.state.debateLog}/>
                             </div>
                         </div>

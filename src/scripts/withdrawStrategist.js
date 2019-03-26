@@ -24,7 +24,7 @@ export class WithdrawStrategist {
                 relevantMove.push(nextMove);
             } else {
                 // 2.2 Else plan is abandoned, switch focus
-                nextMove = FocusShiftManager.execute(dialogueHistory, planner, partnerCS,selfCS,selfKBS);
+                nextMove = FocusShiftManager.execute(dialogueHistory, partnerCS, selfCS, selfKBS, planner);
                 if (nextMove !== null && nextMove !== undefined) {
                     relevantMove.push(nextMove);
                 }
@@ -38,7 +38,7 @@ export class WithdrawStrategist {
             } else if (previousProposition !== null && previousProposition !== undefined && planner.computerThesis.denial().equals(previousProposition)) {
                 relevantMove.push(new Move("C","Question",planner.computerThesis));
             } else {
-                let nextMove = FocusShiftManager.execute(dialogueHistory, planner, partnerCS,selfCS,selfKBS);
+                let nextMove = FocusShiftManager.execute(dialogueHistory, partnerCS, selfCS, selfKBS, planner);
                 if (nextMove !== null && nextMove !== undefined) {
                     relevantMove.push(nextMove);
                 }

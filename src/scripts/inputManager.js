@@ -218,7 +218,7 @@ export class InputManager {
                     let conflictSet = previousMove.conflictSet;
 
                     // Try get rid of this i rubbish
-                    let i = debatingSystemInterface.moveTypes.indexOf(moveType);
+                    let i = debatingSystemInterface.state.moveTypes.indexOf(moveType);
 
                     if ((conflictSet.set.length === 2 && conflictSet.isPNP() && i === 2 ) || i === 3) {
                         let message = "You need to select a move choice.\n";

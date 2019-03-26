@@ -48,12 +48,24 @@ export class DebatingSystemInterface extends React.Component{
     }
 
     update() {
+        let newDialogueState = 0;
+        if (this._dialogueManager._gameEnd === true) {
+            newDialogueState = 99;
+        } else if (this._dialogueManager._dialogueHistory.length >= 2){
+            if (this._dialogueManager.moveTypes[0] === "Yes" || this._dialogueManager.moveTypes[0] === "Because...") {
+                newDialogueState = 1
+            } else {
+                newDialogueState = 2;
+            }
+        }
+
         this.setState({
             debateLog: this._dialogueManager.dialogueHistory.moveStrings,
             studentCS: this._dialogueManager.studentCS,
             computerCS: this._dialogueManager.computerCS,
             studentCSStrings: this.getCommitments(this._dialogueManager.studentCS),
             computerCSStrings: this.getCommitments(this._dialogueManager.computerCS),
+            dialogueState: newDialogueState,
 
             moveTypes: this._dialogueManager.moveTypes,
             moveContents: this._dialogueManager.moveContents,
@@ -65,16 +77,6 @@ export class DebatingSystemInterface extends React.Component{
             selectedAntecedentString: this.state.moveContentsStrings[0],
             selectedConsequentString: this.state.moveContentsStrings[0],
         });
-
-        if (this._dialogueManager._gameEnd === true) {
-            this.updateDialogueState(99);
-        } else if (this._dialogueManager._dialogueHistory.length >= 2){
-            if (this._dialogueManager.moveTypes[0] === "Yes" || this._dialogueManager.moveTypes[0] === "Because...") {
-                this.updateDialogueState(1);
-            } else {
-                this.updateDialogueState(2);
-            }
-        }
     }
 
     updateDisableUneededInputs(boolean) {
@@ -223,7 +225,6 @@ export class DebatingSystemInterface extends React.Component{
             if (event.target.classList.contains("commitmenttabs__tabbuttonarea__clicked")) {
                 event.target.classList.remove("commitmenttabs__tabbuttonarea__clicked");
                 event.target.parentElement.classList.remove("commitmenttabs__tab__open");
-
                 event.target.nextSibling.classList.add("commitmenttabs__store__hidden");
             } else {
                 event.target.classList.add("commitmenttabs__tabbuttonarea__clicked");
@@ -243,12 +244,45 @@ export class DebatingSystemInterface extends React.Component{
         }
     }
 
+    clearCommitmentTabs() {
+        let a = document.getElementsByClassName("commitmentstore__listelement__clicked");
+
+        while(a.length > 0) {
+            a[0].className = "commitmentstore__listelement";
+        }
+        this.setState({selectedComputerCommitments: []});
+        this.setState({selectedStudentCommitments: []});
+    }
+
     clearAllFields() {
         document.getElementById("movechoice-input").value = "";
         document.getElementById("antecedent-input").value = "";
         document.getElementById("consequent-input").value = "";
         document.getElementById("impliesbox-input").value = "";
         this.setState({implies: false});
+        this.closeCommitmentTabs();
+        this.clearCommitmentTabs();
+    }
+
+    closeCommitmentTabs() {
+        let studentTab = document.getElementById("commitmenttabs-Studenttab");
+        let studentTabButton = document.getElementById("commitmenttabs-Studenttabbutton");
+        let studentTabStore = document.getElementById("commitmenttabs-Studentstore");
+        let computerTab = document.getElementById("commitmenttabs-Computertab");
+        let computerTabButton = document.getElementById("commitmenttabs-Computertabbutton");
+        let computerTabStore = document.getElementById("commitmenttabs-Computerstore");
+
+        if (studentTab.classList.contains("commitmenttabs__tab__open")) {
+            studentTab.classList.remove("commitmenttabs__tab__open");
+            studentTabButton.classList.remove("commitmenttabs__tabbuttonarea__clicked");
+            studentTabStore.classList.add("commitmenttabs__store__hidden");
+        }
+
+        if (computerTab.classList.contains("commitmenttabs__tab__open")) {
+            computerTab.classList.remove("commitmenttabs__tab__open");
+            computerTabButton.classList.remove("commitmenttabs__tabbuttonarea__clicked");
+            computerTabStore.classList.add("commitmenttabs__store__hidden");
+        }
     }
 
     scrollToBottom(divId) {
@@ -381,14 +415,14 @@ function CommitmentStore(props) {
 
 function CommitmentStoreTab(props) {
     return (
-        <div className="commitmenttabs__tab">
-            <div className="commitmenttabs__tabbuttonarea" onClick={props.onTabClick}>
+        <div id={"commitmenttabs-" + props.owner + "tab"} className="commitmenttabs__tab">
+            <div id={"commitmenttabs-" + props.owner + "tabbutton"} className="commitmenttabs__tabbuttonarea" onClick={props.onTabClick}>
                 <div className="commitmenttabs__tabbutton unselectable">
                     {props.owner + " Commitments"}
                 </div>
                 <div className="commitmenttabs__tabedge"></div>
             </div>
-            <div className={"commitmenttabs__store commitmenttabs__store__hidden " + props.className + "__store"}>
+            <div id={"commitmenttabs-" + props.owner + "store"} className={"commitmenttabs__store commitmenttabs__store__hidden " + props.className + "__store"}>
                 <CommitmentStore owner={props.owner} onClick={props.onCommitmentClick} commitmentStore={props.commitmentStore}/>
             </div>
         </div>

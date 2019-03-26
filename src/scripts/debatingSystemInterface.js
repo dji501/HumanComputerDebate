@@ -1,4 +1,5 @@
 import { DialogueManager } from "./dialogueManager";
+import { GuidanceBar } from "./guidancebar";
 
 import React from "react";
 
@@ -7,11 +8,12 @@ export class DebatingSystemInterface extends React.Component{
         super(props);
         this._dialogueManager = new DialogueManager(this);
         this.state = {
-            debateLog: null,
-            moveTypes: [],
-            moveContents: [],
-            implies: false,
+            debateLog: null, //Array of strings representing moves
+            moveTypes: [],  //Available move types to choose from
+            moveContents: [],  //Available move contents to choose from
+            implies: false,  //If the move is a rule or not
             disableUneededInputs: true,
+            dialogueState: 0,  //Current state, corresponds to a string in guidancebar.js,
 
             selectedType: "Yes",
             selectedAntecedent: null,
@@ -63,12 +65,45 @@ export class DebatingSystemInterface extends React.Component{
             selectedAntecedentString: this.state.moveContentsStrings[0],
             selectedConsequentString: this.state.moveContentsStrings[0],
         });
+
+        if (this._dialogueManager._gameEnd === true) {
+            this.updateDialogueState(99);
+        } else if (this._dialogueManager._dialogueHistory.length >= 2){
+            if (this._dialogueManager.moveTypes[0] === "Yes" || this._dialogueManager.moveTypes[0] === "Because...") {
+                this.updateDialogueState(1);
+            } else {
+                this.updateDialogueState(2);
+            }
+        }
     }
 
     updateDisableUneededInputs(boolean) {
         this.setState({
             disableUneededInputs: boolean,
         });
+    }
+
+    updateDialogueState(stateNumber) {
+        this.setState({
+            dialogueState: stateNumber,
+        });
+    }
+
+    getDialogueState(selectedMoveType) {
+        if (this._dialogueManager._gameEnd === false) {
+            if (selectedMoveType === "I think...") {
+                return 3;
+            } else if (selectedMoveType === "Is it the case that..?") {
+                return 4;
+            } else if (selectedMoveType === "Why is it the case that..?") {
+                return 5;
+            } else if (selectedMoveType === "I don't think...") {
+                return 6;
+            } else if (selectedMoveType === "Please resolve...") {
+                return 7;
+            }
+        }
+        return this.state.dialogueState;
     }
 
     inputIsValid() {
@@ -113,7 +148,8 @@ export class DebatingSystemInterface extends React.Component{
     }
 
     handleMoveTypeChange(event) {
-        this.setState({selectedType: event.target.value});
+        this.setState({selectedType: event.target.value,
+                       dialogueState: this.getDialogueState(event.target.value)});
     }
 
     handleMoveAntecedentChange(event) {
@@ -251,29 +287,32 @@ export class DebatingSystemInterface extends React.Component{
                             </div>
                         </div>
                         <div className="userinput__inset">
-                            <div className="userinput__inputarea">
-                                <div className="userinput__inputarea__inputs">
-                                    <div className="userinput__movetype">
-                                        <MoveChoiceInput onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
-                                    </div>
-                                    <div className="userinput__movecontent">
-                                        <MoveContentInput selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs}/>
-                                    </div>
-                                    <div className="userinput__implytextbox">
-                                        <ImpliesInput onChange={this.handleImpliesChange} onFocus={this.clearInput} disabled={this.state.disableUneededInputs}/>
-                                    </div>
-                                    <div className="userinput__movecontent">
-                                        <MoveContentInput selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs || !this.state.implies}/>
+                            <GuidanceBar state={this.state.dialogueState} key={this.state.dialogueState}/>
+                            <div className="userinput__submissionarea">
+                                <div className="userinput__inputarea">
+                                    <div className="userinput__inputarea__inputs">
+                                        <div className="userinput__movetype">
+                                            <MoveChoiceInput onChange={this.handleMoveTypeChange} onFocus={this.clearInput} moveTypes={this.state.moveTypes}/>
+                                        </div>
+                                        <div className="userinput__movecontent">
+                                            <MoveContentInput selected={this.state.selectedAntecedentString} propositionType="antecedent" onChange={this.handleMoveAntecedentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs}/>
+                                        </div>
+                                        <div className="userinput__implytextbox">
+                                            <ImpliesInput onChange={this.handleImpliesChange} onFocus={this.clearInput} disabled={this.state.disableUneededInputs}/>
+                                        </div>
+                                        <div className="userinput__movecontent">
+                                            <MoveContentInput selected={this.state.selectedConsequentString} propositionType="consequent" onChange={this.handleMoveConsequentChange} onFocus={this.clearInput} moveContents={this.state.moveContentsStrings} disabled={this.state.disableUneededInputs || !this.state.implies}/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="userinput__buttonsection">
-                                <div className="userinput__inputbutton">
-                                    <button className={"unselectable userinput__button " + (!this.inputIsValid() ? "userinput__button__disabled" : "")}
-                                            onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}
-                                            disabled={!this.inputIsValid()}>
-                                            {">>"}
-                                    </button>
+                                <div className="userinput__buttonsection">
+                                    <div className="userinput__inputbutton">
+                                        <button className={"unselectable userinput__button " + (!this.inputIsValid() ? "userinput__button__disabled" : "")}
+                                                onClick={() => { this._dialogueManager.actionPerformed(); this.clearAllFields();}}
+                                                disabled={!this.inputIsValid()}>
+                                                {">>"}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -63,10 +63,6 @@ export class HintButton extends React.Component {
             }
         }
         return null;
-
-        //PROBLEMS:
-        // IT will return same hint over and over.
-        // IT cannot tell when something is implied.
     }
 
     getRandomParameter(array) {
@@ -77,7 +73,7 @@ export class HintButton extends React.Component {
     render() {
         return (
             <button className={"unselectable userinput__hintbutton"}
-                    onClick={() => {this.generateHint(); console.warn(this.usage);}}>
+                    onClick={() => {this.generateHint(); this.props.incrementHintUsage();}}>
                     {"?"}
             </button>
         );

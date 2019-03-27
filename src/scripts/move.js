@@ -157,9 +157,9 @@ export class Move {
         let content = this.getMoveAsString(prevMoveType, prevMoveContent);
 
         if (line < 10) {
-            return "0" + line + ": " + this._turn + ">" + content;
+            return "0" + line + ": " + this._turn + ">" + content + "\n";
         } else {
-            return line + ": " + this._turn + ">" + content;
+            return line + ": " + this._turn + ">" + content + "\n";
         }
     }
 }

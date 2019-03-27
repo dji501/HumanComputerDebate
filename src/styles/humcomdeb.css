@@ -327,6 +327,7 @@ input[type=text], select {
             }
 
             .userinput__submissionarea {
+                width: 100%;
                 display: flex;
                 flex-wrap: nowrap;
                 justify-content: space-evenly;

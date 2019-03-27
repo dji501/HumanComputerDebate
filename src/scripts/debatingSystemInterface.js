@@ -315,7 +315,7 @@ export class DebatingSystemInterface extends React.Component{
                     <div className="userinput">
                         <div className="userinput__sidebuttonarea">
                             <div className="userinput__sidebuttoncontainer">
-                                <HintButton />
+                                <HintButton computerCS={this.state.computerCS} computerKBS={this._dialogueManager.computerKBS}/>
                             </div>
                             <div className="userinput__sidebuttoncontainer">
                                 <button className={"unselectable userinput__backbutton"}

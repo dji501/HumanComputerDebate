@@ -330,6 +330,35 @@ input[type=text], select {
                     transform: translateY(2px);
                 }
 
+                .userinput__savetranscriptbutton {
+                    margin: inherit;
+                    background-color: #8c8c8c;
+                    border: none;
+                    border-radius: 25%;
+
+                    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                    color: #343631;
+                    font-size: 40px;
+                    padding: 0px 10px;
+
+                    cursor: pointer;
+                }
+
+                .userinput__savetranscriptbutton:focus {
+                    outline:0;
+                }
+
+                .userinput__savetranscriptbutton:hover {
+                    background-color: #bdbdbd;
+                }
+
+                .userinput__savetranscriptbutton:active {
+                    background-color: #494949;
+                    color: #ffffff;
+                    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3), 0 6px 20px 0 rgba(0,0,0,0.29);
+                    transform: translateY(2px);
+                }
+
         .userinput__inset {
             width: 85%;
             height: 85%;

@@ -15,6 +15,7 @@ export class DebatingSystemInterface extends React.Component{
             implies: false,  //If the move is a rule or not
             disableUneededInputs: true,
             dialogueState: 0,  //Current state, corresponds to a string in guidancebar.js,
+            hintUsage: 0,
 
             selectedType: "Yes",
             selectedAntecedent: null,
@@ -38,6 +39,7 @@ export class DebatingSystemInterface extends React.Component{
         this.handleImpliesChange = this.handleImpliesChange.bind(this);
         this.inputIsValid = this.inputIsValid.bind(this);
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+        this.handleHintClick = this.handleHintClick.bind(this);
     }
 
     componentDidMount() {
@@ -239,6 +241,10 @@ export class DebatingSystemInterface extends React.Component{
         this.props.homePage.setState({active: true, debateActive: false});
     }
 
+    handleHintClick() {
+        this.state.hintUsage++;
+    }
+
     clearInput(event) {
         if (event.target.value !== null && event.target.value !== undefined) {
             event.target.value = "";
@@ -291,7 +297,22 @@ export class DebatingSystemInterface extends React.Component{
         objDiv.scrollTop = objDiv.scrollHeight;
     }
 
+    saveTranscript() {
+        let blob = new Blob([this.state.debateLog, this.state.hintUsage], {type: "text/csv"});
+        if(window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, "transcript.txt");
+        }
+        else{
+            let elem = window.document.createElement("a");
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = "transcript.txt";
+            document.body.appendChild(elem);
+            elem.click();
+            document.body.removeChild(elem);
+        }
+    }
     render() {
+
         return (
             <div id="debate-system" className={this.props.active ? "debatesystem" : "hidden"}>
                 <div className="uppersection">
@@ -315,7 +336,13 @@ export class DebatingSystemInterface extends React.Component{
                     <div className="userinput">
                         <div className="userinput__sidebuttonarea">
                             <div className="userinput__sidebuttoncontainer">
-                                <HintButton computerCS={this.state.computerCS} computerKBS={this._dialogueManager.computerKBS}/>
+                                <HintButton computerCS={this.state.computerCS} computerKBS={this._dialogueManager.computerKBS} hintUsage={this.state.hintUsage} incrementHintUsage={this.handleHintClick}/>
+                            </div>
+                            <div className="userinput__sidebuttoncontainer">
+                                <button className={"unselectable userinput__savetranscriptbutton"}
+                                        onClick={() => {this.saveTranscript();}}>
+                                        {"🖫"}
+                                </button>
                             </div>
                             <div className="userinput__sidebuttoncontainer">
                                 <button className={"unselectable userinput__backbutton"}

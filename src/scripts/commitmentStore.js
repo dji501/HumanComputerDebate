@@ -38,11 +38,6 @@ export class CommitmentStore extends BooleanRuleBase {
         }
     }
 
-    repaint(commitmentStoreElement) {
-        // TODO: Original: This is where the drawing of text into area occured.
-        // Think I can just get total list.
-    }
-
     /**
      * addAssertion - Adds assertion proposition or rule to a commitment store
      * will also be added to concession set and claim stack
@@ -195,12 +190,6 @@ export class CommitmentStore extends BooleanRuleBase {
                 }
             }
         }
-        //After tests are made try this:
-        /*or (let i = 0; i < this._assertionList.length; i++) {
-            if (ruleProp.getClassName() === this._assertionList[i].getClassName() && this._assertionList[i].equals(ruleProp)) {
-                return true;
-            }
-        }*/
         return false;
     }
 
@@ -224,12 +213,6 @@ export class CommitmentStore extends BooleanRuleBase {
                 }
             }
         }
-        //After tests are made try this:
-        /*or (let i = 0; i < this._claimStack.length; i++) {
-            if (ruleProp.getClassName() === this._claimStack[i].getClassName() && this._claimStack[i].equals(ruleProp)) {
-                return true;
-            }
-        }*/
         return false;
     }
 
@@ -253,12 +236,6 @@ export class CommitmentStore extends BooleanRuleBase {
                 }
             }
         }
-        //After tests are made try this:
-        /*or (let i = 0; i < this._concessionList.length; i++) {
-            if (ruleProp.getClassName() === this._concessionList[i].getClassName() && this._concessionList[i].equals(ruleProp)) {
-                return true;
-            }
-        }*/
         return false;
     }
 
@@ -282,12 +259,7 @@ export class CommitmentStore extends BooleanRuleBase {
                 }
             }
         }
-        //After tests are made try this:
-        /*or (let i = 0; i < this._totalList.length; i++) {
-            if (ruleProp.getClassName() === this._totalList[i].getClassName() && this._totalList[i].equals(ruleProp)) {
-                return true;
-            }
-        }*/
+
         return false;
     }
 
@@ -311,12 +283,7 @@ export class CommitmentStore extends BooleanRuleBase {
                 }
             }
         }
-        //After tests are made try this:
-        /*or (let i = 0; i < this._record.length; i++) {
-            if (ruleProp.getClassName() === this._record[i].getClassName() && this._record[i].equals(ruleProp)) {
-                return true;
-            }
-        }*/
+
         return false;
     }
 
@@ -365,7 +332,8 @@ export class CommitmentStore extends BooleanRuleBase {
         return conflictSet;
 
 
-    /*WE TEMPARARILY NOT CONSIDER THIS KIND OF CONFLICT
+    /*Comment copied from prototype
+    WE TEMPARARILY NOT CONSIDER THIS KIND OF CONFLICT
     If there is no P AND -P conflict, check P and R-->-P  conflict
     if (conflict.isEmpty()==true) {
         for(int i=0; i<=n-1; i++) {
@@ -412,7 +380,7 @@ export class CommitmentStore extends BooleanRuleBase {
         return premises;
     }
 
-    /** TODO:
+    /**:
      * getInput - Method of getting student input for resolution demand from assertion list.
      *
      * @param  {array} assertList TODO

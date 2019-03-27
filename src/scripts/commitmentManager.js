@@ -1,7 +1,7 @@
 import { Rule } from "./rule";
 
 export class CommitmentManager {
-    static commit(currentMove, previousMove, currentSelfCS, currentOppCS, dsiSelfCS, dsiOppCS) {
+    static commit(currentMove, previousMove, currentSelfCS, currentOppCS) {
 
         let currentRuleProp = currentMove.moveContent;
         if (currentMove.moveType === "Assertion" || currentMove.moveType === "Ground") {
@@ -27,9 +27,5 @@ export class CommitmentManager {
             currentSelfCS.addAssertion(currentRuleProp);
             currentOppCS.addConcession(currentRuleProp);
         }
-
-        // TODO:
-        currentSelfCS.repaint(dsiSelfCS);
-        currentSelfCS.repaint(dsiOppCS);
     }
 }

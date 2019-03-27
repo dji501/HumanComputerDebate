@@ -1,5 +1,6 @@
 import { DialogueManager } from "./dialogueManager";
 import { GuidanceBar } from "./guidancebar";
+import { HintButton } from "./hintbutton";
 
 import React from "react";
 
@@ -53,7 +54,7 @@ export class DebatingSystemInterface extends React.Component{
             newDialogueState = 99;
         } else if (this._dialogueManager._dialogueHistory.length >= 2){
             if (this._dialogueManager.moveTypes[0] === "Yes" || this._dialogueManager.moveTypes[0] === "Because...") {
-                newDialogueState = 1
+                newDialogueState = 1;
             } else {
                 newDialogueState = 2;
             }
@@ -312,8 +313,11 @@ export class DebatingSystemInterface extends React.Component{
                 </div>
                 <div className="lowersection">
                     <div className="userinput">
-                        <div className="userinput__backbuttonarea">
-                            <div className="userinput__backbuttoncontainer">
+                        <div className="userinput__sidebuttonarea">
+                            <div className="userinput__sidebuttoncontainer">
+                                <HintButton computerCS={this.state.computerCS} computerKBS={this._dialogueManager.computerKBS}/>
+                            </div>
+                            <div className="userinput__sidebuttoncontainer">
                                 <button className={"unselectable userinput__backbutton"}
                                         onClick={this.handleBackButtonClick}>
                                         {"<"}

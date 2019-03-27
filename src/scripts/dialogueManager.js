@@ -25,6 +25,10 @@ export class DialogueManager {
         this._moveContents;
     }
 
+    get computerKBS() {
+        return this._computerKBS;
+    }
+
     get computerCS() {
         return this._computerCS;
     }

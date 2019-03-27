@@ -75,15 +75,15 @@ export class KBSManager {
         let p33=new Proposition("humans can forfeit their right to live though their actions", true, "opinion", booleanRuleBase);
 
         // Define Consequence links
-        let r1 = new Rule(p3,  p1, null, booleanRuleBase,"R1");
-        let r2 = new Rule(p5,  p4, null, booleanRuleBase,"R2");
-        let r3 = new Rule(p6,  p3, null, booleanRuleBase,"R3");
-        let r4 = new Rule(p7,  p3, null, booleanRuleBase,"R4");
-        let r5 = new Rule(p8,  p7, null, booleanRuleBase,"R5");
-        let r6 = new Rule(p10, p9, null, booleanRuleBase,"R6");
-        let r7 = new Rule(p11, p2, null, booleanRuleBase,"R7");
-        let r8 = new Rule(p26, p12, null, booleanRuleBase,"R8");
-        let r9 = new Rule(p15, p26, null, booleanRuleBase,"R9");
+        let r1 =  new Rule(p3,  p1,  null, booleanRuleBase, "R1");
+        let r2 =  new Rule(p5,  p4,  null, booleanRuleBase, "R2");
+        let r3 =  new Rule(p6,  p3,  null, booleanRuleBase, "R3");
+        let r4 =  new Rule(p7,  p3,  null, booleanRuleBase, "R4");
+        let r5 =  new Rule(p8,  p7,  null, booleanRuleBase, "R5");
+        let r6 =  new Rule(p10, p9,  null, booleanRuleBase, "R6");
+        let r7 =  new Rule(p11, p2,  null, booleanRuleBase, "R7");
+        let r8 =  new Rule(p26, p12, null, booleanRuleBase, "R8");
+        let r9 =  new Rule(p15, p26, null, booleanRuleBase, "R9");
 
         let r10 = new Rule(p13, p11, null, booleanRuleBase, "R10");
         let r11 = new Rule(p14, p13, null, booleanRuleBase, "R11");

@@ -38,7 +38,7 @@ export class PlanSet {
 
 
     /**
-     * getQuestionMove - If the current support cannot be support get a question plan for 2 elements only
+     * getQuestionMove - If the current support cannot be supported get a question plan for 2 elements only
      *
      * @param  {DialogueHistory} dialogueHistory history of the current dialogue
      * @param  {Planner} planner  the computer player planner

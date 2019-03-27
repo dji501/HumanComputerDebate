@@ -169,93 +169,101 @@ export class Proposition extends RuleProp {
         if (this._truth === false) {
             switch (this._message) {
                 case "a state has the right to deliberately execute the wrong people":
-                 contentString = "a state does not have the right to deliberately execute the wrong people";
-                 break;
+                    contentString = "a state does not have the right to deliberately execute the wrong people";
+                    break;
 
                 case "chances should be given to murderers for rehabilitation":
-                 contentString = "chances should not be given to murderers for rehabilitation";
-                 break;
+                    contentString = "chances should not be given to murderers for rehabilitation";
+                    break;
 
                 case "CP is acceptable":
-                 contentString = "CP is not acceptable";
-                 break;
+                    contentString = "CP is not acceptable";
+                    break;
 
                 case "CP is a good deterrent":
-                 contentString = "CP is not a good deterrent";
-                 break;
+                    contentString = "CP is not a good deterrent";
+                    break;
 
                 case "CP makes people less likely commit serious crimes":
-                 contentString = "CP does not make people less likely commit serious crimes";
-                 break;
+                    contentString = "CP does not make people less likely commit serious crimes";
+                    break;
 
                 // Opinion
                 case "CP stops murderers commit further crimes":
-                 contentString = "CP does not stop murderers commit further crimes";
-                 break;
+                    contentString = "CP does not stop murderers commit further crimes";
+                    break;
 
                 case "execution of murderers is fair for the people being murdered":
-                 contentString = "execution of murderers is not fair for the people being murdered";
-                 break;
+                    contentString = "execution of murderers is not fair for the people being murdered";
+                    break;
 
                 case "human lives are scarce":
-                 contentString = "human lives are not scarce";
-                 break;
+                    contentString = "human lives are not scarce";
+                    break;
 
                 case "innocent people may get killed":
-                 contentString = "it is unlikely innocent people get killed";
-                 break;
+                    contentString = "it is unlikely innocent people get killed";
+                    break;
 
                 case "it is wrong to take a human life":
-                 contentString = "it is not always wrong to take a human life";
-                 break;
+                    contentString = "it is not always wrong to take a human life";
+                    break;
 
                 case "most people want CP back":
-                 contentString = "most people don't want CP back";
-                 break;
+                    contentString = "most people don't want CP back";
+                    break;
 
                 case "murderers should receive capital punishment":
-                 contentString = "murderers should not receive capital punishment";
-                 break;
+                    contentString = "murderers should not receive capital punishment";
+                    break;
 
                 case "nobody is willing to die":
-                 contentString = "some people are willing to die";
-                 break;
+                    contentString = "some people are willing to die";
+                    break;
 
                 case "political and racial bias often causes prejudices":
-                 contentString = "political and racial bias will not cause prejudices";
-                 break;
+                    contentString = "political and racial bias will not cause prejudices";
+                    break;
 
                 case "scientific techniques will increase the success of justice":
-                 contentString = "scientific techniques will not increase the success of justice";
-                 break;
+                    contentString = "scientific techniques will not increase the success of justice";
+                    break;
 
                 case "there are mistakes during judicial process":
-                 contentString = "mistakes rarely happen during judicial process";
-                 break;
+                    contentString = "mistakes rarely happen during judicial process";
+                    break;
 
                 case "suicide bombers want to die":
-                 contentString = "suicide bombers don't want to die";
-                 break;
+                    contentString = "suicide bombers don't want to die";
+                    break;
 
                 case "CP does not give murderers opportunities for rehabilitation":
-                 contentString = "CP gives murderers opportunities for rehabilitation";
-                 break;
+                    contentString = "CP gives murderers opportunities for rehabilitation";
+                    break;
 
                 case "CP having countries like USA has higher murder rate than UK":
-                 contentString = "it is not the case that CP having countries like USA has high murder rate than UK";
-                 break;
+                    contentString = "it is not the case that CP having countries like USA has high murder rate than UK";
+                    break;
 
                 case "statistics shows an increase in murder rate since the abolition of CP":
-                 contentString = "it is not the case that statistics shows an increase in murder rate since the abolition of CP";
-                 break;
+                    contentString = "it is not the case that statistics shows an increase in murder rate since the abolition of CP";
+                    break;
 
                 case "the recent survey shows that 60% British people support CP":
-                 contentString = "it is not the case that the recent survey shows that 60% British people support CP";
-                 break;
+                    contentString = "it is not the case that the recent survey shows that 60% British people support CP";
+                    break;
 
                 case "statistics shows that repeat offences of murders are extremely low":
-                 contentString = "it is not the case that statistics shows that repeat offences of murders are extremely low";
-                 break;
+                    contentString = "it is not the case that statistics shows that repeat offences of murders are extremely low";
+                    break;
+
+                case "everyone has a human right to live":
+                    contentString = "not everyone has a human right to live";
+                    break;
+
+                case "humans can forfeit their right to live though their actions":
+                    contentString = "humans cannot forfeit their right to live through their actions";
+                    break;
 
                 default:
                  contentString = "denial of this is not specified";

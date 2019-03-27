@@ -49,7 +49,7 @@ export class KBSManager {
         let p20=new Proposition("a state has the right to deliberately execute the wrong people",true,"opinion",booleanRuleBase);
         let p21=new Proposition("human lives are scarce",true,"opinion",booleanRuleBase);
 
-        //opinions
+        //Opinions
         let p22=new Proposition("murderers should receive capital punishment",true,"opinion",booleanRuleBase);
         let p23=new Proposition("execution of murderers is fair for the people being murdered",true,"opinion",booleanRuleBase);
 
@@ -68,6 +68,11 @@ export class KBSManager {
         //Opinions
         let p29=new Proposition("murderers should receive capital punishment",false,"opinion",booleanRuleBase);
         let p30=new Proposition("chances should be given to murderers for rehabilitation",true,"opinion",booleanRuleBase);
+
+        //Opinions
+        let p31=new Proposition("everyone has a human right to live", true, "opinion", booleanRuleBase);
+        let p32=new Proposition("everyone has a human right to live", false,"opinion", booleanRuleBase);
+        let p33=new Proposition("humans can forfeit their right to live though their actions", true, "opinion", booleanRuleBase);
 
         // Define Consequence links
         let r1 = new Rule(p3,  p1, null, booleanRuleBase,"R1");
@@ -95,5 +100,10 @@ export class KBSManager {
 
         let r22 = new Rule(p30, p29, null, booleanRuleBase, "R22");
         let r23 = new Rule(p25, p30, null, booleanRuleBase, "R23");
+
+        let r24 = new Rule(p33, p32, null, booleanRuleBase, "R24");
+        let r25 = new Rule(p32, p1,  null, booleanRuleBase, "R25");
+        let r26 = new Rule(p31, p2,  null, booleanRuleBase, "R26");
+
         }
 }

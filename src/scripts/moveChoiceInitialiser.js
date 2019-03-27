@@ -73,6 +73,11 @@ export class MoveChoiceInitialiser {
 		moveContents.push(new Proposition("there are mistakes during judicial process",true));
 		moveContents.push(new Proposition("there are mistakes during judicial process",false));
 
+        moveContents.push(new Proposition("humans can forfeit their right to live though their actions", true));
+        moveContents.push(new Proposition("humans can forfeit their right to live though their actions", false));
+
+        moveContents.push(new Proposition("everyone has a human right to live", true));
+        moveContents.push(new Proposition("everyone has a human right to live", false));
 
 		//Fact
 		moveContents.push(new Proposition("CP having countries like USA has higher murder rate than UK",true));

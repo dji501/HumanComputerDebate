@@ -1,5 +1,6 @@
 import { Move } from "./move";
 import { Rule } from "./rule";
+import { ConflictSet } from "./conflictSet";
 
 export class InputManager {
 
@@ -128,19 +129,23 @@ export class InputManager {
                     fullMove = new Move("S","Withdraw",previousRuleProp);
                 }
             } else if (moveType === "Resolve") {
-                let conflictSet = debatingSystemInterface.state.selectedComputerCommitments;
-                if (conflictSet.length < 2) {
+                let conflictSet = new ConflictSet();
+                for (let i= 0;i<debatingSystemInterface.state.selectedComputerCommitments.length;i++) {
+                    conflictSet.add(debatingSystemInterface.state.selectedComputerCommitments[i]);
+                }
+
+                if (conflictSet.set.length < 2) {
                     let message = "If you ask the computer to resolve conflicts, you need"
                                  +"to select two (P, not P) or three (P, R, R implies not P)"
                                  +"conflict statements from computer's positions to resolve.";
                     alert(message); //TODO Make this something else;
-                } else if (conflictSet.length > 3) {
+                } else if (conflictSet.set.length > 3) {
                     let message = "Sorry, this advanced feature--over 3 conflit elements is "
                                  +"not currently available in this version, try to select "
                                  +"two (P, not P) or three (P, R, R implies not P) options "
                                  +"from computer's positions to resolve.";
                     alert(message); //TODO Make this something else;
-                } else if ((conflictSet.length === 2 && conflictSet.isPNP() === false) || (conflictSet.set.length === 3 && conflictSet.isPRNP() === false)) {
+                } else if ((conflictSet.set.length === 2 && conflictSet.isPNP() === false) || (conflictSet.set.length === 3 && conflictSet.isPRNP() === false)) {
                     let message = "If you ask the computer to resolve conflicts, you need "
                                  +"to select two (P, not P) or three (P, R, R implies not P)"
                                  +"conflict statements from computer's positions to resolve.";

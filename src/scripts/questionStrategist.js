@@ -48,17 +48,23 @@ export class QuestionStrategist {
                 }
 
                 /*
-                 3.1 If C has acceptable support for C's favor statement, then state its favorable one
+                 3.1 If C has an acceptable support for the statement, or if it hasn't been said before, or if they already commit to it then answer with the favourable commitment.
                 */
                 if(selfKBS.findAcceptableGroundPropositions(inFavour, partnerCS).length > 0) {
                     relevantMove.push(new Move("C","Concession",inFavour));
+                /*
+                 3.2 If C has no acceptable support for C's favor statement,
+                 and C has got reasonable support in his assertion to support "against"
+                 C would surrender and state "against" OR against is a consequence of its store
+                */
                 } else if (selfCS.isSupported(against,selfKBS) || selfCS.isConsequence(against)) {
-                    /*
-                     3.2 If C has no acceptable support for C's favor statement,
-                     and C has got reasonable support in his assertion to support "against"
-                     C would surrender and state "against" OR against is a consequence of its store
-                    */
                     relevantMove.push(new Move("C","Concession",against));
+                /*
+                 3.3 If C has no reasonable support in his assertion to support "against" then
+                 if it has not been said before, or C is already comitted to it then state "inFavour"
+                */
+                } else if (selfCS.onTotal(inFavour) || !selfCS.onRecord(inFavour)) {
+                    relevantMove.push(new Move("C","Concession",inFavour));
                 } else {
                     relevantMove.push(new Move("C","Withdraw",prevMoveContent));
                 }
@@ -66,7 +72,7 @@ export class QuestionStrategist {
         } else {
             // A rule has changed
             /*
-             Since in the current ssystem, a conditional is not challengable,
+             Since in the current system, a conditional is not challengable,
              C would assert a conditional if it can be found in KBS
              Otherwise, C would say no commitment to it.
             */

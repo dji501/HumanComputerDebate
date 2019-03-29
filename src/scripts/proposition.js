@@ -189,8 +189,16 @@ export class Proposition extends RuleProp {
                     break;
 
                 // Opinion
-                case "CP stops murderers commit further crimes":
+                case "CP definitely stops murderers commit further crimes":
                     contentString = "CP does not stop murderers commit further crimes";
+                    break;
+
+                case "hanging, firing squad, gas chamber, and electrocution are all violent methods used for execution":
+                    contentString = "hanging, firing squad, gas chamber, and electrocution are not violent methods used for execution";
+                    break;
+
+                case "many countries primarily use a lethal injection with anaesthetic to perform capital punishment":
+                    contentString = "many countries do not primarily use a lethal injection with anaesthetic to perform capital punishment";
                     break;
 
                 case "execution of murderers is fair for the people being murdered":
@@ -257,12 +265,44 @@ export class Proposition extends RuleProp {
                     contentString = "it is not the case that statistics shows that repeat offences of murders are extremely low";
                     break;
 
+                case "records show that, since 1973, within the US more than 160 people have been released from death row with evidence of their innocence":
+                    contentString = "records do not show that, since 1973, within the US more than 160 people have been released from death row with evidence of their innocence";
+                    break;
+
+                case "studies show jurors in some states are 3 times more likely to recommend capital punishment for black people in comparison to white people":
+                    contentString = "studies do not show that jurors in some states are 3 times more likely to recommend capital punishment for black people in comparison to white people";
+                    break;
+
+                case "court cases that aim for capital punishment are more expensive than those that do not":
+                    contentString = "court cases that aim for capital punishment are not more expensive than those that do not";
+                    break;
+
                 case "everyone has a human right to live":
                     contentString = "not everyone has a human right to live";
                     break;
 
                 case "humans can forfeit their right to live though their actions":
                     contentString = "humans cannot forfeit their right to live through their actions";
+                    break;
+
+                case "CP is too expensive to maintain":
+                    contentString = "CP is not too expensive to maintain";
+                    break;
+
+                case "CP is cheaper than housing criminals for life":
+                    contentString = "CP is not cheaper than housing criminals for life";
+                    break;
+
+                case "finances are not important when aiming for justice against criminals":
+                    contentString = "finances should be considered when aiming for justice against criminals";
+                    break;
+
+                case "methods of execution are cruel and inhumane":
+                    contentString = "methods used to enact capital punishment are humane";
+                    break;
+
+                case "it is more punishing to be locked up for life than to be executed":
+                    contentString = "it is more punishing to be executed than to be locked up for life";
                     break;
 
                 default:

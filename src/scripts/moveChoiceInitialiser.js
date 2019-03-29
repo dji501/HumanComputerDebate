@@ -79,16 +79,36 @@ export class MoveChoiceInitialiser {
         moveContents.push(new Proposition("everyone has a human right to live", true));
         moveContents.push(new Proposition("everyone has a human right to live", false));
 
+        moveContents.push(new Proposition("CP is too expensive to maintain", true));
+        moveContents.push(new Proposition("CP is too expensive to maintain", false));
+
+        moveContents.push(new Proposition("CP is cheaper than housing criminals for life", true));
+        moveContents.push(new Proposition("CP is cheaper than housing criminals for life", false));
+
+        moveContents.push(new Proposition("finances are not important when aiming for justice against criminals", true));
+        moveContents.push(new Proposition("finances are not important when aiming for justice against criminals", false));
+
+        moveContents.push(new Proposition("methods of execution are cruel and inhumane", true));
+        moveContents.push(new Proposition("methods of execution are cruel and inhumane", false));
+
+        moveContents.push(new Proposition("it is more punishing to be locked up for life than to be executed", true));
+        moveContents.push(new Proposition("it is more punishing to be locked up for life than to be executed", false));
+
 		//Fact
-		moveContents.push(new Proposition("CP having countries like the USA have higher murder rates than the UK",true));
 		moveContents.push(new Proposition("CP does not give murderers opportunities for rehabilitation",true));
 		moveContents.push(new Proposition("CP definitely stops murderers commit further crimes",true));
 		moveContents.push(new Proposition("suicide bombers want to die",true));
+        moveContents.push(new Proposition("hanging, firing squad, gas chamber, and electrocution are all violent methods used for execution", true));
+        moveContents.push(new Proposition("many countries primarily use a lethal injection with anaesthetic to perform capital punishment", true));
 
 		//Evidence
+        moveContents.push(new Proposition("CP having countries like the USA have higher murder rates than the UK",true));
 		moveContents.push(new Proposition("statistics shows that repeat offences of murders are extremely low",true));
 		moveContents.push(new Proposition("statistics shows an increase in murder rate since the abolition of CP",true));
 		moveContents.push(new Proposition("the recent survey shows that 60% British people support CP",true));
+        moveContents.push(new Proposition("records show that, since 1973, within the US more than 160 people have been released from death row with evidence of their innocence", true));
+        moveContents.push(new Proposition("studies show jurors in some states are 3 times more likely to recommend capital punishment for black people in comparison to white people", true));
+        moveContents.push(new Proposition("court cases that aim for capital punishment are more expensive than those that do not", true));
         return moveContents;
 	}
 }

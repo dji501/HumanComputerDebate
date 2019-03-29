@@ -129,18 +129,18 @@ export class InputManager {
                 }
             } else if (moveType === "Resolve") {
                 let conflictSet = debatingSystemInterface.state.selectedComputerCommitments;
-                if (conflictSet.set.length < 2) {
+                if (conflictSet.length < 2) {
                     let message = "If you ask the computer to resolve conflicts, you need"
                                  +"to select two (P, not P) or three (P, R, R implies not P)"
                                  +"conflict statements from computer's positions to resolve.";
                     alert(message); //TODO Make this something else;
-                } else if (conflictSet.set.length > 3) {
+                } else if (conflictSet.length > 3) {
                     let message = "Sorry, this advanced feature--over 3 conflit elements is "
                                  +"not currently available in this version, try to select "
                                  +"two (P, not P) or three (P, R, R implies not P) options "
                                  +"from computer's positions to resolve.";
                     alert(message); //TODO Make this something else;
-                } else if ((conflictSet.set.length === 2 && conflictSet.isPNP() === false) || (conflictSet.set.length === 3 && conflictSet.isPRNP() === false)) {
+                } else if ((conflictSet.length === 2 && conflictSet.isPNP() === false) || (conflictSet.set.length === 3 && conflictSet.isPRNP() === false)) {
                     let message = "If you ask the computer to resolve conflicts, you need "
                                  +"to select two (P, not P) or three (P, R, R implies not P)"
                                  +"conflict statements from computer's positions to resolve.";
@@ -202,7 +202,7 @@ export class InputManager {
                 let chosenContent = debatingSystemInterface.state.selectedAntecedent;
                 fullMove = new Move("S", "Question", chosenContent);
             } else {
-                if (previousMoveType === "Challenge" && moveType === ("I don't know why " + previousRuleProp.getContentAsString()  + ".")) {//TODO TEST THIS
+                if (previousMoveType === "Challenge" && moveType === ("I don't know why " + previousRuleProp.getContentAsString()  + ".")) {
                     fullMove = new Move("S", "Withdraw", previousRuleProp);
                 }
 

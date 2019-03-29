@@ -27,9 +27,6 @@ export class InputManager {
                 moveTypes.push("Resolve");
             }
 
-            // Original would add "" here to "make interface nice"
-
-            //TODO: Original would re-add content dropdown in this case
             return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         } else if (previousMoveType === "Resolve") {
             let conflictSet = previousMove.conflictSet;
@@ -41,9 +38,6 @@ export class InputManager {
                 moveTypes.push("I think " + conflictSet.getConsequent().getContentAsString() + ".");
             }
 
-            // Original would add "" here to "make interface nice"
-
-            //TODO: Original would re-add content dropdown in this case
             return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         } else if (previousMoveType === "Assertion" || previousMoveType === "Question" || previousMoveType === "Ground") {
             moveTypes.push("Assertion");
@@ -56,7 +50,6 @@ export class InputManager {
                 moveTypes.push("Resolve");
             }
 
-            //TODO: Original would re-add content dropdown in this case
             return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         } else {
             moveTypes.push("Assertion");
@@ -70,7 +63,6 @@ export class InputManager {
                 }
             }
 
-            //TODO: Original would re-add content dropdown in this case
              return InputManager.getDynamicMoveType(dialogueHistory, moveTypes);
         }
 
@@ -210,7 +202,7 @@ export class InputManager {
                 let chosenContent = debatingSystemInterface.state.selectedAntecedent;
                 fullMove = new Move("S", "Question", chosenContent);
             } else {
-                if (previousMoveType === "Challenge" && moveType === ("I don't know why " + previousRuleProp.getContentAsString())) {//TODO TEST THIS
+                if (previousMoveType === "Challenge" && moveType === ("I don't know why " + previousRuleProp.getContentAsString()  + ".")) {//TODO TEST THIS
                     fullMove = new Move("S", "Withdraw", previousRuleProp);
                 }
 

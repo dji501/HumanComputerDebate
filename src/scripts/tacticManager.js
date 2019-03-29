@@ -29,14 +29,14 @@ export class TacticManager {
             // If the demolish target is not on the assertion set, then assert the negation of the
             // demolish target, else assert the support
             let i = Math.round(Math.random() * 2);
-
+            i=0;
             switch (i) {
                 case 0:
                     if (response === null || response === undefined) {
                         response = planSet.startSubtopic(selfCS, partnerCS);
                     }
                     if (response === null || response === undefined) {
-                        response = planSet.startBuildMove(dialogueHistory, planner);
+                        response = planSet.startBuildPlan(dialogueHistory, planner);
                     }
                 break;
 

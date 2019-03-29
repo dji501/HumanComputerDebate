@@ -84,6 +84,7 @@ export class MoveChoiceInitialiser {
 		moveContents.push(new Proposition("CP does not give murderers opportunities for rehabilitation",true));
 		moveContents.push(new Proposition("CP definitely stops murderers commit further crimes",true));
 		moveContents.push(new Proposition("suicide bombers want to die",true));
+        moveContents.push(new Proposition("since 1973, within the US more than 160 people have been released from death row with evidence of their innocence", true));
 
 		//Evidence
 		moveContents.push(new Proposition("statistics shows that repeat offences of murders are extremely low",true));

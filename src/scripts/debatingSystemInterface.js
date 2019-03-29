@@ -392,7 +392,7 @@ export class DebatingSystemInterface extends React.Component{
 function MoveChoiceInput(props) {
     let moveChoices;
     if (props.moveTypes !== null && props.moveTypes !== undefined) {
-        moveChoices = props.moveTypes.map((moveChoice) => <option value={moveChoice}/>);
+        moveChoices = props.moveTypes.map((moveChoice) => <option key={moveChoice} value={moveChoice}/>);
     }
     return (
         <div id="movechoice-datalist">
@@ -407,7 +407,7 @@ function MoveChoiceInput(props) {
 function MoveContentInput(props) {
     let moveContents;
     if (props.moveContents !== null && props.moveContents !== undefined) {
-        moveContents = props.moveContents.map((moveContent) => <option value={moveContent}/>);
+        moveContents = props.moveContents.map((moveContent) => <option key={moveContent} value={moveContent}/>);
     }
     return (
         <div id={props.propositionType + "-datalist"}>
@@ -435,7 +435,7 @@ function ImpliesInput(props) {
 function CommitmentStore(props) {
     let commitments;
     if (props.commitmentStore !== null && props.commitmentStore !== undefined) {
-        commitments = props.commitmentStore.map((commitment) => <li className="commitmentstore__listelement" onClick={props.onClick}>{commitment}</li>);
+        commitments = props.commitmentStore.map((commitment) => <li key={commitment} className="commitmentstore__listelement" onClick={props.onClick}>{commitment}</li>);
     }
     return (
         <div id={props.owner}>
@@ -463,9 +463,11 @@ function CommitmentStoreTab(props) {
 function DialogueHistory(props) {
     let dialogue;
     if (props.dialogueHistory !== null && props.dialogueHistory !== undefined) {
+        let i = -1;
         dialogue = props.dialogueHistory.map((move) => {
+            i++;
             return (
-                <div className="debatehistorydialogue__logitem">
+                <div key={move} className="debatehistorydialogue__logitem">
                     <div className="debatehistorydialogue__turncolumn debatehistorydialogue__logitemturn">
                         <li className="debatehistory__listitem">{move.split(">")[0]+ ">"}</li>
                     </div>

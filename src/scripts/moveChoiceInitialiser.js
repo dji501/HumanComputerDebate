@@ -80,7 +80,7 @@ export class MoveChoiceInitialiser {
         moveContents.push(new Proposition("everyone has a human right to live", false));
 
 		//Fact
-		moveContents.push(new Proposition("CP having countries like USA has higher murder rate than UK",true));
+		moveContents.push(new Proposition("CP having countries like the USA have higher murder rates than the UK",true));
 		moveContents.push(new Proposition("CP does not give murderers opportunities for rehabilitation",true));
 		moveContents.push(new Proposition("CP definitely stops murderers commit further crimes",true));
 		moveContents.push(new Proposition("suicide bombers want to die",true));

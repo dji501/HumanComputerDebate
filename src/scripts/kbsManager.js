@@ -19,7 +19,7 @@ export class KBSManager {
         let p4=new Proposition("CP is a good deterrent",false,"opinion",booleanRuleBase);
 
         //1 Fact
-        let p5=new Proposition("CP having countries like USA has higher murder rate than UK",true,"evidence",booleanRuleBase);
+        let p5=new Proposition("CP having countries like the USA have higher murder rates than the UK",true,"evidence",booleanRuleBase);
 
         //2 Evidence
         let p6=new Proposition("statistics shows an increase in murder rate since the abolition of CP",true,"evidence",booleanRuleBase);

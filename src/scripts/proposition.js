@@ -265,6 +265,22 @@ export class Proposition extends RuleProp {
                     contentString = "humans cannot forfeit their right to live through their actions";
                     break;
 
+                case "CP is too expensive to maintain":
+                    contentString = "CP is not too expensive to maintain";
+                    break;
+
+                case "CP is cheaper than housing criminals for life":
+                    contentString = "CP is not cheaper than housing criminals for life";
+                    break;
+
+                case "finances are not important when aiming for justice against criminals":
+                    contentString = "finances should be considered when aiming for justice against criminals";
+                    break;
+
+                case "methods used to enact capital punishment are cruel and inhumane":
+                    contentString = "methods used to enact capital punishment are humane";
+                    break;
+
                 default:
                  contentString = "denial of this is not specified";
 

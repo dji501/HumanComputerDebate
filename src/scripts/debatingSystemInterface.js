@@ -462,9 +462,7 @@ function CommitmentStoreTab(props) {
 function DialogueHistory(props) {
     let dialogue;
     if (props.dialogueHistory !== null && props.dialogueHistory !== undefined) {
-        let i = -1;
         dialogue = props.dialogueHistory.map((move) => {
-            i++;
             return (
                 <div key={move} className="debatehistorydialogue__logitem">
                     <div className="debatehistorydialogue__turncolumn debatehistorydialogue__logitemturn">

@@ -36,7 +36,7 @@ export class TacticManager {
                         response = planSet.startSubtopic(selfCS, partnerCS);
                     }
                     if (response === null || response === undefined) {
-                        response = planSet.startBuildMove(dialogueHistory, planner);
+                        response = planSet.startBuildPlan(dialogueHistory, planner);
                     }
                 break;
 

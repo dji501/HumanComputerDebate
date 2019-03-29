@@ -241,8 +241,8 @@ export class Proposition extends RuleProp {
                     contentString = "CP gives murderers opportunities for rehabilitation";
                     break;
 
-                case "CP having countries like USA has higher murder rate than UK":
-                    contentString = "it is not the case that CP having countries like USA has high murder rate than UK";
+                case "CP having countries like the USA have higher murder rates than the UK":
+                    contentString = "it is not the case that CP having countries like USA have higher murder rates than the UK";
                     break;
 
                 case "statistics shows an increase in murder rate since the abolition of CP":

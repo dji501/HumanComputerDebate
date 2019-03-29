@@ -98,20 +98,22 @@ export class DialogueManager {
         if (previousMove.turn === "C" && this._end === false) {
             let studentMove = InputManager.getInput(this._debateSystemInterface, this._dialogueHistory, this._computerCS, this._studentCS);
 
-            this._line += 1;
+            if (studentMove !== undefined) {
+                this._line += 1;
 
-            // Check if the move is legal
-            let warningMessage = Filler.getMessage(studentMove, this._dialogueHistory, this._computerCS, this._studentCS);
-            if (warningMessage === null || warningMessage === undefined) {
-                // Move is legal
-                CommitmentManager.commit(studentMove, previousMove, this._studentCS, this._computerCS, this._debateSystemInterface.studentCommitmentStore, this._debateSystemInterface.computerCommitmentStore, this._dialogueHistory);
+                // Check if the move is legal
+                let warningMessage = Filler.getMessage(studentMove, this._dialogueHistory, this._computerCS, this._studentCS);
+                if (warningMessage === null || warningMessage === undefined) {
+                    // Move is legal
+                    CommitmentManager.commit(studentMove, previousMove, this._studentCS, this._computerCS, this._debateSystemInterface.studentCommitmentStore, this._debateSystemInterface.computerCommitmentStore, this._dialogueHistory);
 
-                //TODO: this is where the original would remove the green border hints
-                this._dialogueHistory.add(studentMove);
-            } else {
-                //let refereeMove = new Move("R","Message", new Proposition(warningMessage, true));
-                //TODO: Original would create new thread here to add line and update display
-                alert(warningMessage);
+                    //TODO: this is where the original would remove the green border hints
+                    this._dialogueHistory.add(studentMove);
+                } else {
+                    //let refereeMove = new Move("R","Message", new Proposition(warningMessage, true));
+                    //TODO: Original would create new thread here to add line and update display
+                    alert(warningMessage);
+                }
             }
         }
     }

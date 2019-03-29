@@ -267,7 +267,6 @@ export class DebatingSystemInterface extends React.Component{
         document.getElementById("consequent-input").value = "";
         document.getElementById("impliesbox-input").value = "";
         this.setState({implies: false});
-        this.closeCommitmentTabs();
         this.clearCommitmentTabs();
     }
 

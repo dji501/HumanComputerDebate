@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-.eslintrc.json
-colourScheme.PNG
-NOTES.txt
-node_modules
-.tern-project
-=======
 node_modules
 .eslintrc.json
 .tern-project
@@ -12,4 +5,3 @@ NOTES.txt
 colourScheme.png
 /src
 /tests
->>>>>>> 402f5f15142b5adf2a198f29b2691112bba15c5d

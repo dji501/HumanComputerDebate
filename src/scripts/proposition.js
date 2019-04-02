@@ -184,7 +184,7 @@ export class Proposition extends RuleProp {
                     contentString = "CP is not a good deterrent";
                     break;
 
-                case "CP makes people less likely commit serious crimes":
+                case "CP makes people less likely to commit serious crimes":
                     contentString = "CP does not make people less likely commit serious crimes";
                     break;
 

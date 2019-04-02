@@ -63,8 +63,8 @@ export class MoveChoiceInitialiser {
 		moveContents.push(new Proposition("scientific techniques will increase the success of justice",true));
 		moveContents.push(new Proposition("scientific techniques will increase the success of justice",false));
 
-		moveContents.push(new Proposition("CP makes people less likely commit serious crimes",true));
-		moveContents.push(new Proposition("CP makes people less likely commit serious crimes",false));
+		moveContents.push(new Proposition("CP makes people less likely to commit serious crimes",true));
+		moveContents.push(new Proposition("CP makes people less likely to commit serious crimes",false));
 
 		moveContents.push(new Proposition("political and racial bias often causes prejudices",true));
 		moveContents.push(new Proposition("political and racial bias often causes prejudices",false));

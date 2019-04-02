@@ -74,8 +74,6 @@ export class KBSManager {
         let p36=new Proposition("CP definitely stops murderers commit further crimes",true,"fact",booleanRuleBase);
 
         //Opinions
-        let p37=new Proposition("murderers should receive capital punishment",false,"opinion",booleanRuleBase);
-        let p38=new Proposition("murderers should receive capital punishment",true,"opinion",booleanRuleBase);
         let p39=new Proposition("chances should be given to murderers for rehabilitation",true,"opinion",booleanRuleBase);
         let p40=new Proposition("chances should be given to murderers for rehabilitation",false,"opinion",booleanRuleBase);
 

@@ -166,7 +166,7 @@ export class InputManager {
                                  +"positions which are indeed stated by the computer.";
                     alert(message); //TODO Make this something else;
                 } else {
-                    if (challengedElements[0].getClassName === "Rule") {
+                    if (challengedElements[0].getClassName() === "Rule") {
                         let message = "To challenge a conditional (e.g. P-->Q) is not currently \n"
                                      +"available, if you have problem with this conditional, you \n"
                                      +"can withdraw it or try other options.";
